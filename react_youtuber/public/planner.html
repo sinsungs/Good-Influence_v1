@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+	<!-- subHeader Start -->
+	<div id="subHeader" class="container">
+		<div class="container_inner">
+			<div>
+				<ul>
+					<li class="sub_logo">
+						<p>갓생플래너</p>
+						<img src="./img/logo.png" alt="logo">
+					</li>
+					<li class="sub_burger">
+						<span></span>
+						<span></span>
+						<span></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!-- subHeader End -->
+	<!-- planner_content Start -->
+	<div id="planner_content" class="container">
+		<div class="container_inner">
+			<div>
+				<ul>
+					<li class="planner_profile">
+						<div>
+							<div class="pl_pro_img">
+								<img src="./img/profile.png" alt="profile">
+								<p>@sinsung test</p>
+							</div>
+							<div class="pl_pro_text">
+								<p>영진상사</p>
+								<p>lv. 10</p>
+							</div>
+						</div>
+					</li>
+					<li class="planner_calendar">
+						<div id="datepickerDiv" style="cursor: pointer; margin-bottom:10px; padding: 10px 0; width:120px; text-align: center; border: 1px solid #ccc; display: inline-block;">
+							달력 보기
+						</div>
+						<input type="text" id="selected-date-input">
+						<div id="datepickerUI"></div>
+					</li>
+					<li class="planner_inputArea">
+						<div>
+							<ul>
+								<li class="list_no_12">아침 8시에 기상하기</li>
+								<li class="list_no_2">강아지 산책시키기</li>
+								<li class="list_no_3">책 읽고 독후감 쓰기</li>
+								<div class="btn_li">
+									<button id="addTaskBtn">할 일 추가 <span>+</span> </button>
+								</div>
+								<div class="modal" id="listModal">
+									<div class="modal-content">
+										<h2>아침 8시에 기상하기</h2>
+										<div class="btn_area">
+											<button class="editBtn"><img src="./img/edit.png" alt="edit">시간수정</button>
+											<button><img src="./img/bin.png" alt="bin">삭제하기</button>
+										</div>
+										<div class="text_area">
+											<textarea name="" id="" >9시 수영 수업들으러 가야함!!</textarea>
+										</div>
+										<div class="etcClass">
+											<p>기간 : 2023.04.15 ~ 2023.04.17</p>
+											<p>시간 : 09:00 ~ 11:00</p>
+										</div>
+										<div class="editReminder">
+											<div class="confirmBtn">
+												<button>확인</button>
+											</div>
+											<div class="reminder_btn">
+												<label for="chk_reminder"><img src="./img/reminders.png" alt="reminders">리마인더 설정</label>
+												<input type="checkbox" id="chk_reminder" name="chk_reminder" >
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="editModal" class="modal">
+									<div class="modal-content">
+										<h2>시간 설정</h2>
+										<!-- <div class="btn_area">
+											<button>오전</button>
+											<button>오후</button>
+										</div> -->
+										<div id="alarm-wrapper">
+									        <div id="alarm-time-display">00 : 00</div>
+									    </div>
+									    <audio id="alarm-sound">
+									        <source src="./audio/alarm.mp3" type="audio/mpeg">
+									        Your browser does not support the audio element.
+									    </audio>
+
+									    <button class="alarmChkBtn">확인</button>
+									</div>
+								</div>
+								<div id="addTaskModal" class="modal">
+									<div class="modal-content">
+										<label for="plan_title">제목</label>
+										<input id="plan_title" type="text" />
+
+										<div class="btn_area">
+											<button class="editBtn"><img src="./img/edit.png" alt="edit">시간수정</button>
+											<button><img src="./img/bin.png" alt="bin">삭제하기</button>
+										</div>
+										<div class="text_area">
+											<textarea name="" id="" ></textarea>
+										</div>
+										<div class="editReminder">
+											<div class="confirmBtn">
+												<button>확인</button>
+											</div>
+											<div class="reminder_btn">
+												<label for="chk_reminder_w"><img src="./img/reminders.png" alt="reminders">리마인더 설정</label>
+												<input type="checkbox" id="chk_reminder_w" name="chk_reminder" >
+											</div>
+										</div>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!-- planner_content End -->
+	<!-- subFooter Start -->
+	<div id="subFooter" class="container">
+		<div class="container_inner">
+			<div>
+				<ul>
+					<li><a href="planner.html"><img src="./img/home.png" alt="home"></a></li>
+					<li><a href="board.html"><img src="./img/list.png" alt="list"></a></li>
+					<li><a href="challenge.html"><img src="./img/flag.png" alt="flag"></a></li>
+					<li><a href="user.html"><img src="./img/user.png" alt="user"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div><!-- subFooter end -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="../script/index.js"></script>
+</body>
+</html>

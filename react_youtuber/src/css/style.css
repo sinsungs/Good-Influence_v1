@@ -1,0 +1,186 @@
+/* OPTIONS */
+*{ padding:0; margin:0; text-decoration:none; list-style:none; box-sizing:border-box; font-family:godlife; }
+
+@font-face{
+  font-family:"godlife";
+  src:url("godlife.ttf") format("truetype");
+  font-weight:normal;
+}
+
+html, body{ width:100%; height:100%; }
+.container{ width:100%; float:left; }
+.container_inner{ width:1200px; margin:0 auto; }
+.container_inner > div{ width:100%; float:left; }
+
+/* 주 컬러 : #4c6ef5(파란색) */
+
+/* OPTIONS */
+
+
+#header{ width:100%; height:100%; background:#4c6ef5; }
+
+#header > div, #header > div > div{ height:100%; }
+#header ul{ display:flex; align-items: center; justify-content: center; height:100%; flex-direction: column; }
+#header ul > li{ padding:25px 0; }
+#header .header_title p{ color:#fff; font-weight:bold; font-size:50px; }
+#header .header_logo img{ width:300px; }
+#header .header_login img{ width:250px; } 
+
+
+#subHeader{ padding:30px 0; background:#4c6ef5; }
+#subHeader img{ width:80px; }
+
+#subHeader span
+{
+  display: block;
+  width:100%;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #fff;
+  border-radius: 3px;
+  width: 33px;
+  z-index: 1;
+}
+
+#subHeader ul{ display:flex; justify-content: space-between;  }
+#subHeader ul .sub_logo{  }
+#subHeader ul .sub_logo > *{ display:inline-block; vertical-align: middle; }
+#subHeader ul .sub_logo > p{ font-size:30px; color:#fff; font-weight:bold; }
+#subHeader ul .sub_burger{ display:flex; flex-direction: column; justify-content: center; }
+
+
+#planner_content{ padding:50px 0;  }
+#planner_content > div > div > ul{ display:flex; }
+.planner_profile{ width:20%; display:flex; }
+.planner_profile .pl_pro_img img{ width:140px; }
+.planner_profile .pl_pro_img p{ text-align: center; }
+.planner_profile .pl_pro_text > p{ padding:35px 10px; }
+
+.planner_calendar{ width:30%; padding:0 50px; height:250px; }
+.planner_calendar #datepickerDiv{ margin-top:50px; }
+#selected-date-input{ padding:10px; font-size:20px; }
+
+.planner_inputArea{ width:50%; padding:20px; }
+.planner_inputArea ul{ display:flex; flex-direction:column; align-items:center; }
+.planner_inputArea ul > li, .planner_inputArea ul > .btn_li{ width:100%; border:solid 1px #e1e1e1; padding:10px 15px; margin:5px 0; border-radius:40px; background:#eee; color:#999; cursor:pointer; }
+.planner_inputArea ul > .btn_li{ text-align:center; background:none; border:none; }
+.planner_inputArea ul > .btn_li button{ padding:10px 20px; background:none; background:#868686; color:#cfcfcf; border:none; font-size:20px; border-radius:10px; cursor:pointer }
+.planner_inputArea button span{ display:inline-block; border-radius:50%; width:20px; height:20px; background:#dadada; color:#868686; text-align: center; vertical-align:middle; }
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 450px;
+  height: 450px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius:10px;
+  border:solid 1px #a2a2a2;
+}
+
+.modal-content h2{ color:#333; }
+
+#listModal{}
+#listModal .btn_area{ width:100%; display:flex; justify-content:space-between; padding-top:20px; }
+#listModal .btn_area img{ width:20px; vertical-align:middle; margin-right:10px; }
+#listModal .btn_area button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#listModal .text_area{ width:100%; padding-top:20px; }
+#listModal .text_area textarea{ width:100%; border:solid 1px #8e8e8e; border-radius:10px; background:#e7e7e7; height:200px; font-size:15px; text-align:left; padding:15px; color:#333; resize:none; }
+#listModal .etcClass{ text-align: left; width:100%; }
+
+#listModal .editReminder img{ width:18px; }
+#listModal .editReminder { font-size:18px; width:100%; padding-top:20px; display:flex; justify-content:space-between; }
+#listModal .editReminder > div{ width:50%; }
+#listModal .editReminder .confirmBtn button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#listModal .editReminder .reminder_btn{ text-align: right; }
+
+#closeModalBtn {
+  margin-top: 10px;
+}
+
+#editModal .btn_area{ width:100%; display:flex; justify-content:space-between; padding-top:20px; }
+#editModal .btn_area img{ width:20px; vertical-align:middle; margin-right:10px; }
+#editModal .btn_area button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+
+#alarm-wrapper {
+    margin-top: 50px;
+}
+
+#alarm-time-display {
+    font-size: 80px;
+    font-weight:bold;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    color:#adadad;
+}
+
+.alarmChkBtn{ margin-top:50px; background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:20px 0; font-size:18px; cursor:pointer; }
+
+#addTaskModal{}
+#addTaskModal #plan_title{ width:100%; border:solid 1px #8e8e8e; border-radius:5px; background:#e7e7e7; font-size:15px; text-align:left; padding:5px; color:#8e8e8e; }
+#addTaskModal .btn_area{ width:100%; display:flex; justify-content:space-between; padding-top:20px; }
+#addTaskModal .btn_area img{ width:20px; vertical-align:middle; margin-right:10px; }
+#addTaskModal .btn_area button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#addTaskModal .text_area{ width:100%; padding-top:20px; }
+#addTaskModal .text_area textarea{ width:100%; border:solid 1px #8e8e8e; border-radius:10px; background:#e7e7e7; height:200px; font-size:15px; text-align:left; padding:15px; color:#8e8e8e; resize:none; }
+
+#addTaskModal .editReminder img{ width:18px; }
+#addTaskModal .editReminder { font-size:18px; width:100%; padding-top:20px; display:flex; justify-content:space-between; }
+#addTaskModal .editReminder > div{ width:50%; }
+#addTaskModal .editReminder .confirmBtn button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#addTaskModal .editReminder .reminder_btn{ text-align: right; }
+
+
+#subFooter{ padding-top:50px; }
+
+#subFooter ul{ display:flex; justify-content:space-around; }
+
+#subFooter img{ width:60px; }
+
+#challenge{ padding:50px 0; }
+
+#challenge > div > div > ul{ display:flex; }
+#challenge .ch_lists{ padding-bottom:30px; }
+#challenge .ch_lists > div:first-child{ display:flex; justify-content:space-between; }
+#challenge .ch_lists .title > p{ font-size:30px; color:#6b6b6b; font-weight:bold; }
+#challenge .ch_lists .title > button{ background:none; border:none; font-size:50px; cursor:pointer; color:#d2d2d2; }
+#challenge .challenge_list{ padding:20px 0; }
+#challenge .challenge_list > ul{ display:flex; justify-content: space-between; align-content: flex-start; }
+#challenge .challenge_list > ul > li{ width:calc(25% - 20px); }
+
+#challenge .challenge_list div{ width:100%; height:180px; background:#b5b5b5; border-radius:10px; cursor:pointer; }
+
+#challenge .challenge_area{ width:80%; padding:20px 40px; }
+
+#challenge .challenge_read{ width:80%; padding:20px 40px; }
+
+#challenge .challenge_read > div{ display:flex; margin-bottom:30px; }
+#challenge .challenge_read img{ width:80px; }
+#challenge .read_title{ justify-content: center; grid-gap:70px; align-items:center; }
+#challenge .read_title > p{ font-size:45px; font-size:bold; }
+#challenge .read_info{ width:100%; border:solid 2px #ededed; color:#999; font-weight:bold; }
+#challenge .read_info > div{ width:50%; }
+#challenge .read_info img{ width:100%; height:100%; }
+#challenge .read_info > .info_text{ display:flex; padding:20px; flex-direction: column; grid-gap: 20px; }
+#challenge .read_content{ width:100%; padding:20px; background:#ededed; height:200px; font-size:24px; border-radius:10px; }
+#challenge .read_btn{ width:100%; text-align: right; }
+#challenge .read_btn button{ background:#999; border:solid 1px #d4d4d4; border-radius:5px; width:100px; padding:10px 0; font-size:20px; cursor:pointer; color:#fff; }
+
