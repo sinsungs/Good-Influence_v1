@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kong.king.spring.youtuber.entity.Board;
 
@@ -30,7 +31,7 @@ public class BoardRepositoryTest {
 //			});
 //		}
 //		
-
+		@Transactional
 		@Test
 		public void testReadBoard() {
 			Optional<Board> result = boardRepository.findById(100L);
@@ -40,7 +41,7 @@ public class BoardRepositoryTest {
 			System.out.println(board);
 			System.out.println(board.getWriter());
 		}
-		
+//		
 //		@Test 
 //		public void testReadWithWriter() {
 //			
