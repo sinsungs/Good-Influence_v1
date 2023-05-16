@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -38,7 +38,7 @@
 }
 
  /* reset */
- * {margin: 0; padding: 0;}
+ * {margin: 0; padding: 0; background-color: #f8f9fa;}
  a {text-decoration: none; color:black;}
  li {list-style: none;}
  ul {margin: 0; padding: 0;}
@@ -56,17 +56,91 @@
   
 }
 
+.menu {
+  width: 100%;
+  height: 500px;
+  background-color: black;
+  display: flex;
+  flex-wrap: wrap; /* Allow the menu-body elements to wrap onto multiple lines */
+}
+
+.menu-body {
+  width: 25%;
+  height: 250px;
+  flex-basis: 25%; /* Each menu-body element occupies 25% of the container width */
+  /* Add additional styling as needed */
+}
+
 .box {
   height: 350px;
   width: 300px;
-  background-color: #ccc;
-  border: 1px solid #000;
+  background-color: #ffffff;
+  /* border: 1px solid #000; */
   margin: 10px;
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.box-header {
+  height: 150px;
+  width: 100%;
+  background-color:#61dafb;
+}
+.box-body {
+  height: 150px;
+  width: 100%;
+}
+.box-footer {
+  height: 50px;
+  width: 100%;
+  background-color: black;
+}
+
 
 .box:hover {
   transform: translateY(-10px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 450px;
+  height: 450px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius:10px;
+  border:solid 1px #a2a2a2;
+}
+
+.modal-content h2{ color:#333; }
+
+#addTaskModal{}
+#addTaskModal #plan_title{ width:100%; border:solid 1px #8e8e8e; border-radius:5px; background:#e7e7e7; font-size:15px; text-align:left; padding:5px; color:#8e8e8e; }
+#addTaskModal .btn_area{ width:100%; display:flex; justify-content:space-between; padding-top:20px; }
+#addTaskModal .btn_area img{ width:20px; vertical-align:middle; margin-right:10px; }
+#addTaskModal .btn_area button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#addTaskModal .text_area{ width:100%; padding-top:20px; }
+#addTaskModal .text_area textarea{ width:100%; border:solid 1px #8e8e8e; border-radius:10px; background:#e7e7e7; height:200px; font-size:15px; text-align:left; padding:15px; color:#8e8e8e; resize:none; }
+
+#addTaskModal .editReminder img{ width:18px; }
+#addTaskModal .editReminder { font-size:18px; width:100%; padding-top:20px; display:flex; justify-content:space-between; }
+#addTaskModal .editReminder > div{ width:50%; }
+#addTaskModal .editReminder .confirmBtn button{ background:#f4f4f4; border:solid 1px #d4d4d4; border-radius:5px; width:45%; padding:5px 0; font-size:18px; cursor:pointer; }
+#addTaskModal .editReminder .reminder_btn{ text-align: right; }
