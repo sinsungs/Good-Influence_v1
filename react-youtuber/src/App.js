@@ -1,13 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
-// import $ from "jquery";
+import $ from "jquery";
 import axios from 'axios';
 
 import React, {useState, useEffect} from 'react';
-// import $ from "jquery";
-// import axios from 'axios';
+
 function App() {
 
+  // const dto = {
+  //   bno: 123,
+  //   title: 'Sample Title',
+  //   content: 'Sample Content',
+  //   writerName: 'John Doe',
+  // };
+
+  // const [rank, setrank]=useState([]);
+  // useEffect(() => {
+	// axios.get('api/rank')
+	//   .then(response => setrank(response.data))
+	//   .catch(error => console.log(error));
+  // }, []);
+  
   const [msg, setMsg] = useState([]);
   useEffect(() => {
     fetch("/api/hello")
@@ -15,11 +28,11 @@ function App() {
         .then((data) => {setMsg(data);})
   }, []);
 
-  // useEffect(() => {
-	// 	// "할일 추가" 버튼 클릭 시, 모달 창 보이기
-	// 	$('#addTaskBtn').click(function() {
-	// 		$('#addTaskModal').css('display', 'flex');
-	// 	});
+  useEffect(() => {
+		// "할일 추가" 버튼 클릭 시, 모달 창 보이기
+		$('#addTaskBtn').click(function() {
+			$('#addTaskModal').css('display', 'flex');
+		});
 
 	// 	// // "닫기" 버튼 클릭 시, 모달 창 숨기기
 	// 	// $('#closeModalBtn').click(function() {
@@ -32,7 +45,7 @@ function App() {
 	// 		$('#addTaskModal').css('display', 'none');
 	// 		// 추가할일 처리 로직 작성
 	// 	});
-  //   }, []);
+    }, []);
 
   //   const [formData, setFormData] = useState({});
   //   const handleSubmit = (event) => {
@@ -51,7 +64,7 @@ function App() {
   //       ...formData,
   //       [event.target.name]: event.target.value
   //     });
-  //     };
+      // };
 
 
     const [formData, setFormData] = useState({
@@ -83,17 +96,17 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
           {/* <div>
             <h1>Today's Plan List</h1>
-            {plans.length > 0 ? (
-              plans.map(plan => (
-              <div key={plan.p_id}>
-                <h2>{plan.p_title}</h2>
-                <p>{plan.p_content}</p>
-                <p>Start Date: {plan.p_startdate}</p>
-                <p>Start Time: {plan.p_starttime}</p>
-                <p>End Date: {plan.p_enddate}</p>
-                <p>End Time: {plan.p_endtime}</p>
-                <p>Category: {plan.p_category}</p>
-                <p>Remind: {plan.p_remindornot ? 'Yes' : 'No'}</p>
+            {rank.length > 0 ? (
+              rank.map(rank => (
+              <div key={rank.mno}>
+                <h2>Title : {rank.title}</h2>
+                <p>Content : {rank.content}</p>
+                <p>Writer Name : {rank.writerName}</p>
+                <p>Start Time: {rank.p_starttime}</p>
+                <p>End Date: {rank.p_enddate}</p>
+                <p>End Time: {rank.p_endtime}</p>
+                <p>Category: {rank.p_category}</p>
+                <p>Remind: {rank.p_remindornot ? 'Yes' : 'No'}</p>
               </div>
             ))
           ) : (
@@ -116,7 +129,7 @@ function App() {
 
         <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Title</label>
+        <label>책 제목 : </label>
         <input
           type="text"
           className="form-control"
@@ -127,7 +140,7 @@ function App() {
         />
       </div>
       <div className="form-group">
-        <label>Content</label>
+        <label>소개 내용</label>
         <textarea
           className="form-control"
           rows="5"
@@ -152,6 +165,8 @@ function App() {
       </button>
     </form>
 
+    <button id="addTaskBtn">할 일 추가 <span>+</span> </button>
+    <button id="closeModalBtn">할 일 삭제 <span>+</span> </button>
       </header>
       
       <div className="container">
@@ -187,12 +202,11 @@ function App() {
         </div>
       </div>
 
-      <button id="addTaskBtn">할 일 추가 <span>+</span> </button>
-      <button id="closeModalBtn">할 일 삭제 <span>+</span> </button>
+
 
     {/* container End  */}
-{/* 
-    <div id="addTaskModal" class="modal">
+
+    {/* <div id="addTaskModal" class="modal">
 									<div class="modal-content">
 										<form onSubmit={handleSubmit}>
 											<label for="plan_title">제목</label>
