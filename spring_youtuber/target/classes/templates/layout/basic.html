@@ -20,7 +20,7 @@
 
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-  <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
   
 </head>
 
@@ -30,14 +30,24 @@
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Start Bootstrap </div>
+      <div class="sidebar-heading">Influencer</div>
+      
+        <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light">홈</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Shorts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">구독</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Originals</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">YouTube Music</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light"></a>
+      </div>
+      
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">보관함</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">시청 기록</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">내 동영상</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">나중에 볼 동영상</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">오프라인 저장 동영상</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">좋아요 표시한 동영상</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
