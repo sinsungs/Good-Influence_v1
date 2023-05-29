@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kong.king.spring.youtuber.dto.BoardDTO;
 import com.kong.king.spring.youtuber.dto.PageRequestDTO;
-import com.kong.king.spring.youtuber.dto.ReplyDTO;
 import com.kong.king.spring.youtuber.dto.YoutuberDTO;
-import com.kong.king.spring.youtuber.entity.Youtuber;
 import com.kong.king.spring.youtuber.service.YoutuberService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,66 +33,112 @@ public class YoutuberController {
 
     private final YoutuberService youtuberService;
 
-    // Create a new Youtuber
-	@PostMapping("/register")
-    public ResponseEntity<Youtuber> createYoutuber(@RequestBody YoutuberDTO dto) {
-        Youtuber createdYoutuber = youtuberService.createYoutuber(dto);
-        return ResponseEntity.ok(createdYoutuber);
-    }
-	
-//    @GetMapping("/list")
-//    public ResponseEntity<List<Youtuber>> getAllYoutubers() {
-//        List<Youtuber> youtubers = youtuberService.getAllYoutubers();
-//        return new ResponseEntity<>(youtubers, HttpStatus.OK);
+    /* API 버전 ( @RequestBody 사용 )*/
+    
+//	@PostMapping("/register")
+//    public ResponseEntity<Youtuber> createYoutuber(@RequestBody YoutuberDTO dto) {
+//        Youtuber createdYoutuber = youtuberService.createYoutuber(dto);
+//        return ResponseEntity.ok(createdYoutuber);
 //    }
-	
+    
 //  @GetMapping("/list")
-//  public ResponseEntity<List<Youtuber>> getAllYoutubers() {
-//      List<Youtuber> youtubers = youtuberService.getAllYoutubers();
+//  public ResponseEntity<List<YoutuberDTO>> getAllYoutubersWithWriters() {
+//      List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
 //      return ResponseEntity.ok(youtubers);
 //  }
-	
-	
     
-    @GetMapping({"/read/{yno}", "/modify/{yno}"})
-    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {
-    	YoutuberDTO youtuberWithWriter = youtuberService.getYoutuberWithWriter(yno);
-        return new ResponseEntity<>(youtuberWithWriter, HttpStatus.OK);
-    }
+//    @GetMapping({"/read/{yno}", "/modify/{yno}"})
+//    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {
+//    	YoutuberDTO youtuberWithWriter = youtuberService.getYoutuberWithWriter(yno);
+//        return new ResponseEntity<>(youtuberWithWriter, HttpStatus.OK);
+//    }
     
+//	@PutMapping("/update")
+//	public ResponseEntity<String> modify(@RequestBody YoutuberDTO dto){
+//		
+//		log.info(dto);
+//		
+//		youtuberService.modify(dto);
+//		
+//		return new ResponseEntity<>("success", HttpStatus.OK);
+//	}
+//	
+//	// yno값이 자동으로 안들어가고 주소창 yno가 dto바로 적용되는 구문을 찾아야함 
+//	// 아니다 이코드가 맞다 hidden으로 yno을 뷰단에서 받아서 자동으로 처리하는게 맞다 
     
-//	@GetMapping({"/read", "/modify"})
-//	public void read(Long yno, Model model) {
-//		log.info("yno: " + yno);
+//	@DeleteMapping("/delete/{yno}")
+//	public ResponseEntity<String> remove(@PathVariable("yno") Long yno){
 //		
-//		YoutuberDTO youtuberDTO = youtuberService.get(yno);
+//		log.info("RNO : " + yno);
 //		
-//		log.info(youtuberDTO);
+//		youtuberService.remove(yno);
 //		
-////		model.addAttribute("dto", youtuberDTO);
+//		return new ResponseEntity<>("success", HttpStatus.OK);
 //	}
     
     
-	@PutMapping("/update")
-	public ResponseEntity<String> modify(@RequestBody YoutuberDTO dto){
+    /* ============================================================   */
+    
+	@GetMapping("/register")
+	public void register() {
+		log.info("register get..........");
+	}
+	
+	@PostMapping("/register")
+	public String createYoutuber(YoutuberDTO dto) {
+		
+		youtuberService.createYoutuber(dto);
+		
+		return "redirect:/youtuber/list";
+	}
+	
+	@GetMapping("/list")
+	public void getAllYoutubersWithWriters(Model model) {
+	    List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
+	    model.addAttribute("youtubers", youtubers);
+	}
+	
+	
+	
+    @GetMapping({"/read", "/modify"})
+    public void getYoutuberWithWriter(@RequestParam("yno") Long yno, Model model) {
+    	
+    	YoutuberDTO youtuberDTO = youtuberService.getYoutuberWithWriter(yno);
+    	model.addAttribute("dto", youtuberDTO);
+    	
+    }
+    
+    @PostMapping("/modify")
+	public String modify(YoutuberDTO dto, RedirectAttributes redirectAttributes){
 		
 		log.info(dto);
 		
 		youtuberService.modify(dto);
 		
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		redirectAttributes.addAttribute("yno", dto.getYno());
+		
+//		redirectAttributes 리디렉션 URL에 'yno' 매개변수를 쿼리 매개변수로 추가하는 역할을 합니다
+		
+		return "redirect:/youtuber/read";
 	}
 	
-	// yno값이 자동으로 안들어가고 주소창 yno가 dto바로 적용되는 구문을 찾아야함 
-	// 아니다 이코드가 맞다 hidden으로 yno을 뷰단에서 받아서 자동으로 처리하는게 맞다 
 	
-	@DeleteMapping("/delete/{yno}")
-	public ResponseEntity<String> remove(@PathVariable("yno") Long yno){
-		
-		log.info("RNO : " + yno);
-		
-		youtuberService.remove(yno);
-		
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
+    @PostMapping("/remove")
+    public String remove(@RequestParam("yno") Long yno){
+
+    	log.info("YNO : " + yno);
+
+    	youtuberService.remove(yno);
+
+    	return "redirect:/youtuber/list";
+    }
+	
+//	@PostMapping("/remove")
+//	public String remove(long bno, RedirectAttributes redirectAttributes) {
+//		log.info("bon: " + bno);
+//		boardService.removeWithReplies(bno);
+//		redirectAttributes.addFlashAttribute("msg", bno);
+//		return "redirect:/board/list";
+//	}
+	
 }

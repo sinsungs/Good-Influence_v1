@@ -10,9 +10,11 @@ import com.kong.king.spring.youtuber.entity.Youtuber;
 
 public interface YoutuberService {
 	
-	Youtuber createYoutuber(YoutuberDTO dto);
+	void createYoutuber(YoutuberDTO dto);
 	
 	YoutuberDTO getYoutuberWithWriter(Long yno);
+	
+	List<YoutuberDTO> getAllYoutubersWithWriters();
 	
 //	List<Youtuber> getAllYoutubers();
 	

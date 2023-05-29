@@ -23,33 +23,28 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "writer")
-public class Youtuber {
+public class Post extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long yno;
-	private String name;
+	private Long pno;
 	private String title;
 	private String content;	
-	private int likes;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Member writer;  // Member와 연관관계 지정
+	private Member writer;  // Member와 연관관계 지정 
 	
-//	@OneToMany(mappedBy = "youtuber")
+//	@OneToMany(mappedBy = "post")
 //	private List<PostYoutuber> postYoutubers;
 	
-    @OneToMany(mappedBy = "youtuber")
+    @OneToMany(mappedBy = "post")
     private Set<PostYoutuber> postYoutubers = new HashSet<>();
 	
-	public void changeTitle(String title) {
-		this.title = title;
-	}
-	
-	public void changeContent(String content) {
-		this.content = content;
-		
-		
-	}
+//	public void changeTitle(String title) {
+//		this.title = title;
+//	}
+//	
+//	public void changeContent(String content) {
+//		this.content = content;
+//	}
 }
-

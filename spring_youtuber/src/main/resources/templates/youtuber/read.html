@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<th:block th:replace="~{/layout/basic::setContent(~{this::content})}">
+   <th:block th:fragment="content">
+      <h1 class="mt-4">추천 유튜버 상세보기</h1>
+      
+      <div class="form-group">
+         <label>Yno</label>
+         <input type="text" class="formo-control" name="yno" th:value="${dto.yno}" readonly>
+      </div>
+      
+      <div class="form-group">
+         <label>Title</label>
+         <input type="text" class="form-control" name="title" th:value="${dto.name}" readonly>
+      </div>
+      
+      <div class="form-group">
+         <label>Title</label>
+         <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
+      </div>
+      
+      <div class="form-group">
+         <label>Content</label>
+         <textarea class="form-control" fows="5" name="content" readonly>
+            [[${dto.content}]]
+         </textarea>
+      </div>
+      
+      <div class="form-group">
+         <label>Writer</label>
+         <input type="text" class="form-control" name="writer" th:value="${dto.writerName}" readonly>
+      </div>
+      
+      <div class="form-group">
+         <label>Likes</label>
+         <input type="text" class="form-control" name="likes" th:value="${dto.likes}" readonly>
+      </div>
+      
+       <a th:href="@{/youtuber/modify(yno = ${dto.yno})}">
+         <button type="button" class="btn btn-primary">Modify</button>
+      </a>
+      
+      <a th:href="@{/youtuber/list}">
+         <button type="button" class="btn btn-info">List</button>   
+      </a> 
+      
+      
+   </th:block>
+</th:block>

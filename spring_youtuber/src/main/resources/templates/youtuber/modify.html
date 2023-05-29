@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<th:block th:replace="~{/layout/basic::setContent(~{this::content})}">
+   <th:block th:fragment="content">
+   
+      <h1 class="mt-4">추천도서 독후감 수정/삭제</h1>
+      
+      <form action="/youtuber/modify" method="post">
+      
+      <div class="form-group">
+      		<label>Yno</label>
+      		<input type="text" class="form-control" name="yno" th:value="${dto.yno}" readonly>
+      </div>
+    
+       <div class="form-group">
+         <label>Title</label>
+         <input type="text" class="form-control" name="title" th:value="${dto.name}" readonly>
+      </div>
+      
+      
+      <div class="form-group">
+      		<label>Title</label>
+      		<input type="text" class="form-control" name="title" th:value="${dto.title}" >
+      </div>
+      
+      <div class="form-group">
+      		<label>Content</label>
+      		<textarea class="form-control" rows="5" name="content" >
+      			[[${dto.content}]]
+      		</textarea>
+      </div>
+      
+      <div class="form-group">
+         <label>Writer</label>
+         <input type="text" class="form-control" name="writer" th:value="${dto.writerName}" readonly>
+      </div>
+      
+      <div class="form-group">
+         <label>Likes</label>
+         <input type="text" class="form-control" name="likes" th:value="${dto.likes}" readonly>
+      </div>      
+
+      </form>
+      
+      <button type="button" class="btn btn-primary modifyBtn">Modify</button>
+      <button type="button" class="btn btn-info listBtn">List</button>
+      <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
+      <script th:inline="javascript">
+         
+         var actionForm = $("form");
+         
+         $(".removeBtn").click(function(){
+            
+            if(!confirm("삭제하시겠습니까?")){
+               return;
+            }
+            
+            actionForm
+               .attr("action", "/youtuber/remove")
+               .attr("method","post");
+            
+            actionForm.submit();
+            
+         });
+         
+         $(".modifyBtn").click(function(){
+            
+            if(!confirm("수정하시겠습니까?")){
+               return;
+            }
+            
+            actionForm
+               .attr("action", "/youtuber/modify")
+               .attr("method", "post")
+               .submit();
+            
+         });
+         
+         $(".listBtn").click(function(){
+
+            actionForm
+               .attr("action", "/youtuber/list")
+               .attr("method", "get");
+            
+            console.log(actionForm.html());
+            actionForm.submit();
+            
+         });
+         
+      </script>
+
+   </th:block>
+</th:block>

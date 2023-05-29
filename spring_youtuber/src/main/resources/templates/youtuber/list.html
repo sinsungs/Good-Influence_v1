@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+	<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+		<th:block th:fragment="content">
+			<h1 class="mt-4">유튜버 전체 조회 페이지 
+	 			<span>
+					<a th:href="@{/youtuber/register}">
+						<button type="button" class="btn btn-outline-primary">유튜버 등록</button>
+					</a>
+				</span>
+			</h1>
+
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Writer</th>
+					<th scope="col">Regdate</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr th:each="youtuber : ${youtubers}">
+						<th scope="row">
+						<a th:href="@{/youtuber/read(yno= ${youtuber.yno})}">
+                     		[[${youtuber.yno}]]
+                  		</a>
+                  	
+						</th>
+						<td>[[${youtuber.name}]]</td>
+						<td>[[${youtuber.title}]] <small>[[${youtuber.content}]]</small></td>
+						<td>[[${youtuber.likes}]]</td>
+						<td>[[${youtuber.writerName}]] <small>[[${youtuber.writerEmail}]]</small></td>
+					</tr>
+				</tbody>
+			</table>
+		      
+		<script th:inline="javascript" type="text/javascript">
+		
+         var msg = [[${msg}]];
+         
+         console.log(msg);
+         
+         if(msg) {
+            $(".modal").modal();
+         }
+         
+         var searchForm = $("#searchForm");
+         $('.btn-search').click(function(e) {
+            searchForm.submit();
+         });
+         
+         $('.btn-clear').click(function(e) {
+            searchForm.empty().submit();
+         });
+      </script>
+
+					
+		</th:block>
+	</th:block>
+
+			
+      

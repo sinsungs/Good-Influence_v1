@@ -1,15 +1,14 @@
 package com.kong.king.spring.youtuber.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.kong.king.spring.youtuber.dto.BoardDTO;
-import com.kong.king.spring.youtuber.dto.ReplyDTO;
 import com.kong.king.spring.youtuber.dto.YoutuberDTO;
 import com.kong.king.spring.youtuber.entity.Board;
 import com.kong.king.spring.youtuber.entity.Member;
-import com.kong.king.spring.youtuber.entity.Reply;
 import com.kong.king.spring.youtuber.entity.Youtuber;
 import com.kong.king.spring.youtuber.repository.YoutuberRepository;
 
@@ -25,17 +24,30 @@ public class YoutuberServiceImpl implements YoutuberService {
 	
 	// 게시물 등록 
 	@Override
-	public Youtuber createYoutuber(YoutuberDTO dto) {
+	public void createYoutuber(YoutuberDTO dto) {
 		log.info("---BoardServiceImpl register()---" + dto);
 		Youtuber youtuber = dtoToEntity(dto);
-		return youtuberRepository.save(youtuber);
+		youtuberRepository.save(youtuber); 
 		
-//		return null;
 	}
 	
 //    public List<Youtuber> getAllYoutubers() {
 //        return youtuberRepository.findAll();
 //    }
+	
+	@Override
+	public List<YoutuberDTO> getAllYoutubersWithWriters() {
+	    List<Object[]> results = youtuberRepository.getAllYoutubersWithWriters();
+	    List<YoutuberDTO> youtubers = new ArrayList<>();
+
+	    for (Object[] arr : results) {
+	        Youtuber youtuber = (Youtuber) arr[0];
+	        Member writer = (Member) arr[1];
+	        youtubers.add(entityToDTO(youtuber, writer));
+	    }
+
+	    return youtubers;
+	}
 //    
 	
 	@Override
@@ -46,12 +58,31 @@ public class YoutuberServiceImpl implements YoutuberService {
 		return entityToDTO((Youtuber)arr[0], (Member)arr[1]);
 	}
 	
+	
 	@Override
 	public void modify(YoutuberDTO dto) {
-		Youtuber youtuber = dtoToEntity(dto);
-		youtuberRepository.save(youtuber);
 		
+		Youtuber youtuber = youtuberRepository.getOne(dto.getYno());
+		
+		System.out.println("youtuber1--------" + youtuber);
+		
+		youtuber.changeTitle(dto.getTitle());
+		youtuber.changeContent(dto.getContent());
+		
+		System.out.println("youtuber2--------" + youtuber);
+		
+		youtuberRepository.save(youtuber);
 	}
+	/* 이렇게 수정하면 member와의 연관관계를 이어주지 않아도 youtuber의 엔티티만 수정가능 하게된다 */
+	
+	
+	
+//	@Override
+//	public void modify(YoutuberDTO dto) {
+//		Youtuber youtuber = dtoToEntity(dto);
+//		youtuberRepository.save(youtuber);
+//	}
+	
 	@Override
 	public void remove(Long yno) {
 		youtuberRepository.deleteById(yno);
