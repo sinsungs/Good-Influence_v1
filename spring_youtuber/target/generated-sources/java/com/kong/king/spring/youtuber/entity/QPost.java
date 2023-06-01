@@ -18,8 +18,6 @@ public class QPost extends EntityPathBase<Post> {
 
     private static final long serialVersionUID = -2109189990L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QPost post = new QPost("post");
 
     public final QBaseEntity _super = new QBaseEntity(this);
@@ -38,27 +36,16 @@ public class QPost extends EntityPathBase<Post> {
 
     public final StringPath title = createString("title");
 
-    public final QMember writer;
-
     public QPost(String variable) {
-        this(Post.class, forVariable(variable), INITS);
+        super(Post.class, forVariable(variable));
     }
 
     public QPost(Path<? extends Post> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QPost(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QPost(PathMetadata metadata, PathInits inits) {
-        this(Post.class, metadata, inits);
-    }
-
-    public QPost(Class<? extends Post> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.writer = inits.isInitialized("writer") ? new QMember(forProperty("writer")) : null;
+        super(Post.class, metadata);
     }
 
 }

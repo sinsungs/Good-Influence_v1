@@ -31,8 +31,6 @@ public class Post extends BaseEntity{
 	private String title;
 	private String content;	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Member writer;  // Member와 연관관계 지정 
 	
 //	@OneToMany(mappedBy = "post")
 //	private List<PostYoutuber> postYoutubers;

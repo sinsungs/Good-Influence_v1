@@ -46,7 +46,7 @@ public class QPostYoutuber extends EntityPathBase<PostYoutuber> {
 
     public QPostYoutuber(Class<? extends PostYoutuber> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.post = inits.isInitialized("post") ? new QPost(forProperty("post"), inits.get("post")) : null;
+        this.post = inits.isInitialized("post") ? new QPost(forProperty("post")) : null;
         this.youtuber = inits.isInitialized("youtuber") ? new QYoutuber(forProperty("youtuber"), inits.get("youtuber")) : null;
     }
 
