@@ -1,11 +1,15 @@
 package com.kong.king.spring.youtuber.service;
 
+import java.util.List;
+
 import com.kong.king.spring.youtuber.dto.PostDTO;
 import com.kong.king.spring.youtuber.entity.Post;
 
 public interface PostService {
 
-	void createPost(PostDTO dto);
+	Post createPost(PostDTO dto);
+	
+	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
 //	
 //	PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 //	
@@ -26,6 +30,8 @@ public interface PostService {
 		
 		return post;
 	}
+
+
 	
 //	
 //	default BoardDTO entityToDTO(Board board, Member member, Long replyCount) {

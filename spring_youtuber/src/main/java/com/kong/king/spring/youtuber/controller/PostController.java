@@ -1,8 +1,13 @@
 package com.kong.king.spring.youtuber.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kong.king.spring.youtuber.dto.PostDTO;
 import com.kong.king.spring.youtuber.entity.Post;
@@ -18,12 +23,13 @@ public class PostController {
     private final PostService postService;
     
     @PostMapping("/register")
-    public void createPost(PostDTO dto) {
-//      Post createdPost = postService.createPost(dto);
-    	postService.createPost(dto);
+    public ResponseEntity<Post> createPost(PostDTO dto) {
+      Post createdPost = postService.createPost(dto);
+//    postService.createPost(dto);
     	
-//      return "redirect:/youtuber/list";
+      return ResponseEntity.ok(createdPost);
     }
+    
     
 //	@PostMapping("/register")
 //	public String createYoutuber(YoutuberDTO dto) {
@@ -65,6 +71,7 @@ public class PostController {
 //    }
 //
 //    
+    
 //    @PostMapping
 //    public ResponseEntity<PostYoutuber> addYouTuberToPost(@PathVariable Long postId, @RequestBody PostYoutuberDTO postYoutuberDTO) {
 //        postYoutuberDTO.setPostId(postId);
@@ -76,16 +83,17 @@ public class PostController {
 //        }
 //    }
 
-    // Add other CRUD functions as needed
-//    @PostMapping("/{postId}/youtubers")
-//    public ResponseEntity<Void> addYouTubersToPost(@PathVariable Long postId, @RequestBody List<Long> youtuberIds) {
-//    	boolean added = postService.addYouTubersToPost(postId, youtuberIds);
-//    	if (added) {
-//    		return ResponseEntity.ok().build();
-//    	} else {
-//    		return ResponseEntity.notFound().build();
-//    	}
-//    }
+    @PostMapping("/postyoutuber")
+    public ResponseEntity<Void> addYoutubersToPost(@RequestParam Long postId, @RequestBody List<Long> youtuberIds) {
+    	boolean added = postService.addYouTubersToPost(postId, youtuberIds);
+    	if (added) {
+    		return ResponseEntity.ok().build();
+    	} else {
+    		return ResponseEntity.notFound().build();
+    	}
+    }
+    
+    
 }
     
     
