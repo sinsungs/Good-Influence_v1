@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Youtuber from './pages/Youtuber';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route component={NotFound} /> */}
         </Routes>
         <Footer />
+        <Youtuber/>
       </div>
     </Router>
   );
