@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.kong.king.spring.youtuber.dto.PostDTO;
+import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Post;
 import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.entity.Youtuber;
@@ -25,13 +26,18 @@ public class PostServiceImpl implements PostService {
 	private final YoutuberRepository youtuberRepository;
 	
 	// 게시물 등록 
-	@Override
-	public Post createPost(PostDTO dto) {
-		log.info("---BoardServiceImpl register()---" + dto);
-		Post post = dtoToEntity(dto);
-		return postRepository.save(post); 
-		
-	}
+//	@Override
+//	public Post createPost(PostDTO dto) {
+//		log.info("---BoardServiceImpl register()---" + dto);
+//		Post post = dtoToEntity(dto);
+//		return postRepository.save(post); 
+//	}
+	
+    @Override
+    public Post createPost(PostRequestDTO dto) {
+        Post post = dtoToEntity(dto);
+        return postRepository.save(post);
+    }
 
 //	@Override
 //	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {
@@ -39,32 +45,32 @@ public class PostServiceImpl implements PostService {
 //		return false;
 //	}
 	
-	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {
-	    Optional<Post> optionalPost = postRepository.findById(postId);
-	    if (optionalPost.isPresent()) {
-	        Post post = optionalPost.get();
-	        
-	        List<Youtuber> youtubers = new ArrayList<>();
-	        
-	        for (Long youtuberId : youtuberIds) {
-	            Optional<Youtuber> optionalYouTuber = youtuberRepository.findById(youtuberId);
-	            if (optionalYouTuber.isPresent()) {
-	            	
-	                Youtuber youtuber = optionalYouTuber.get();
-	                youtubers.add(youtuber);
-	                
-	            } else {
-	                // 해당 YouTuber ID에 해당하는 YouTuber가 없는 경우 처리 로직 작성
-	            }
-	        }
-	        
-	        post.getPostYoutubers().add((PostYoutuber) youtubers);
-	        postRepository.save(post);
-	        
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
+//	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {
+//	    Optional<Post> optionalPost = postRepository.findById(postId);
+//	    if (optionalPost.isPresent()) {
+//	        Post post = optionalPost.get();
+//	        
+//	        List<Youtuber> youtubers = new ArrayList<>();
+//	        
+//	        for (Long youtuberId : youtuberIds) {
+//	            Optional<Youtuber> optionalYouTuber = youtuberRepository.findById(youtuberId);
+//	            if (optionalYouTuber.isPresent()) {
+//	            	
+//	                Youtuber youtuber = optionalYouTuber.get();
+//	                youtubers.add(youtuber);
+//	                
+//	            } else {
+//	                // 해당 YouTuber ID에 해당하는 YouTuber가 없는 경우 처리 로직 작성
+//	            }
+//	        }
+//	        
+//	        post.getPostYoutubers().add((PostYoutuber) youtubers);
+//	        postRepository.save(post);
+//	        
+//	        return true;
+//	    } else {
+//	        return false;
+//	    }
+//	}
 
 }

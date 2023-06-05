@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kong.king.spring.youtuber.dto.PostDTO;
+import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Post;
 import com.kong.king.spring.youtuber.service.PostService;
 
@@ -23,11 +23,11 @@ public class PostController {
     private final PostService postService;
     
     @PostMapping("/register")
-    public ResponseEntity<Post> createPost(PostDTO dto) {
-      Post createdPost = postService.createPost(dto);
-//    postService.createPost(dto);
+    public ResponseEntity<Post> createPost(@RequestBody PostRequestDTO dto) {
     	
-      return ResponseEntity.ok(createdPost);
+        Post post = postService.createPost(dto);
+        
+        return ResponseEntity.ok(post);
     }
     
     
@@ -83,15 +83,15 @@ public class PostController {
 //        }
 //    }
 
-    @PostMapping("/postyoutuber")
-    public ResponseEntity<Void> addYoutubersToPost(@RequestParam Long postId, @RequestBody List<Long> youtuberIds) {
-    	boolean added = postService.addYouTubersToPost(postId, youtuberIds);
-    	if (added) {
-    		return ResponseEntity.ok().build();
-    	} else {
-    		return ResponseEntity.notFound().build();
-    	}
-    }
+//    @PostMapping("/postyoutuber")
+//    public ResponseEntity<Void> addYoutubersToPost(@RequestParam Long postId, @RequestBody List<Long> youtuberIds) {
+//    	boolean added = postService.addYouTubersToPost(postId, youtuberIds);
+//    	if (added) {
+//    		return ResponseEntity.ok().build();
+//    	} else {
+//    		return ResponseEntity.notFound().build();
+//    	}
+//    }
     
     
 }

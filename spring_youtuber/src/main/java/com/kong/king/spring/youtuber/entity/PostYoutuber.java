@@ -25,13 +25,16 @@ public class PostYoutuber {
     private Long pyno;
 
     @ManyToOne
-//    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
-//    @JoinColumn(name = "youtuber_id")
+    @JoinColumn(name = "youtuber_id")
     private Youtuber youtuber;
 
+    public void setPost(Post post) {
+        this.post = post;
+    }
     // Define getters and setters
 
     // Define other necessary methods

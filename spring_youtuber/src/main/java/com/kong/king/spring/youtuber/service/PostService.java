@@ -2,14 +2,20 @@ package com.kong.king.spring.youtuber.service;
 
 import java.util.List;
 
+import com.kong.king.spring.youtuber.dto.BoardDTO;
 import com.kong.king.spring.youtuber.dto.PostDTO;
+import com.kong.king.spring.youtuber.dto.PostRequestDTO;
+import com.kong.king.spring.youtuber.entity.Board;
+import com.kong.king.spring.youtuber.entity.Member;
 import com.kong.king.spring.youtuber.entity.Post;
+import com.kong.king.spring.youtuber.entity.PostYoutuber;
+import com.kong.king.spring.youtuber.entity.Youtuber;
 
 public interface PostService {
 
-	Post createPost(PostDTO dto);
+//	Post createPost(PostDTO dto);
 	
-	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
+//	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
 //	
 //	PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 //	
@@ -18,17 +24,44 @@ public interface PostService {
 //	void removeWithReplies(Long bno);
 //	
 //	void modify(BoardDTO boardDTO);
-//	
 	
-	default Post dtoToEntity(PostDTO dto) {
+	Post createPost(PostRequestDTO dto);
+	
+	
+    default Post dtoToEntity(PostRequestDTO dto) {
+        Youtuber youtuber = Youtuber.builder()
+                .yno(dto.getYno())
+                .build();
+
+        Post post = Post.builder()
+                .pno(dto.getPno())
+//                .title(dto.getTitle())
+//                .content(dto.getContent())
+                .build();
+
+        PostYoutuber postYoutuber = PostYoutuber.builder()
+                .post(post)
+                .youtuber(youtuber)
+                .build();
+
+        post.addPostYoutuber(postYoutuber);
+
+        return post;
+    }
+    
+	
+	default Board dtoToEntity(BoardDTO dto) {
+		Member member = Member.builder()
+				.email(dto.getWriterEmail()).build();
 		
-		Post post = Post.builder()
-				.pno(dto.getPno())
+		Board board = Board.builder()
+				.bno(dto.getBno())
 				.title(dto.getTitle())
 				.content(dto.getContent())
+				.writer(member)
 				.build();
 		
-		return post;
+		return board;
 	}
 
 
