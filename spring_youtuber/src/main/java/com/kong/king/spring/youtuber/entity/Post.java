@@ -9,18 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
 
 @Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@ToString
+@Data
 public class Post extends BaseEntity{
 
 	@Id
@@ -30,33 +22,9 @@ public class Post extends BaseEntity{
 	private String title;
 	private String content;	
 	
-	
-//	@OneToMany(mappedBy = "post")
-//	private List<PostYoutuber> postYoutubers;
-	
     @OneToMany(mappedBy = "post")
     private List<PostYoutuber> postYoutubers = new ArrayList<>();
-    
-//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<PostYoutuber> postYoutubers = new HashSet<>();
-	
-//	public void changeTitle(String title) {
-//		this.title = title;
-//	}
-//	
-//	public void changeContent(String content) {
-//		this.content = content;
-//	}
-    
-//    public void addPostYoutuber(PostYoutuber postYoutuber) {
-//        postYoutubers.add(postYoutuber);
-//        postYoutuber.setPost(this);
-//    }
 
-//    public void removePostYoutuber(PostYoutuber postYoutuber) {
-//        postYoutubers.remove(postYoutuber);
-//        postYoutuber.setPost(null);
-//    }
-    
     
 }
+

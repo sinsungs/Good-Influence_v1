@@ -14,10 +14,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostRequestDTO {
+	
 	private Long pno;
-//    private String title;
-//    private String content;
-
+	private String title;
+	private String content;
+//	private LocalDateTime regDate;
+//	private LocalDateTime modDate;
+	
     private Long yno;
-    // Constructors, getters, setters
+
 }

@@ -22,7 +22,7 @@ public class YoutuberServiceImpl implements YoutuberService {
 
 	private final YoutuberRepository youtuberRepository;
 	
-	// 게시물 등록 
+//	// 게시물 등록 
 	@Override
 	public void createYoutuber(YoutuberDTO dto) {
 		log.info("---BoardServiceImpl register()---" + dto);
@@ -66,8 +66,8 @@ public class YoutuberServiceImpl implements YoutuberService {
 		
 		System.out.println("youtuber1--------" + youtuber);
 		
-		youtuber.changeTitle(dto.getTitle());
-		youtuber.changeContent(dto.getContent());
+//		youtuber.changeTitle(dto.getTitle());
+//		youtuber.changeContent(dto.getContent());
 		
 		System.out.println("youtuber2--------" + youtuber);
 		

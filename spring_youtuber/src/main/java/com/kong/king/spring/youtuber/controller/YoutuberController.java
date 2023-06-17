@@ -84,6 +84,7 @@ public class YoutuberController {
 		log.info("register get..........");
 	}
 	
+    
 	@PostMapping("/register")
 	public String createYoutuber(YoutuberDTO dto) {
 		

@@ -1,12 +1,20 @@
 package com.kong.king.spring.youtuber.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Post;
+import com.kong.king.spring.youtuber.entity.PostYoutuber;
+import com.kong.king.spring.youtuber.entity.Youtuber;
 import com.kong.king.spring.youtuber.repository.PostRepository;
 import com.kong.king.spring.youtuber.repository.PostYoutuberRepository;
 import com.kong.king.spring.youtuber.repository.YoutuberRepository;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,7 +22,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class PostServiceImpl implements PostService {
+public class PostYoutuberServiceImpl implements PostYoutuberService {
 	
 	private final PostRepository postRepository;
 	private final YoutuberRepository youtuberRepository;
@@ -41,23 +49,32 @@ public class PostServiceImpl implements PostService {
 //    }
     
     @Override
-    public Long createPost(PostRequestDTO dto) {
+    public String createPost(PostRequestDTO dto) {
     	
-        Post post = new Post();
-        post.setTitle(dto.getTitle());
-        post.setContent(dto.getContent());
-        postRepository.save(post);
+        Post post = postRepository.findById(dto.getPno()).get();
+        Youtuber youtuber = youtuberRepository.findById(dto.getYno()).get();
         
-        Long postId = post.getPno();
+        PostYoutuber postYoutuber = new PostYoutuber();
+        postYoutuber.setPost(post);
+        postYoutuber.setYoutuber(youtuber);
+        postyoutuberRepository.save(postYoutuber);
         
-        return postId;
+        String response = String.format("%s번 게시물에 %s 유튜버를 등록하였습니다.", post.getPno(), youtuber.getName()); 
+        return response;
 //        return postYoutuber;
+        
+        // 유튜버 여러명 받는 버전 만들어야 함 이거 할려면 dto yno를 List 형태로 만들어야 함 
+//        List<Long> youTuberIds = dto.getYouTuberIds(); // Assuming you receive YouTuber IDs in the request
+//        for (Long youTuberId : youTuberIds) {
+//            Intermediate intermediate = new Intermediate(postId, youTuberId); // Assuming Intermediate entity with postId and youTuberId fields
+//            intermediateRepository.save(intermediate);
+//        }
     }
     
     
-
+//
 //	@Override
-//	public PostYoutuber getList() {
+//	public String getList() {
 //		List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
 //		
 //		List<PostYoutuber> dto = new ArrayList<>();
@@ -66,6 +83,20 @@ public class PostServiceImpl implements PostService {
 //			dto.add(dto.of(postYoutuber));
 //		}
 //	}
+	
+//    @GetMapping("/list-academy")
+//    public ResponseEntity<String> showRegisterAcademy() {
+//        List<ExamineeAcademy> examineeAcademies = examineeAcademyRepository.findAll();
+//
+//        List<ExamineeAcademyDTO> dto = new ArrayList<>();
+//        for(ExamineeAcademy examineeAcademy : examineeAcademies) {
+//            dto.add(ExamineeAcademyDTO.of(examineeAcademy));
+//        }
+//
+//        String response = dto.toString();
+//        return ResponseEntity.ok(response);
+//    }
+//    
 
 //	@Override
 //	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {

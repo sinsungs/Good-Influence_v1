@@ -2,17 +2,13 @@ package com.kong.king.spring.youtuber.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kong.king.spring.youtuber.dto.PageRequestDTO;
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
-import com.kong.king.spring.youtuber.entity.Post;
-import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.service.PostService;
+import com.kong.king.spring.youtuber.service.PostYoutuberService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,17 +18,21 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 	
     private final PostService postService;
+    private final PostYoutuberService postyoutuberService;
     
     @PostMapping("/register")
-    public ResponseEntity<PostYoutuber> createPost(@RequestBody PostRequestDTO dto) {
+    public  ResponseEntity<String> createPost(@RequestBody PostRequestDTO dto) {
     	
     	System.out.print(dto);
     	
-    	PostYoutuber postyoutuber = postService.createPost(dto);
+    	Long pno = postService.createPost(dto);
+    	
+    	dto.setPno(pno);
+    	
+    	String response = postyoutuberService.createPost(dto);
         
-        System.out.print(postyoutuber);
-        
-        return ResponseEntity.ok(postyoutuber);
+//        String response = "success";
+        return ResponseEntity.ok(response);
     }
     
 //	@GetMapping("/list")

@@ -31,7 +31,7 @@ public interface YoutuberService {
 	void remove(Long yno);
 	
 	
-//	
+	
 	default Youtuber dtoToEntity(YoutuberDTO dto) {
 		Member member = Member.builder()
 				.email(dto.getWriterEmail()).build();

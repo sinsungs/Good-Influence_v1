@@ -1,7 +1,7 @@
 package com.kong.king.spring.youtuber.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,16 +13,17 @@ import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@ToString(exclude = "writer")
+@NoArgsConstructor 
+@AllArgsConstructor 
+@ToString(exclude = {"writer"})
+
 public class Youtuber {
 
 	@Id
@@ -36,20 +37,11 @@ public class Youtuber {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Member writer;  // Member와 연관관계 지정
 	
-//	@OneToMany(mappedBy = "youtuber")
-//	private List<PostYoutuber> postYoutubers;
 	
     @OneToMany(mappedBy = "youtuber")
-    private Set<PostYoutuber> postYoutubers = new HashSet<>();
+    private List<PostYoutuber> postYoutubers = new ArrayList<>();
+
 	
-	public void changeTitle(String title) {
-		this.title = title;
-	}
-	
-	public void changeContent(String content) {
-		this.content = content;
-		
-		
-	}
+    
 }
 

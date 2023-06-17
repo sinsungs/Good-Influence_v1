@@ -28,7 +28,7 @@ public class QYoutuber extends EntityPathBase<Youtuber> {
 
     public final StringPath name = createString("name");
 
-    public final SetPath<PostYoutuber, QPostYoutuber> postYoutubers = this.<PostYoutuber, QPostYoutuber>createSet("postYoutubers", PostYoutuber.class, QPostYoutuber.class, PathInits.DIRECT2);
+    public final ListPath<PostYoutuber, QPostYoutuber> postYoutubers = this.<PostYoutuber, QPostYoutuber>createList("postYoutubers", PostYoutuber.class, QPostYoutuber.class, PathInits.DIRECT2);
 
     public final StringPath title = createString("title");
 

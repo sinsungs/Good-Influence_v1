@@ -1,8 +1,24 @@
 package com.kong.king.spring.youtuber.dto;
 
-public class PostYoutuberDTO {
-    private Long postId;
-    private Long youtuberId;
+import java.time.LocalDateTime;
 
-    // Constructors, getters, and setters
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class PostYoutuberDTO {
+	
+	private Long pyno;
+	private String title;
+	private String content;
+	private LocalDateTime regDate;
+	private LocalDateTime modDate;
+
 }

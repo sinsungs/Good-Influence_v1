@@ -5,46 +5,24 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
 
 @Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@ToString
+@Data
 public class PostYoutuber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pyno;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+//    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "youtuber_id")
+//    @JoinColumn(name = "youtuber_id")
     private Youtuber youtuber;
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
 
-    public void setYoutuber(Youtuber youtuber) {
-        this.youtuber = youtuber;
-    }
-
-//    public void setPost(Post post) {
-//        this.post = post;
-//    }
-    // Define getters and setters
-
-    // Define other necessary methods
 }

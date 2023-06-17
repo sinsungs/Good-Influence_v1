@@ -15,23 +15,23 @@ public class YoutuberRepositoryTest {
 		@Autowired
 		private YoutuberRepository youtuberRepository;
 		
-		@Test
-		public void insertYoutuber() {
-			
-			IntStream.rangeClosed(1, 100).forEach(i -> {
-				Member member = Member.builder().email("user" + i + "@king.kong.com").build();
-						
-				Youtuber youtuber = Youtuber.builder()
-						.title("제목타이름..." + (i%5))
-						.content("내용..." + (i%8))
-						.writer(member)
-						.likes(i)
-						.name("강신성" + i)
-						.build();
-				
-				youtuberRepository.save(youtuber);
-			});
-		}
+//		@Test
+//		public void insertYoutuber() {
+//			
+//			IntStream.rangeClosed(1, 100).forEach(i -> {
+//				Member member = Member.builder().email("user" + i + "@king.kong.com").build();
+//						
+//				Youtuber youtuber = Youtuber.builder()
+//						.title("제목타이름..." + (i%5))
+//						.content("내용..." + (i%8))
+//						.writer(member)
+//						.likes(i)
+//						.name("강신성" + i)
+//						.build();
+//				
+//				youtuberRepository.save(youtuber);
+//			});
+//		}
 //		
 //		@Transactional
 //		@Test
