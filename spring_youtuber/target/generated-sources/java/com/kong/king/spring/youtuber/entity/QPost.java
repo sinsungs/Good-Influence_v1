@@ -29,7 +29,7 @@ public class QPost extends EntityPathBase<Post> {
 
     public final NumberPath<Long> pno = createNumber("pno", Long.class);
 
-    public final SetPath<PostYoutuber, QPostYoutuber> postYoutubers = this.<PostYoutuber, QPostYoutuber>createSet("postYoutubers", PostYoutuber.class, QPostYoutuber.class, PathInits.DIRECT2);
+    public final ListPath<PostYoutuber, QPostYoutuber> postYoutubers = this.<PostYoutuber, QPostYoutuber>createList("postYoutubers", PostYoutuber.class, QPostYoutuber.class, PathInits.DIRECT2);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;

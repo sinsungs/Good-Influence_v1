@@ -1,16 +1,17 @@
 package com.kong.king.spring.youtuber.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kong.king.spring.youtuber.dto.PageRequestDTO;
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Post;
+import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,14 +24,34 @@ public class PostController {
     private final PostService postService;
     
     @PostMapping("/register")
-    public ResponseEntity<Post> createPost(@RequestBody PostRequestDTO dto) {
+    public ResponseEntity<PostYoutuber> createPost(@RequestBody PostRequestDTO dto) {
     	
-        Post post = postService.createPost(dto);
+    	System.out.print(dto);
+    	
+    	PostYoutuber postyoutuber = postService.createPost(dto);
         
-        return ResponseEntity.ok(post);
+        System.out.print(postyoutuber);
+        
+        return ResponseEntity.ok(postyoutuber);
     }
     
-    
+//	@GetMapping("/list")
+//	public ResponseEntity<PostYoutuber> listPost() {
+//		
+//		PostYoutuber postyoutuber = PostService.getList();
+//		
+//        return ResponseEntity.ok(postyoutuber);
+//	}
+	
+	
+//	@GetMapping("/list")
+//	public void list(PageRequestDTO pageRequestDTO, Model model) {
+//		log.info("list..............." + pageRequestDTO);
+//		
+//		model.addAttribute("result", boardService.getList(pageRequestDTO));
+//	}
+//	
+	
 //	@PostMapping("/register")
 //	public String createYoutuber(YoutuberDTO dto) {
 //		
@@ -39,6 +60,7 @@ public class PostController {
 //		return "redirect:/youtuber/list";
 //	}
 	
+    
 
 //    @GetMapping("/{postId}")
 //    public ResponseEntity<Post> getPost(@PathVariable Long postId) {

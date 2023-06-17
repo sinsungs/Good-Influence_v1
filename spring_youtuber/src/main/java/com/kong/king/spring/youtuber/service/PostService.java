@@ -1,9 +1,6 @@
 package com.kong.king.spring.youtuber.service;
 
-import java.util.List;
-
 import com.kong.king.spring.youtuber.dto.BoardDTO;
-import com.kong.king.spring.youtuber.dto.PostDTO;
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Board;
 import com.kong.king.spring.youtuber.entity.Member;
@@ -25,44 +22,46 @@ public interface PostService {
 //	
 //	void modify(BoardDTO boardDTO);
 	
-	Post createPost(PostRequestDTO dto);
+	PostYoutuber createPost(PostRequestDTO dto);
+	
+//	PostYoutuber getList();
 	
 	
-    default Post dtoToEntity(PostRequestDTO dto) {
-        Youtuber youtuber = Youtuber.builder()
-                .yno(dto.getYno())
-                .build();
-
-        Post post = Post.builder()
-                .pno(dto.getPno())
-//                .title(dto.getTitle())
-//                .content(dto.getContent())
-                .build();
-
-        PostYoutuber postYoutuber = PostYoutuber.builder()
-                .post(post)
-                .youtuber(youtuber)
-                .build();
-
-        post.addPostYoutuber(postYoutuber);
-
-        return post;
-    }
-    
-	
-	default Board dtoToEntity(BoardDTO dto) {
-		Member member = Member.builder()
-				.email(dto.getWriterEmail()).build();
-		
-		Board board = Board.builder()
-				.bno(dto.getBno())
-				.title(dto.getTitle())
-				.content(dto.getContent())
-				.writer(member)
-				.build();
-		
-		return board;
-	}
+//    default Post dtoToEntity(PostRequestDTO dto) {
+//        Youtuber youtuber = Youtuber.builder()
+//                .yno(dto.getYno())
+//                .build();
+//
+//        Post post = Post.builder()
+//                .pno(dto.getPno())
+////                .title(dto.getTitle())
+////                .content(dto.getContent())
+//                .build();
+//
+//        PostYoutuber postYoutuber = PostYoutuber.builder()
+//                .post(post)
+//                .youtuber(youtuber)
+//                .build();
+//
+//        post.addPostYoutuber(postYoutuber);
+//
+//        return post;
+//    }
+//    
+//	
+//	default Board dtoToEntity(BoardDTO dto) {
+//		Member member = Member.builder()
+//				.email(dto.getWriterEmail()).build();
+//		
+//		Board board = Board.builder()
+//				.bno(dto.getBno())
+//				.title(dto.getTitle())
+//				.content(dto.getContent())
+//				.writer(member)
+//				.build();
+//		
+//		return board;
+//	}
 
 
 	

@@ -17,7 +17,7 @@ public class PostRequestDTO {
 	private Long pno;
 //    private String title;
 //    private String content;
-    private Long yno;
 
+    private Long yno;
     // Constructors, getters, setters
 }

@@ -1,6 +1,7 @@
 package com.kong.king.spring.youtuber.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,17 +25,25 @@ public class PostYoutuber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pyno;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "youtuber_id")
     private Youtuber youtuber;
 
     public void setPost(Post post) {
         this.post = post;
     }
+
+    public void setYoutuber(Youtuber youtuber) {
+        this.youtuber = youtuber;
+    }
+
+//    public void setPost(Post post) {
+//        this.post = post;
+//    }
     // Define getters and setters
 
     // Define other necessary methods

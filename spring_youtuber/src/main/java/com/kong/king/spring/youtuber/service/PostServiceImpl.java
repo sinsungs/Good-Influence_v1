@@ -2,16 +2,15 @@ package com.kong.king.spring.youtuber.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.kong.king.spring.youtuber.dto.PostDTO;
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
 import com.kong.king.spring.youtuber.entity.Post;
 import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.entity.Youtuber;
 import com.kong.king.spring.youtuber.repository.PostRepository;
+import com.kong.king.spring.youtuber.repository.PostYoutuberRepository;
 import com.kong.king.spring.youtuber.repository.YoutuberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,20 +23,52 @@ public class PostServiceImpl implements PostService {
 	
 	private final PostRepository postRepository;
 	private final YoutuberRepository youtuberRepository;
+	private final PostYoutuberRepository postyoutuberRepository;
 	
-	// 게시물 등록 
-//	@Override
-//	public Post createPost(PostDTO dto) {
-//		log.info("---BoardServiceImpl register()---" + dto);
-//		Post post = dtoToEntity(dto);
-//		return postRepository.save(post); 
-//	}
-	
+//    @Override
+//    public Post createPost(PostRequestDTO dto) {
+//        Post post = dtoToEntity(dto);
+//        return postRepository.save(post);
+//    }
+    
+//    @Override
+//    public Post createPost(PostRequestDTO dto) {
+//        Post post = dtoToEntity(dto);
+//        post = postRepository.save(post); // Post 저장
+//
+//        // Post와 연관된 PostYoutuber 엔티티 저장
+//        for (PostYoutuber postYoutuber : post.getPostYoutubers()) {
+//            postYoutuber.setPost(post);
+//            postyoutuberRepository.save(postYoutuber);
+//        }
+//
+//        return post;
+//    }
+    
     @Override
-    public Post createPost(PostRequestDTO dto) {
-        Post post = dtoToEntity(dto);
-        return postRepository.save(post);
+    public PostYoutuber createPost(PostRequestDTO dto) {
+    	
+        Post post = postRepository.findById(dto.getPno()).get();
+        Youtuber youtuber = youtuberRepository.findById(dto.getYno()).get();
+        
+        PostYoutuber postYoutuber = new PostYoutuber();
+        postYoutuber.setPost(post);
+        postYoutuber.setYoutuber(youtuber);
+        postyoutuberRepository.save(postYoutuber);
+
+        return postYoutuber;
     }
+
+//	@Override
+//	public PostYoutuber getList() {
+//		List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
+//		
+//		List<PostYoutuber> dto = new ArrayList<>();
+//		
+//		for(PostYoutuber postYoutuber : postYoutubers) {
+//			dto.add(dto.of(postYoutuber));
+//		}
+//	}
 
 //	@Override
 //	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {
