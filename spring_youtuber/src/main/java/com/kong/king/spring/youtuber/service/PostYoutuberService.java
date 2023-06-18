@@ -6,6 +6,8 @@ public interface PostYoutuberService {
 	
 	String createPost(PostRequestDTO dto);
 	
+	String getList();
+	
 //	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
 //	
 //	PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);

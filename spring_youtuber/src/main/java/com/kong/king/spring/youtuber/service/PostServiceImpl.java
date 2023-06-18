@@ -17,9 +17,7 @@ import lombok.extern.log4j.Log4j2;
 public class PostServiceImpl implements PostService {
 	
 	private final PostRepository postRepository;
-	private final YoutuberRepository youtuberRepository;
-	private final PostYoutuberRepository postyoutuberRepository;
-	
+
 //    @Override
 //    public Post createPost(PostRequestDTO dto) {
 //        Post post = dtoToEntity(dto);

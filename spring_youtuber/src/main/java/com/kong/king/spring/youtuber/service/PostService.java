@@ -9,6 +9,10 @@ import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.entity.Youtuber;
 
 public interface PostService {
+	
+	Long createPost(PostRequestDTO dto);
+	
+//	PostYoutuber getList();
 
 //	Post createPost(PostDTO dto);
 	
@@ -22,9 +26,9 @@ public interface PostService {
 //	
 //	void modify(BoardDTO boardDTO);
 	
-	Long createPost(PostRequestDTO dto);
+
 	
-//	PostYoutuber getList();
+
 	
 	
 //    default Post dtoToEntity(PostRequestDTO dto) {

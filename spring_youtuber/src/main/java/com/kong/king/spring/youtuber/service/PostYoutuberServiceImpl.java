@@ -15,6 +15,8 @@ import com.kong.king.spring.youtuber.repository.PostRepository;
 import com.kong.king.spring.youtuber.repository.PostYoutuberRepository;
 import com.kong.king.spring.youtuber.repository.YoutuberRepository;
 
+import com.kong.king.spring.youtuber.dto.PostYoutuberDTO;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -72,17 +74,29 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
     }
     
     
+	@Override
+	public String getList() {
+		List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
+		
+		List<PostYoutuberDTO> dto = new ArrayList<>();
+		
+		for(PostYoutuber postYoutuber : postYoutubers) {
+			dto.add(PostYoutuberDTO.of(postYoutuber));
+		}
+		
+		String response = dto.toString();
+			
+		return response;
+		
+		
+//      List<ExamineeAcademy> examineeAcademies = examineeAcademyRepository.findAll();
 //
-//	@Override
-//	public String getList() {
-//		List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
-//		
-//		List<PostYoutuber> dto = new ArrayList<>();
-//		
-//		for(PostYoutuber postYoutuber : postYoutubers) {
-//			dto.add(dto.of(postYoutuber));
-//		}
-//	}
+//      List<ExamineeAcademyDTO> dto = new ArrayList<>();
+//      for(ExamineeAcademy examineeAcademy : examineeAcademies) {
+//          dto.add(ExamineeAcademyDTO.of(examineeAcademy));
+//      }
+	}
+	
 	
 //    @GetMapping("/list-academy")
 //    public ResponseEntity<String> showRegisterAcademy() {
@@ -97,6 +111,9 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
 //        return ResponseEntity.ok(response);
 //    }
 //    
+	
+
+	
 
 //	@Override
 //	public boolean addYouTubersToPost(Long postId, List<Long> youtuberIds) {
