@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 import $ from "jquery";
 import axios from 'axios';
 // import PostList from './PostList';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import React, {useState, useEffect} from 'react';
 
-function App() {
+function YoutuberList() {
 
 
   // const dto = {
@@ -25,12 +25,12 @@ function App() {
 	//   .catch(error => console.log(error));
   // }, []);
   
-  const [msg, setMsg] = useState([]);
-  useEffect(() => {
-    fetch("/api/hello")
-        .then((res) => {return res.json();})
-        .then((data) => {setMsg(data);})
-  }, []);
+//   const [msg, setMsg] = useState([]);
+//   useEffect(() => {
+//     fetch("/api/hello")
+//         .then((res) => {return res.json();})
+//         .then((data) => {setMsg(data);})
+//   }, []);
 
   useEffect(() => {
 		// "할일 추가" 버튼 클릭 시, 모달 창 보이기
@@ -74,14 +74,14 @@ function App() {
     const [formData, setFormData] = useState({
       title: '',
       content: '',
-      writerEmail: ''
+      yno: ''
     });
   
     const handleSubmit = async (e) => {
       e.preventDefault();
   
       try {
-        const response = await axios.post('/api/register', formData);
+        const response = await axios.post('/post/register', formData);
   
         // Handle the response as needed
         console.log('Response:', response);
@@ -127,9 +127,9 @@ function App() {
           Learn React
         </a>
 
-        <ul>
+        {/* <ul>
           {msg.map((content, idx) => <li key={`${idx} - ${content}`}>{content}</li>)}
-        </ul>
+        </ul> */}
 
 
         <form onSubmit={handleSubmit}>
@@ -155,18 +155,18 @@ function App() {
         ></textarea>
       </div>
       <div className="form-group">
-        <label>Writer Email</label>
+        <label>유튜버 선택하기</label>
         <input
           type="text"
           className="form-control"
-          name="writerEmail"
-          placeholder="Writer Email"
-          value={formData.writerEmail}
+          name="yno"
+          placeholder="유튜버를 선택해주세요"
+          value={formData.yno}
           onChange={handleChange}
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        게시글 등록하기
       </button>
     </form>
 
@@ -262,4 +262,4 @@ function App() {
   );
 }
 
-export default App;
+export default YoutuberList;
