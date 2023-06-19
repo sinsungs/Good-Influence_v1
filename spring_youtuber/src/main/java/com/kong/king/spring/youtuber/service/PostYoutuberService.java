@@ -8,20 +8,16 @@ public interface PostYoutuberService {
 	
 	String getList();
 	
+	String get(Long pyno);
+	
 //	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
 //	
 //	PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
 //	
-//	BoardDTO get(Long bno);
-//	
+
 //	void removeWithReplies(Long bno);
 //	
 //	void modify(BoardDTO boardDTO);
-	
-//	String createPost(PostRequestDTO dto);
-//	
-//	String getList();
-	
 	
 //    default Post dtoToEntity(PostRequestDTO dto) {
 //        Youtuber youtuber = Youtuber.builder()

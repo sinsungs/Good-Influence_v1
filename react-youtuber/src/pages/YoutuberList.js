@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import React, {useState, useEffect} from 'react';
 
-function YoutuberCreate() {
+function YoutuberList() {
 
 
   // const dto = {
@@ -262,4 +262,4 @@ function YoutuberCreate() {
   );
 }
 
-export default YoutuberCreate;
+export default YoutuberList;

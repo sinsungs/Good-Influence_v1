@@ -2,12 +2,16 @@ package com.kong.king.spring.youtuber.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
+import com.kong.king.spring.youtuber.dto.YoutuberDTO;
 import com.kong.king.spring.youtuber.service.PostService;
 import com.kong.king.spring.youtuber.service.PostYoutuberService;
 
@@ -44,26 +48,42 @@ public class PostController {
         return ResponseEntity.ok(response);
 	}
     
-//    @GetMapping("/list-academy")
-//    public ResponseEntity<String> showRegisterAcademy() {
-//        List<ExamineeAcademy> examineeAcademies = examineeAcademyRepository.findAll();
-//
-//        List<ExamineeAcademyDTO> dto = new ArrayList<>();
-//        for(ExamineeAcademy examineeAcademy : examineeAcademies) {
-//            dto.add(ExamineeAcademyDTO.of(examineeAcademy));
-//        }
-//
-//        String response = dto.toString();
-//        return ResponseEntity.ok(response);
-//    }
-//	
-	
-//	@GetMapping("/list")
-//	public void list(PageRequestDTO pageRequestDTO, Model model) {
-//		log.info("list..............." + pageRequestDTO);
+    @GetMapping({"/read", "/modify"})
+    public ResponseEntity<String> Read(@RequestParam("pyno") Long pyno, Model model) {
+    	
+    	String response  = postyoutuberService.get(pyno);
+//    	model.addAttribute("dto", youtuberDTO);
+    	
+    	return ResponseEntity.ok(response);
+  
+    }
+    
+//    
+//    @PostMapping("/modify")
+//	public String modify(YoutuberDTO dto, RedirectAttributes redirectAttributes){
 //		
-//		model.addAttribute("result", boardService.getList(pageRequestDTO));
+//		log.info(dto);
+//		
+//		youtuberService.modify(dto);
+//		
+//		redirectAttributes.addAttribute("yno", dto.getYno());
+//		
+////		redirectAttributes 리디렉션 URL에 'yno' 매개변수를 쿼리 매개변수로 추가하는 역할을 합니다
+//		
+//		return "redirect:/youtuber/read";
 //	}
+//	
+//	
+//    @PostMapping("/remove")
+//    public String remove(@RequestParam("yno") Long yno){
+//
+//    	log.info("YNO : " + yno);
+//
+//    	youtuberService.remove(yno);
+//
+//    	return "redirect:/youtuber/list";
+//    }
+	
 
     
 }

@@ -3,20 +3,16 @@ package com.kong.king.spring.youtuber.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kong.king.spring.youtuber.dto.PostRequestDTO;
+import com.kong.king.spring.youtuber.dto.PostYoutuberDTO;
 import com.kong.king.spring.youtuber.entity.Post;
 import com.kong.king.spring.youtuber.entity.PostYoutuber;
 import com.kong.king.spring.youtuber.entity.Youtuber;
 import com.kong.king.spring.youtuber.repository.PostRepository;
 import com.kong.king.spring.youtuber.repository.PostYoutuberRepository;
 import com.kong.king.spring.youtuber.repository.YoutuberRepository;
-
-import com.kong.king.spring.youtuber.dto.PostYoutuberDTO;
-
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -95,6 +91,14 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
 //      for(ExamineeAcademy examineeAcademy : examineeAcademies) {
 //          dto.add(ExamineeAcademyDTO.of(examineeAcademy));
 //      }
+	}
+
+
+	@Override
+	public String get(Long pyno) {
+		// TODO Auto-generated method stub
+		PostYoutuber postyoutuber = postyoutuberRepository.findById(pyno);
+				
 	}
 	
 	
