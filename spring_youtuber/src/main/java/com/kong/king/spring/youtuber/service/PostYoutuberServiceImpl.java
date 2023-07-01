@@ -94,12 +94,12 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
 	}
 
 
-	@Override
-	public String get(Long pyno) {
-		// TODO Auto-generated method stub
-		PostYoutuber postyoutuber = postyoutuberRepository.findById(pyno);
-				
-	}
+//	@Override
+//	public String get(Long pyno) {
+//		// TODO Auto-generated method stub
+//		PostYoutuber postyoutuber = postyoutuberRepository.findById(pyno);
+//				
+//	}
 	
 	
 //    @GetMapping("/list-academy")

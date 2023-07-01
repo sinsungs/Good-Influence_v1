@@ -8,7 +8,7 @@ public interface PostYoutuberService {
 	
 	String getList();
 	
-	String get(Long pyno);
+//	String get(Long pyno);
 	
 //	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
 //	

@@ -7,23 +7,27 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import YoutuberCreate from './pages/YoutuberCreate';
+import YoutuberList from './pages/YoutuberList';
+import YoutuberRead from './pages/YoutuberRead';
 
 function App() {
   return (
     <Router>
-      <div>
-        <Header />
-        {/* <Routes> */}
-          {/* <Route exact path="/" component={PostList} />
-          <Route path="/post/:id" component={PostDetail} />
-          <Route component={NotFound} /> */}
-        {/* </Routes> */}
 
-          <YoutuberCreate/>
-        {/* <Youtuber/> */}
+        <Header />
+
+
+          {/* <YoutuberList/> */}
+
+        <Routes>
+          <Route path="/" element={<YoutuberList/>}/>
+          {/* <Route exact path="/" component={YoutuberList} /> */}
+          <Route exact path="/YoutuberRead" element={<YoutuberRead/>} /> // Define the YoutuberRead route
+        </Routes>
+
         <Footer />
         
-      </div>
+
     </Router>
   );
 }

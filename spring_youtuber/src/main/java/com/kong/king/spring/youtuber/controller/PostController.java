@@ -48,15 +48,15 @@ public class PostController {
         return ResponseEntity.ok(response);
 	}
     
-    @GetMapping({"/read", "/modify"})
-    public ResponseEntity<String> Read(@RequestParam("pyno") Long pyno, Model model) {
-    	
-    	String response  = postyoutuberService.get(pyno);
-//    	model.addAttribute("dto", youtuberDTO);
-    	
-    	return ResponseEntity.ok(response);
-  
-    }
+//    @GetMapping({"/read", "/modify"})
+//    public ResponseEntity<String> Read(@RequestParam("pyno") Long pyno, Model model) {
+//    	
+//    	String response  = postyoutuberService.get(pyno);
+////    	model.addAttribute("dto", youtuberDTO);
+//    	
+//    	return ResponseEntity.ok(response);
+//  
+//    }
     
 //    
 //    @PostMapping("/modify")
