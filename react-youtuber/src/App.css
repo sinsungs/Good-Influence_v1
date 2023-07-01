@@ -135,9 +135,19 @@ header .bottom {
   width: 100%;
 }
 .box-footer {
+  display: flex;
+  align-items: center;
   height: 50px;
   width: 100%;
-  background-color: black;
+  background-color: #61dafb;
+}
+
+.box-name {
+  margin-right: auto;
+}
+
+.box-like {
+  margin-left: auto;
 }
 
 

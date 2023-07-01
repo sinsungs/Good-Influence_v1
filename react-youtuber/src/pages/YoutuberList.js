@@ -15,7 +15,14 @@ function YoutuberList() {
           <div className="box" key={youtuber.id}>
             <div className="box-header">{youtuber.title}</div>
             <div className="box-body">{youtuber.description}</div>
-            <div className="box-footer">by {youtuber.author}</div>
+            <div className="box-footer">
+              <a>
+                <span className='box-name'>by {youtuber.author}</span>
+              </a>
+              <span className='box-like'>
+                  ♥ 33
+              </span>
+            </div>
           </div>
         ))}
       </div>
