@@ -47,24 +47,29 @@
  ul {margin: 0; padding: 0;}
 
  header {
-  height: 250px;
+  height: 300px;
   width: 1300px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
   
  }
-header .top {
+ header .top {
   height: 100px;
+
 }
+
 header .center {
   height: 100px;
 }
 header .bottom {
-  height: 50px;
+  height: 100px;
 }
 
-.login-button {
+.login-button , .mypage-button {
   padding: 10px 20px;
+  margin-left: 5px;
+
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -73,7 +78,7 @@ header .bottom {
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: auto; /* Add this line to move the button to the right */
+  /* margin-left: auto; */
   float: right;
 }
 
@@ -155,4 +160,54 @@ header .bottom {
   transform: translateY(-10px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+/* List End */
+
+/* List Start */
+.y-box {
+  height: 350px;
+  width: 180px;
+  background-color: #ffffff;
+  /* border: 1px solid #000; */
+  margin: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.y-box-header {
+  height: 150px;
+  width: 100%;
+  /* background-color:#61dafb; */
+
+  background-image: url('https://yt3.googleusercontent.com/TFDsP7GTkb-adv_BnBNNv5gjHpFmCrYvJ5QP1I5CMgyUnjuV3l0ZopTGPf0noTssor-3mooh=s176-c-k-c0x00ffffff-no-rj');
+  background-size: cover;
+  background-position: center;
+}
+
+
+.y-box-body {
+  height: 150px;
+  width: 100%;
+}
+.y-box-footer {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background-color: red;
+}
+
+.y-box-name {
+  margin-right: auto;
+}
+
+.y-box-like {
+  margin-left: auto;
+}
+
+
+.y-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 /* List End */

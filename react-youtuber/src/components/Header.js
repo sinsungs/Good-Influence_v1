@@ -5,7 +5,12 @@ function Header() {
   return (
     <header>
       <div className='top'>
-        <h1>My Blog</h1>
+        <h1>Youtuber</h1>
+        <div className='search'>
+          <input type="text" className="search-bar" placeholder="Search..." />
+          <button className="search-button">Search</button>
+        </div>
+        <button class="mypage-button">내 정보</button>
         <button class="login-button">로그인</button>
       </div>
 
@@ -14,26 +19,26 @@ function Header() {
 
           <div class="explore--item">
             
-            <a href="/explore/51/matches/">
+            <Link to="/youtuber">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_earlybird.svg" />
-              <p>얼리버드</p>
-            </a>
-            <a href="/explore/51/matches/">
+              <p>유튜버 둘러보기</p>
+            </Link>
+            <Link to="/list">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_dribbler.svg" />
-              <p>여자 매치</p>
-            </a>
-            <a href="/explore/51/matches/">
+              <p>유튜버 추천하기</p>
+            </Link>
+            <Link to="/youtuber">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
-              <p>스타터</p>
-            </a>
-            <a href="/explore/51/matches/">
+              <p>새로운 유튜버</p>
+            </Link>
+            <Link to="/list">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_fire.svg" />
-              <p>챌린지</p>
-            </a>
-            <a href="/explore/51/matches/">
+              <p>HOT 유튜버</p>
+            </Link>
+            <Link to="/youtuber">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_heart.svg" />
-              <p>시작하기</p>
-            </a>
+              <p>좋아요 유튜버</p>
+            </Link>
 
           </div>
         </div>

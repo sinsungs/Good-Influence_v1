@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <style>
+   body{
+     display:flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+   }
+   .container{
+     background-color:beige;
+   }
+ </style>
+</head>
+<body>
+   <button class="btn">숏박스</button>
+   <div class="container"></div>
+</body>
+ <script src="/static/testYDA.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+ <script>
+    const btn = document.querySelector(".btn");    
+    
+    // 해당 버튼에 일단 유뷰버 이름을 적어놓았고, 해당 버튼의 innerHTML가져와서 그걸로 
+    // 함수를 실행시켜주고 옆에 APIKey를 같이 써놨는데, 그건 먼저 const로 지정을 하셔도 되고.. 
+    // 저도 일단 테스트니까 막 적어놨습니다. 
+    
+    btn.addEventListener('click', (e)=>{
+     console.log(e.currentTarget.innerHTML);
+     let channelName = e.currentTarget.innerHTML;
+     getChannelId(channelName,"AIzaSyCCMXVU0v7DG21AGf7XzRdtF5lSz-RqHmU")
+    })
+    
+    
+    // 제가 사용할 url을 가져와서 붙여주면 되는데, https://developers.google.com/youtube/v3/docs
+    // 여기 들어가서 한번 보시고.. 저는 일단 제가 가져오고자하는 채널의 channelId 값을 얻고싶어서 
+    // 해당 url을 통해서 가져올건데 아마 다른 url도 가능하실겁니다. 
+    
+    function getChannelId(name, APIKey) 
+    {
+     $.ajax({
+       type: "GET",
+       url: "https://www.googleapis.com/youtube/v3/search?",
+       data: { part: "snippet", key: APIKey, type: "video", q: name },
+       success: function (response) {
+        
+        channelId = response.items[0].snippet.channelId;
+        getChannelLists(channelId, APIKey);
+
+       },
+     });
+    }
+
+
+    function getChannelLists(channelId, APIKey) {
+      $.ajax({
+        type: "GET",
+        url: "https://www.googleapis.com/youtube/v3/playlists?",
+        data: {
+          part: "snippet",
+          channelId: channelId,
+          key: APIKey,
+          type: "playlist",
+          maxResults: 100,
+        },
+        success: function (response) {
+          console.log(response);
+        },
+      });
+    }
+    
+    </script>
+
+</html>
+
