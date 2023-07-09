@@ -10,6 +10,7 @@ import YoutuberCreate from './pages/YoutuberCreate';
 import YoutuberList from './pages/YoutuberList';
 import YoutuberRead from './pages/YoutuberRead';
 import Youtuber from './pages/Youtuber';
+import YoutuberPost from './pages/YoutuberPost';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/youtuber" element={<Youtuber/>}/>
           <Route path="/list" element={<YoutuberList/>}/>
+          <Route path="/post" element={<YoutuberPost/>}/>
           {/* <Route exact path="/" component={YoutuberList} /> */}
           <Route exact path="/YoutuberRead" element={<YoutuberRead/>} /> // Define the YoutuberRead route
         </Routes>

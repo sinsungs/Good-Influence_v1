@@ -27,9 +27,9 @@ function Header() {
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_dribbler.svg" />
               <p>유튜버 추천하기</p>
             </Link>
-            <Link to="/youtuber">
+            <Link to="/post">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
-              <p>새로운 유튜버</p>
+              <p>추천 게시글 작성</p>
             </Link>
             <Link to="/list">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_fire.svg" />
