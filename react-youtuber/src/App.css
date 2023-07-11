@@ -97,11 +97,7 @@ header .bottom {
   text-align: center;
 }
 
-
-
-
-
- .container {
+.container {
   width: 1300px;
   /* height: 2500px; */
   display: flex;
@@ -110,6 +106,17 @@ header .bottom {
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
+}
+
+.search {
+  height: 50px;
+  width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.search-input {
+  width: 250px;
+  float: right;
 }
 
 

@@ -4,6 +4,9 @@
 // import NotFound from './NotFound';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import YoutuberCreate from './pages/YoutuberCreate';
@@ -13,8 +16,30 @@ import Youtuber from './pages/Youtuber';
 import YoutuberPost from './pages/YoutuberPost';
 
 function App() {
+
+  const [message, setMessage] = useState([]);
+  
+  const Proxytest = () => {
+    axios.get('/hello')
+      .then((res) => {
+        setMessage(res.data);
+        alert(res.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  const handleButtonClick = () => {
+    Proxytest();
+  };
+
   return (
+    
     <Router>
+      <div>
+        <button onClick={handleButtonClick}>Proxy 테스트</button>
+      </div>
 
         <Header />
 

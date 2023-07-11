@@ -6,10 +6,6 @@ function Header() {
     <header>
       <div className='top'>
         <h1>Youtuber</h1>
-        <div className='search'>
-          <input type="text" className="search-bar" placeholder="Search..." />
-          <button className="search-button">Search</button>
-        </div>
         <button class="mypage-button">내 정보</button>
         <button class="login-button">로그인</button>
       </div>
@@ -25,11 +21,11 @@ function Header() {
             </Link>
             <Link to="/list">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_dribbler.svg" />
-              <p>유튜버 추천하기</p>
+              <p>유튜버 추천글</p>
             </Link>
             <Link to="/post">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
-              <p>추천 게시글 작성</p>
+              <p>추천글 작성하기</p>
             </Link>
             <Link to="/list">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_fire.svg" />
