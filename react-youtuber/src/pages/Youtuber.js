@@ -52,12 +52,28 @@ function Youtuber() {
         // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
         console.log('Youtuber 엔티티가 생성되었습니다.', response.data);
         alert('Youtuber 엔티티가 생성되었습니다.', response.data);
+        handleModalClose();
       })
       .catch(error => {
         // 오류 처리 로직을 작성하세요.
         console.error('데이터 전송 중 오류가 발생했습니다.', error);
       });
   };
+
+  const [youtubers, setYoutubers] = useState([]);
+
+  useEffect(() => {
+    // 서버에서 Youtuber 데이터를 가져오는 요청을 수행합니다.
+    axios.get('/youtuber/list')
+      .then(response => {
+        // 요청에 성공하면 받아온 데이터를 상태로 설정합니다.
+        setYoutubers(response.data);
+      })
+      .catch(error => {
+        // 오류 처리 로직을 작성하세요.
+        console.error('데이터를 가져오는 중 오류가 발생했습니다.', error);
+      });
+  }, []);
 
   return (
     <div className="App">
@@ -83,7 +99,32 @@ function Youtuber() {
           </div>
         ))}
 
-<form onSubmit={handleSubmit}>
+<div>
+      <h2>Youtuber List</h2>
+      <ul>
+        {youtubers.map(youtuber => (
+          <li key={youtuber.yno}>
+            <h3>{youtuber.name}</h3>
+            <p>Title: {youtuber.title}</p>
+            <p>Content: {youtuber.content}</p>
+            <p>Likes: {youtuber.likes}</p>
+            <p>WriterEmail: {youtuber.writerEmail}</p>
+            <p>Writername: {youtuber.writerName}</p>
+          </li>
+        ))}
+      </ul>
+</div>
+
+
+
+
+
+{isModalOpen && (
+        <div className="modal">
+            <div className="modal-content">
+              <h3>유튜버 등록하기</h3>
+
+            <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Name:</label>
         <input
@@ -131,9 +172,13 @@ function Youtuber() {
       <button type="submit">Submit</button>
     </form>
 
+              <button onClick={handleModalClose}>Close</button>
 
+          </div>
+        </div>
+      )}
 
-{isModalOpen && (
+{/* {isModalOpen && (
         <div className="modal">
             <div className="modal-content">
               <form onSubmit={handleSearchSubmit}>
@@ -149,7 +194,7 @@ function Youtuber() {
               <button onClick={handleModalClose}>Close</button>
           </div>
         </div>
-      )}
+      )} */}
 
 
       </div>

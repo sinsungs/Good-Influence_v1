@@ -1,7 +1,10 @@
 package com.youtubers.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +32,11 @@ public class YoutuberController {
         return ResponseEntity.ok(createdYoutuber);
     }
     
-//  @GetMapping("/list")
-//  public ResponseEntity<List<YoutuberDTO>> getAllYoutubersWithWriters() {
-//      List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
-//      return ResponseEntity.ok(youtubers);
-//  }
+	@GetMapping("/list")
+	public ResponseEntity<List<YoutuberDTO>> getAllYoutubersWithWriters() {
+		List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
+		return ResponseEntity.ok(youtubers);
+	}
     
 //    @GetMapping({"/read/{yno}", "/modify/{yno}"})
 //    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {
