@@ -3,7 +3,6 @@ import '../App.css';
 import $ from "jquery";
 import axios from 'axios';
 import data from '../data/data.js';
-
 import React, {useState, useEffect} from 'react';
 
 function YoutuberList() {
@@ -25,6 +24,7 @@ function YoutuberList() {
 
   return (
     <div className="App">
+      <div className='back'>
       <div className="container">
         {data.map(youtuber => (
           <div className="box" key={youtuber.id}>
@@ -40,21 +40,27 @@ function YoutuberList() {
             </div>
           </div>
         ))}
-      </div>
 
-      <div>
+
+<div>
       <h2>Youtuber List</h2>
       <ul>
         {youtubers.map(youtuber => (
           <li>
             <h3>{youtuber.postName}</h3>
-            <h3>{youtuber.youtuberName}</h3>
-            <h3>{youtuber.youtuberContent}</h3>
-
+            <p>Title: {youtuber.youtuberName}</p>
+            <p>Content: {youtuber.youtuberContent}</p>
+            {/* <p>Likes: {youtuber.likes}</p>
+            <p>WriterEmail: {youtuber.writerEmail}</p>
+            <p>Writername: {youtuber.writerName}</p> */}
           </li>
         ))}
       </ul>
 </div>
+
+      </div>
+
+      </div>
     </div>
   );
 }

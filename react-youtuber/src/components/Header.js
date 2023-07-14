@@ -5,10 +5,30 @@ function Header() {
   return (
     <header>
       <div className='top'>
-        <h1>Youtuber</h1>
+        <h1>오늘의 유튜버</h1>
         <button class="mypage-button">내 정보</button>
         <button class="login-button">로그인</button>
       </div>
+
+      <div className='bottom'>
+
+<nav>
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/about">About</Link>
+      </li>
+      <li>
+        <Link to="/contact">Contact</Link>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+
+
 
       <div className='center'>
         <div class="explore--wrapper">
@@ -40,23 +60,7 @@ function Header() {
         </div>
 
       </div>
-      <div className='bottom'>
 
-      <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
-
-      </div>
 
 
 

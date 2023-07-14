@@ -1,5 +1,7 @@
 package com.youtubers.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.youtubers.Service.PostService;
 import com.youtubers.Service.PostYoutuberService;
 import com.youtubers.dto.PostRequestDTO;
+import com.youtubers.dto.PostYoutuberDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,13 +39,13 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
     
-	@GetMapping("/list")
-	public ResponseEntity<String> listPost() {
-		
-		String response = postyoutuberService.getList();
-		
+    @GetMapping("/list")
+    public ResponseEntity<List<PostYoutuberDTO>> listPost() {
+    	
+        List<PostYoutuberDTO> response = postyoutuberService.getList();
         return ResponseEntity.ok(response);
-	}
+        
+    }
     
 //    @GetMapping({"/read", "/modify"})
 //    public ResponseEntity<String> Read(@RequestParam("pyno") Long pyno, Model model) {

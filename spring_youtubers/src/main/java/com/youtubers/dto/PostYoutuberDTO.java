@@ -4,12 +4,15 @@ import com.youtubers.entity.PostYoutuber;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.ToString;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 //ExamineeAcademyDto
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class PostYoutuberDTO {
 //private Long pyno;
 private String postName;

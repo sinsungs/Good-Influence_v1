@@ -77,6 +77,7 @@ function Youtuber() {
 
   return (
     <div className="App">
+      <div className='back'>
       <div className="container">
         <div className="search">
           <button className="login-button" onClick={handleRectangleClick}>
@@ -197,6 +198,7 @@ function Youtuber() {
       )} */}
 
 
+      </div>
       </div>
     </div>
   );

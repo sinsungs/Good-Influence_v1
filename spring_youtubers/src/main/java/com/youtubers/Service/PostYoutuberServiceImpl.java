@@ -70,28 +70,17 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
     }
     
     
-	@Override
-	public String getList() {
-		List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
-		
-		List<PostYoutuberDTO> dto = new ArrayList<>();
-		
-		for(PostYoutuber postYoutuber : postYoutubers) {
-			dto.add(PostYoutuberDTO.of(postYoutuber));
-		}
-		
-		String response = dto.toString();
-			
-		return response;
-		
-		
-//      List<ExamineeAcademy> examineeAcademies = examineeAcademyRepository.findAll();
-//
-//      List<ExamineeAcademyDTO> dto = new ArrayList<>();
-//      for(ExamineeAcademy examineeAcademy : examineeAcademies) {
-//          dto.add(ExamineeAcademyDTO.of(examineeAcademy));
-//      }
-	}
+    @Override
+    public List<PostYoutuberDTO> getList() {
+        List<PostYoutuber> postYoutubers = postyoutuberRepository.findAll();
+        List<PostYoutuberDTO> dtoList = new ArrayList<>();
+        
+        for (PostYoutuber postYoutuber : postYoutubers) {
+            dtoList.add(PostYoutuberDTO.of(postYoutuber));
+        }
+        
+        return dtoList;
+    }
 
 
 //	@Override

@@ -1,12 +1,15 @@
 package com.youtubers.Service;
 
+import java.util.List;
+
 import com.youtubers.dto.PostRequestDTO;
+import com.youtubers.dto.PostYoutuberDTO;
 
 public interface PostYoutuberService {
 	
 	String createPost(PostRequestDTO dto);
 	
-	String getList();
+	List<PostYoutuberDTO> getList();
 	
 //	String get(Long pyno);
 	
