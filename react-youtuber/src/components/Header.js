@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import kakao from '../img/kakao_login_button.png';
 
 function Header() {
   return (
@@ -8,6 +9,8 @@ function Header() {
         <h1>오늘의 유튜버</h1>
         <button class="mypage-button">내 정보</button>
         <button class="login-button">로그인</button>
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
+        <img src={kakao} alt='kakao image' /></a>
       </div>
 
       <div className='bottom'>
