@@ -75,6 +75,35 @@ function Youtuber() {
       });
   }, []);
 
+
+  const handleYoutuberClick = () => {
+    const APIKey = 'AIzaSyCCMXVU0v7DG21AGf7XzRdtF5lSz-RqHmU'
+    axios.get('https://www.googleapis.com/youtube/v3/search', {
+      params: {
+        part: 'snippet',
+        key: APIKey,
+        // type: 'video',
+        q: '핫식스',
+        // channelId: 'UCIVTQcwt4K23mOokm5karKA',
+        // order: 'date',
+        // eventType: 'live',
+        maxResults: 10,
+      },
+    })
+    .then((response) => {
+      // const channelId = response.data.items[0].snippet.channelId;
+      // this.getChannelLists(channelId, APIKey);
+      alert('추천받기 성공 console을 확인하세요')
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  };
+
+
+
   return (
     <div className="App">
       <div className='back'>
@@ -84,6 +113,10 @@ function Youtuber() {
               유튜버 등록하기
           </button>
           <input className="search-input" placeholder="유튜버 검색" maxlength="30" type="text" value=""></input>
+          <button className="login-button" onClick={handleYoutuberClick} style={{ float: 'left', backgroundColor: 'red' }}>
+            유튜버 추천받기
+          </button>
+
 
         </div>
 
