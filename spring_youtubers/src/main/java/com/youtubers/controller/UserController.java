@@ -29,6 +29,14 @@ public class UserController {
 	@Autowired
 	private UserSerivce userService;
 
+	@GetMapping("/user/join")
+	public String joinForm() {
+		
+		return "회원가입 완료되었습니다";
+	}
+	
+	
+
 	@GetMapping("/auth/kakao/callback")
 	public @ResponseBody String kakaoCallback(String code) {
 		
