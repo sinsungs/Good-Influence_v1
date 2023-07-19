@@ -6,11 +6,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,21 +21,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtubers.Service.UserSerivce;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.OAuthToken;
+import com.youtubers.entity.User;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class UserController {
 	
 	@Autowired
 	private UserSerivce userService;
 
-	@GetMapping("/user/join")
-	public String joinForm() {
-		
-		return "회원가입 완료되었습니다";
+	@PostMapping("/user/join")
+	public ResponseEntity<User> joinUser(@RequestBody User user) {
+		System.out.println(user);
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		System.out.println(user.getEmail());
+		User joinUser = userService.joinUser(user);
+		return ResponseEntity.ok(joinUser);
 	}
+	
+//	@PostMapping("/register")
+//    public ResponseEntity<Youtuber> createYoutuber(@RequestBody YoutuberDTO dto) {
+//        Youtuber createdYoutuber = youtuberService.createYoutuber(dto);
+//        return ResponseEntity.ok(createdYoutuber);
+//    }
 	
 	
 

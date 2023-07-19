@@ -35,4 +35,25 @@ public class UserSerivce {
 		
 	}
 
+	public User joinUser(User user) {
+		// TODO Auto-generated method stub
+		user.setRole(RoleType.USER);
+        return userRepository.save(user);
+	}
+	
+//    public Long createPost(PostRequestDTO dto) {
+//    	
+//        Post post = new Post();
+//        post.setTitle(dto.getTitle());
+//        post.setContent(dto.getContent());
+//        postRepository.save(post);
+//        
+//        Long postId = post.getPno();
+//        
+//        return postId;
+////        return postYoutuber;
+//    }
+	
+	
+
 }
