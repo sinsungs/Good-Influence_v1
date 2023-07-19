@@ -15,6 +15,7 @@ import YoutuberRead from './pages/YoutuberRead';
 import Youtuber from './pages/Youtuber';
 import YoutuberPost from './pages/YoutuberPost';
 import Join from './pages/Join';
+import Login from './pages/Login';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
           {/* <YoutuberList/> */}
 
         <Routes>
+          <Route path="/login" element={<Login/>}/>
           <Route path="/join" element={<Join/>}/>
           <Route path="/youtuber" element={<Youtuber/>}/>
           <Route path="/list" element={<YoutuberList/>}/>
