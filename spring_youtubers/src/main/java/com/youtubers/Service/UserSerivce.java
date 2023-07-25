@@ -1,13 +1,13 @@
 package com.youtubers.Service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.entity.KakaoProfile;
-import com.youtubers.entity.Post;
 import com.youtubers.entity.RoleType;
 import com.youtubers.entity.User;
 import com.youtubers.repository.UserRepository;
+import com.youtubers.utils.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,6 +18,16 @@ import lombok.extern.log4j.Log4j2;
 public class UserSerivce {
 
 	private final UserRepository userRepository;
+	
+	@Value("${jwt.secret}")
+	private String secretKey;
+	
+	private Long expiredMs = 1000 * 60 * 60l;
+	
+	public String login(String userName, String password) {
+		
+		return JwtUtil.createJwt(userName, secretKey, expiredMs);
+	}
 	
 	public void KakaoTest(KakaoProfile kakao) {
 		

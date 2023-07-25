@@ -32,6 +32,13 @@ public class UserController {
 	@Autowired
 	private UserSerivce userService;
 
+	
+	@PostMapping("/user/login")
+	public ResponseEntity<String> login() {
+//		return ResponseEntity.ok("로그인 성공");
+		return ResponseEntity.ok().body(userService.login("", ""));
+	}
+	
 	@PostMapping("/user/join")
 	public ResponseEntity<User> joinUser(@RequestBody User user) {
 		System.out.println(user);

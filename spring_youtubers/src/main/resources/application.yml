@@ -1,0 +1,3 @@
+
+jwt:
+  secret: hello.world.ee.ff

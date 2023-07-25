@@ -87,6 +87,14 @@
     <version>2.7.3</version>
 </dependency>
 
+
+<!-- JWT 라이브러리 추가 -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version> <!-- 최신 버전으로 변경 가능 -->
+</dependency>
+
 	</dependencies>
 
 	<build>
