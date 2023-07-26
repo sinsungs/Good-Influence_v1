@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.youtubers.Service.UserSerivce;
+import com.youtubers.Service.UserService;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.OAuthToken;
 import com.youtubers.entity.User;
@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	@Autowired
-	private UserSerivce userService;
+	private UserService userService;
 
 	
 	@PostMapping("/user/login")

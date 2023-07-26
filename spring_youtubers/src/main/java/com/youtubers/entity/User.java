@@ -9,9 +9,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,6 +45,11 @@ public class User {
 	
 	@CreationTimestamp // 시간이 자동 입력
 	private Timestamp createDate;
+	
+    // Rank를 참조(조인)하는 부분 추가
+    @ManyToOne
+    @JoinColumn(name = "rankid")
+    private Ranks ranks;
 
 
 }

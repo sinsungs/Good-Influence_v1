@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.youtubers.Service.UserSerivce;
+import com.youtubers.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
-	private final UserSerivce userSerivce;
+	private final UserService userSerivce;
 	
 	@Value("${jwt.secret}")
 	private String secretKey; 

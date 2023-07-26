@@ -14,14 +14,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.youtubers.Service.UserSerivce;
+import com.youtubers.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter{
 	
-	private final UserSerivce userService;
+	private final UserService userService;
 	private final String secretKey;
 
 	@Override

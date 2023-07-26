@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class UserSerivce {
+public class UserService {
 
 	private final UserRepository userRepository;
 	
