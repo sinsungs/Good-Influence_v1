@@ -2,6 +2,7 @@ package com.youtubers.Service;
 
 import org.springframework.stereotype.Service;
 
+import com.youtubers.dto.FollowRequestDTO;
 import com.youtubers.entity.Follow;
 import com.youtubers.entity.User;
 import com.youtubers.repository.FollowRepository;
@@ -18,9 +19,12 @@ public class FollowService {
 	private final FollowRepository followRepository;
 	private final UserRepository userRepository;
 	
-    public void followUser(Long followerId, Long followingId) {
-        User follower = userRepository.findById(followerId).orElse(null);
-        User following = userRepository.findById(followingId).orElse(null);
+    public void followUser(FollowRequestDTO followRequest) {
+    	
+    	System.out.println(followRequest+" Service단계");
+    	
+        User follower = userRepository.findById(followRequest.getFollowerId()).orElse(null);
+        User following = userRepository.findById(followRequest.getFollowingId()).orElse(null);
         
         if (follower != null && following != null) {
             Follow follow = new Follow();
@@ -31,4 +35,21 @@ public class FollowService {
             throw new IllegalArgumentException("User not found");
         }
     }
+    
+    public void unfollowUser(FollowRequestDTO followRequest) {
+    	
+        Long followerId = followRequest.getFollowerId();
+        Long followingId = followRequest.getFollowingId();
+        
+        Follow follow = followRepository.findByFollowerIdAndFollowingId(followerId, followingId);
+        
+        System.out.println(follow);
+
+        if (follow != null) {
+            followRepository.delete(follow);
+        } else {
+            throw new IllegalArgumentException("Follow relationship not found");
+        }
+    }
+    
 }

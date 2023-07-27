@@ -1,11 +1,13 @@
 package com.youtubers.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youtubers.Service.FollowService;
+import com.youtubers.dto.FollowRequestDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,12 +15,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FollowController {
 
-	private FollowService followService;
+	private final FollowService followService;
 	
 	@PostMapping("/follow")
-	public ResponseEntity<String> followUser(@RequestParam Long followerId, @RequestParam Long followingId) {
-	    followService.followUser(followerId, followingId);
+	public ResponseEntity<String> followUser(@RequestBody FollowRequestDTO followRequest) {
+		
+		System.out.println(followRequest);
+		
+	    followService.followUser(followRequest);
+	    
 	    return ResponseEntity.ok("팔로우 성공");
 	}
+	
+    @DeleteMapping("/unfollow")
+    public ResponseEntity<String> unfollowUser(@RequestBody FollowRequestDTO followRequest) {
+    	
+        followService.unfollowUser(followRequest);
+        
+        return ResponseEntity.ok("언팔로우 성공");
+    }
 	
 }
