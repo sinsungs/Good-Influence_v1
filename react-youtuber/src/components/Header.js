@@ -1,8 +1,30 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import kakao from '../img/kakao_login_button.png';
+import kakao_login_button from '../img/kakao_login_button.png';
+import kakao_payment_button from '../img/kakao_payment_button.png';
 
 function Header() {
+
+  const handleKakaoPaymentClick = () => {
+    // Replace 'http://localhost:8080/payment/ready' with the correct URL for your payment endpoint
+    const paymentEndpoint = '/payment/ready';
+
+    // Perform the Axios GET request
+    axios.get(paymentEndpoint)
+      .then(response => {
+        // Handle the response if needed
+        console.log('Payment response:', response);
+        // Redirect to the payment page, if required
+        // window.location.href = paymentEndpoint;
+        window.open(response.data, '_blank');
+      })
+      .catch(error => {
+        // Handle errors, if necessary
+        console.error('Error making payment request:', error);
+      });
+  };
+
   return (
     <header>
       <div className='top'>
@@ -10,8 +32,19 @@ function Header() {
         <button class="mypage-button">내 정보</button>
         <button class="login-button">로그인</button>
         <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
-        <img src={kakao} alt='kakao image' /></a>
+        <img src={kakao_login_button} alt='kakao_image' /></a>
+        <a href="http://localhost:8080/payment/ready">
+        <img src={kakao_payment_button} alt='kakao_payment' /></a>
+
+        <button onClick={handleKakaoPaymentClick}>
+          <img src={kakao_payment_button} alt='kakao_payment' />
+        </button>
+        {/* <form method="post" action="/kakaoPay">
+        <button type="button">카카오페이로 결제하기</button>
+        </form> */}
       </div>
+
+      
 
       <div className='bottom'>
 

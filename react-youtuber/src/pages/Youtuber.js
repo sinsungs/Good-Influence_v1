@@ -78,15 +78,32 @@ function Youtuber() {
 
   const handleYoutuberClick = () => {
     const APIKey = 'AIzaSyCCMXVU0v7DG21AGf7XzRdtF5lSz-RqHmU'
-    axios.get('https://www.googleapis.com/youtube/v3/search', {
+    // axios.get('https://www.googleapis.com/youtube/v3/search', {
+    //   params: {
+    //     part: 'snippet',
+    //     key: APIKey,
+    //     // type: 'video',
+    //     // q: '핫식스',
+    //     // channelId: 'UCIVTQcwt4K23mOokm5karKA',
+    //     // order: 'date',
+    //     // eventType: 'live',
+    //     type : 'channel',
+    //     regionCode : "KR",
+    //     maxResults: 10,
+    //   },
+    // })
+    axios.get('https://www.googleapis.com/youtube/v3/videos', {
       params: {
         part: 'snippet',
         key: APIKey,
         // type: 'video',
-        q: '핫식스',
+        // q: '핫식스',
         // channelId: 'UCIVTQcwt4K23mOokm5karKA',
         // order: 'date',
         // eventType: 'live',
+        // type : 'channel',
+        // regionCode : "KR",
+        id : "JRRWcsPWi0c",
         maxResults: 10,
       },
     })
@@ -94,7 +111,10 @@ function Youtuber() {
       // const channelId = response.data.items[0].snippet.channelId;
       // this.getChannelLists(channelId, APIKey);
       alert('추천받기 성공 console을 확인하세요')
+      // console.log(response);
       console.log(response);
+      console.log(response.data.items[0].snippet);
+      console.log(response.data.items[0].snippet.channelTitle);
     })
     .catch((error) => {
       console.error('Error:', error);
