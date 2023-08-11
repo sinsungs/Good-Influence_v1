@@ -1,8 +1,6 @@
-package com.youtubers.entity;
+package team.java;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -48,9 +45,6 @@ public class User {
 	
 	@CreationTimestamp // 시간이 자동 입력
 	private Timestamp createDate;
-	
-    @OneToMany(mappedBy = "user")
-    private List<MeetUser> meetUser = new ArrayList<>();
 	
     // Rank를 참조(조인)하는 부분 추가
 //    @ManyToOne

@@ -2,6 +2,7 @@ package com.youtubers.Service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.RoleType;
@@ -19,16 +20,32 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	
+	// 로컬 회원가입 
+	@Transactional
+	public User Join(User user) {
+		// TODO Auto-generated method stub
+		user.setRole(RoleType.USER);
+        return userRepository.save(user);
+	}
+	
+	// 로컬 로그인 
+	@Transactional(readOnly = true) // select 할 때 트랜잭션 시작 , 서비스 종료시에 트랜잭션 종료 ( 정합성 ) 
+	public User Login(User user) {
+		return userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+	}
+	
+	// jwt 로그인 
 	@Value("${jwt.secret}")
 	private String secretKey;
 	
 	private Long expiredMs = 1000 * 60 * 60l;
 	
-	public String login(String userName, String password) {
+	public String jwtLogin(String userName, String password) {
 		
 		return JwtUtil.createJwt(userName, secretKey, expiredMs);
 	}
 	
+	// 카카오 로그인
 	public void KakaoTest(KakaoProfile kakao) {
 		
 		log.info("---test---" + kakao);
@@ -44,26 +61,6 @@ public class UserService {
 		return;
 		
 	}
-
-	public User joinUser(User user) {
-		// TODO Auto-generated method stub
-		user.setRole(RoleType.USER);
-        return userRepository.save(user);
-	}
-	
-//    public Long createPost(PostRequestDTO dto) {
-//    	
-//        Post post = new Post();
-//        post.setTitle(dto.getTitle());
-//        post.setContent(dto.getContent());
-//        postRepository.save(post);
-//        
-//        Long postId = post.getPno();
-//        
-//        return postId;
-////        return postYoutuber;
-//    }
-	
 	
 
 }

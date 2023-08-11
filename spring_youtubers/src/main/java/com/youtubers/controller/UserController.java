@@ -1,6 +1,8 @@
 package com.youtubers.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtubers.Service.UserService;
+import com.youtubers.dto.LoginRequest;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.OAuthToken;
 import com.youtubers.entity.User;
@@ -32,31 +35,45 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	
-	@PostMapping("/user/login")
-	public ResponseEntity<String> login() {
-//		return ResponseEntity.ok("로그인 성공");
-		return ResponseEntity.ok().body(userService.login("", ""));
-	}
-	
 	@PostMapping("/user/join")
 	public ResponseEntity<User> joinUser(@RequestBody User user) {
 		System.out.println(user);
 		System.out.println(user.getUsername());
 		System.out.println(user.getPassword());
 		System.out.println(user.getEmail());
-		User joinUser = userService.joinUser(user);
+		User joinUser = userService.Join(user);
 		return ResponseEntity.ok(joinUser);
 	}
 	
-//	@PostMapping("/register")
-//    public ResponseEntity<Youtuber> createYoutuber(@RequestBody YoutuberDTO dto) {
-//        Youtuber createdYoutuber = youtuberService.createYoutuber(dto);
-//        return ResponseEntity.ok(createdYoutuber);
-//    }
+//	@PostMapping("/user/login")
+//	public ResponseEntity<String> login() {
+////		return ResponseEntity.ok("로그인 성공");
+//		return ResponseEntity.ok().body(userService.login("", ""));
+//	}
 	
+	@PostMapping("/user/login")
+	public ResponseEntity<String> Login(@RequestBody User user, HttpSession session) {
+//		return ResponseEntity.ok("로그인 성공");
+		
+		User principal = userService.Login(user);
+		
+		if(principal != null) {
+			session.setAttribute("principal", principal);
+		}
+		
+		return ResponseEntity.ok("안녕");
+	}
+	
+	
+	@PostMapping("/user/jwtlogin")
+	public ResponseEntity<String> jwtLogin(@RequestBody LoginRequest dto) {
+//		return ResponseEntity.ok("로그인 성공");
+		return ResponseEntity.ok().body(userService.jwtLogin(dto.getUserName(), ""));
+	}
 	
 
+	
+	// 카카오 로그인 
 	@GetMapping("/auth/kakao/callback")
 	public @ResponseBody String kakaoCallback(String code) {
 		
@@ -140,31 +157,6 @@ public class UserController {
 		System.out.println(kakaoProfile);
 		
 		userService.KakaoTest(kakaoProfile);
-		
-		// User 오브젝트 : username , password , email
-//		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
-//		System.out.println("카카오 이메일:"+kakaoProfile.getKakao_account().getEmail());
-//		
-//		System.out.println("회원가입 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-//		System.out.println("회원가입 이메일:"+kakaoProfile.getKakao_account().getEmail());
-//		
-//		UUID garbagePassword = UUID.randomUUID();
-//		System.out.println("회원가입 패스워드:"+garbagePassword);
-		
-//		User kakaoUser = User.builder()
-//			.username(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId())
-//			.password(garbagePassword.toString())
-//			.email(kakaoProfile.getKakao_account().getEmail())
-//			.build();
-//		
-//		// 가입자 혹은 비가입자 체크해서 처리 
-//		User originUser = userService.회원찾기(kakaoUser.getUsername());
-//		
-//		if(originUser == null) {
-//			userService.회원가입(kakaoUser);
-//		}
-//		
-//		userService.회원가입(kakaoUser);
 		
 		return response2.getBody();
 	}

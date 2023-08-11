@@ -8,6 +8,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtUtil {
 	
+	public static String getUserName(String token, String secretKey) {
+		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+				.getBody().get("userName", String.class);	
+	}
+
 	public static String createJwt(String userName, String secretKey, Long expiredMs) {
 		Claims claims = Jwts.claims();
 		claims.put("userName", userName);
@@ -19,5 +24,11 @@ public class JwtUtil {
 				.signWith(SignatureAlgorithm.HS256, secretKey)
 				.compact();
 	}
+	
+	public static boolean isExpired(String token, String secretKey) {
+		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+				.getBody().getExpiration().before(new Date());
+	}
+	
 
 }
