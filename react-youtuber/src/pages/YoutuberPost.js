@@ -68,26 +68,45 @@ function YoutuberPost() {
   return (
     
     <div className="App">
+      <div className='back'>
       <div className="container">
-        <div className="rectangle" onClick={handleRectangleClick}>
-          {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-        </div>
-        <div className="rectangle" onClick={handleRectangleClick}>
-          {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-        </div>
-        <div className="rectangle" onClick={handleRectangleClick}>
-          {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-        </div>
 
+        <div style={{ width: '100%'}}>
+
+          <h1>행복한 세상을 만들어보아요</h1>
+          <p>좋은 영향력을 가지고있는 인플루언서를 추천해주세요</p>
 
           <form onSubmit={handleSubmit}>
-            <input type="text" name="title" placeholder="Enter title" />
-            <input type="text" name="content" placeholder="Enter content" />
-            <input type="text" name="yno" placeholder="Enter yno" />
-            <button type="submit">Submit</button>
+              <label>제목</label>
+              <input type="text" className="custom-input" name="title" placeholder="제목을 입력해주세요." />
+              <div style={{ height: '30px' }}></div> {/* 마진을 통해 간격 추가 */}
+
+              <label>내용</label>
+              <input type="text" className="custom-input" name="content" placeholder="내용을 입력해주세요." />
+              <div style={{ height: '30px' }}></div> {/* 마진을 통해 간격 추가 */}
+
+              <label>인플루언서</label>
+              <p>* 인플루언서를 1명에서 3명까지 선택할 수 있습니다.</p>
+              <input type="text" className="custom-input" name="yno" placeholder="추천 인플루언서를 선택해주세요." />
+              <div style={{ height: '30px' }}></div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <div className="rectangle" onClick={handleRectangleClick}>
+                {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
+                </div>
+                <div className="rectangle" onClick={handleRectangleClick}>
+                {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
+                </div>
+                <div className="rectangle" onClick={handleRectangleClick}>
+                {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
+                </div>
+              </div>
+
+
+              <button type="submit">작성하기</button>
           </form>
 
-
+        </div>
       </div>
 
       {isModalOpen && (
@@ -106,7 +125,7 @@ function YoutuberPost() {
           </div>
         </div>
       )}
-
+    </div>
     </div>
 
     

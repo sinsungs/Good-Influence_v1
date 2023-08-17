@@ -29,19 +29,21 @@ function Header() {
     <header>
       <div className='top'>
         <h1>Good Influence 인플루언스</h1>
-        <button class="mypage-button">내 정보</button>
-        <button class="login-button">로그인</button>
-        <Link to="/mypage"><button class="login-button">마이페이지</button></Link>
+        {/* <button class="mypage-button">내 정보</button> */}
+
+        {/* <Link to="/mypage"><button class="login-button">마이페이지</button></Link> */}
         <Link to="/join"><button class="login-button">회원가입</button></Link>
+        <Link to="/login"><button class="login-button">로그인</button></Link>
+        
         <button class="login-button">SNS 인증</button>        
         <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
         <img src={kakao_login_button} alt='kakao_image' /></a>
         <a href="http://localhost:8080/payment/ready">
         <img src={kakao_payment_button} alt='kakao_payment' /></a>
 
-        <button onClick={handleKakaoPaymentClick}>
+        {/* <button onClick={handleKakaoPaymentClick}>
           <img src={kakao_payment_button} alt='kakao_payment' />
-        </button>
+        </button> */}
         {/* <form method="post" action="/kakaoPay">
         <button type="button">카카오페이로 결제하기</button>
         </form> */}
@@ -49,7 +51,7 @@ function Header() {
 
       
 
-      <div className='bottom'>
+      {/* <div className='bottom'>
 
 <nav>
     <ul>
@@ -65,7 +67,7 @@ function Header() {
     </ul>
   </nav>
 
-</div>
+</div> */}
 
 
 

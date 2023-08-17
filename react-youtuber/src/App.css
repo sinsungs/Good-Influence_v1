@@ -4,6 +4,19 @@
 
 } */
 
+@font-face {
+  font-family: 'Cafe24Supermagic-Bold-v1.0';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+ /* reset */
+ * {margin: 0; padding: 0; font-family: 'Cafe24Supermagic-Bold-v1.0';}
+ a {text-decoration: none; color:black;}
+ li {list-style: none;}
+ ul {margin: 0; padding: 0;}
+
 .custom-input {
   padding: 15px;
   /* border: 1px solid #ccc; */
@@ -21,12 +34,6 @@ input:focus {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -38,26 +45,8 @@ input:focus {
   color: black;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* default css end */
 
- /* reset */
- * {margin: 0; padding: 0;}
- a {text-decoration: none; color:black;}
- li {list-style: none;}
- ul {margin: 0; padding: 0;}
 
 .back { 
   background-color: #f3f3f3;
@@ -65,7 +54,7 @@ input:focus {
 
  header {
   height: 300px;
-  width: 1300px;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -78,6 +67,7 @@ input:focus {
 
 header .center {
   height: 100px;
+  margin-top: 50px;
 }
 header .bottom {
   height: 100px;
@@ -119,10 +109,11 @@ header .bottom {
   /* height: 2500px; */
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; /* Updated */
+  /* justify-content: flex-start;  */
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
+  justify-content: space-between;
 
 }
 
@@ -315,24 +306,25 @@ button[type='submit']:hover {
 }
 
 .flex-container {
-  width: 1300px;
+  width: 1000px;
   height:70px;
   display: flex;
   flex-wrap: wrap; /* 아이템을 여러 줄로 래핑 */
   justify-content: space-between; /* 아이템 사이의 간격을 최대화하여 3개의 열로 분할 */
   align-items: center;
+  text-align: center;
 }
 
 .flex-item-left {
-  width: 200px;
+  width: 20%;
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
 }
 .flex-item-center {
-  width: 800px;
+  width: 60%;
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
 }
 .flex-item-right {
-  width: 300px;
+  width: 20%;
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
 }
 

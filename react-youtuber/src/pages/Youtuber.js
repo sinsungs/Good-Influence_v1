@@ -129,11 +129,11 @@ function Youtuber() {
       <div className="container">
         <div className="search">
           <button className="login-button" onClick={handleRectangleClick}>
-              유튜버 등록하기
+              인플루언서 등록하기
           </button>
-          <input className="search-input" placeholder="유튜버 검색" maxlength="30" type="text" value=""></input>
+          <input className="search-input" placeholder="인플루언서 검색" maxlength="30" type="text" value=""></input>
           <button className="login-button" onClick={handleYoutuberClick} style={{ float: 'left', backgroundColor: 'red' }}>
-            유튜버 추천받기
+              인플루언서 추천받기
           </button>
 
 
@@ -175,7 +175,7 @@ function Youtuber() {
 {isModalOpen && (
         <div className="modal">
             <div className="modal-content">
-              <h3>유튜버 등록하기</h3>
+              <h3>인플루언서 등록하기</h3>
 
             <form onSubmit={handleSubmit}>
       <div>
