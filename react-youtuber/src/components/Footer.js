@@ -14,11 +14,11 @@ function Footer(){
 
                         <li>
                             <p>(주)영진상사 | 010-1234-1234</p>
-                            <p>대구광역시 북구 복현로 35</p>
+                            <p>서울광역시 강남구 땡떙땡회사</p>
                             <p>사업자 등록번호 : 000-0000</p>
                             <p>통신판매업신고 : 0000-xxxx-000000</p>
-                            <p>대표 : 심상희 | 개인정보책임자 : 이민화</p>
-                            <p>이메일 : yeungjin@naver.com</p>
+                            <p>대표 : 강신성 | 개인정보책임자 : who</p>
+                            <p>이메일 : rkdtlstjd123@naver.com</p>
                             <br/>
                             <p>copyright 2023. yeungjinsangsa. All rights reserved.</p>
                         </li>

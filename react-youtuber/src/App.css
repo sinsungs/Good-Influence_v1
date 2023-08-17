@@ -301,3 +301,31 @@ button[type='submit']:hover {
   background-position: center;
 }
 
+.flex-container {
+  width: 1300px;
+  height:70px;
+  display: flex;
+  flex-wrap: wrap; /* 아이템을 여러 줄로 래핑 */
+  justify-content: space-between; /* 아이템 사이의 간격을 최대화하여 3개의 열로 분할 */
+  align-items: center;
+}
+
+.flex-item-left {
+  width: 200px;
+  box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
+}
+.flex-item-center {
+  width: 800px;
+  box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
+}
+.flex-item-right {
+  width: 300px;
+  box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
+}
+
+.full {
+  width: 200px;
+  background-color:#4caf50;
+}
+
+

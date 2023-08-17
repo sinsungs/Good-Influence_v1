@@ -1,5 +1,4 @@
 import '../App.css';
-import $ from "jquery";
 import axios from 'axios';
 import data from '../data/data.js';
 
