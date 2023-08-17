@@ -1,7 +1,19 @@
 /* default css start */
-.App {
+/* .App {
   text-align: center;
 
+} */
+
+.custom-input {
+  padding: 15px;
+  /* border: 1px solid #ccc; */
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 5px;
+}
+
+input:focus {
+  outline: 2px solid #61dafb; /* 클릭 시 테두리가 파란색으로 변경 */
 }
 
 .App-logo {
@@ -103,7 +115,7 @@ header .bottom {
 }
 
 .container {
-  width: 1300px;
+  width: 1000px;
   /* height: 2500px; */
   display: flex;
   flex-direction: row;
@@ -280,7 +292,7 @@ textarea {
 
 button[type='submit'] {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: blue;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -295,6 +307,7 @@ button[type='submit']:hover {
   width: 200px;
   height: 200px;
   margin-right: 50px;
+  
 
   background-image: url('./img/rectangle.png');
   background-size: cover;
