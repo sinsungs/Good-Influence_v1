@@ -19,6 +19,8 @@ import Login from './pages/Login';
 import MyPage from './pages/MyPage';
 import Meeting from './pages/Meeting';
 import Quill from './pages/Quill';
+import Banner from './components/Banner';
+import Category from './components/Category';
 
 function App() {
 
@@ -48,8 +50,9 @@ function App() {
 
         <Header />
 
+        {/* <Banner /> */}
+        <Category />
 
-          {/* <YoutuberList/> */}
 
         <Routes>
           <Route path="/quill" element={<Quill/>}/>

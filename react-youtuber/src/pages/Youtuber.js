@@ -31,7 +31,7 @@ function Youtuber() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [likes, setLikes] = useState(0);
-  const [writerEmail, setWriter] = useState('');
+  // const [imageFile, setImageFile] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,11 +42,12 @@ function Youtuber() {
       title,
       content,
       likes,
-      writerEmail
+      // imageFile
+
     };
 
     // 예시: 데이터를 서버로 전송하는 코드
-    axios.post('/youtuber/register', youtuberData)
+    axios.post('/influencer/register', youtuberData)
       .then(response => {
         // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
         console.log('Youtuber 엔티티가 생성되었습니다.', response.data);
@@ -178,6 +179,15 @@ function Youtuber() {
               <h3>인플루언서 등록하기</h3>
 
             <form onSubmit={handleSubmit}>
+      {/* <div>
+          <label htmlFor="imageFile">Image:</label>
+          <input
+            type="file"
+            accept="image/*"
+            id="imageFile"
+            onChange={(event) => setImageFile(event.target.files[0])}
+          />
+      </div> */}
       <div>
         <label htmlFor="name">Name:</label>
         <input
@@ -186,7 +196,8 @@ function Youtuber() {
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
-      </div>
+      </div>          
+
       <div>
         <label htmlFor="title">Title:</label>
         <input
@@ -214,13 +225,13 @@ function Youtuber() {
         />
       </div>
       <div>
-        <label htmlFor="writer">Writer:</label>
+        {/* <label htmlFor="writer">Writer:</label>
         <input
           type="text"
           id="writer"
           value={writerEmail}
           onChange={(event) => setWriter(event.target.value)}
-        />
+        /> */}
       </div>
       <button type="submit">Submit</button>
     </form>

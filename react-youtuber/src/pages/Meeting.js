@@ -26,6 +26,7 @@ return (
                             </div>
                         {/* </a>  */}
                     </li>
+                    <hr/>
                     <li class="flex-container">
                         {/* <a>  */}
                             <div class="flex-item-left">
@@ -44,6 +45,7 @@ return (
                             </div>
                         {/* </a>  */}
                     </li>
+                    <hr/>                    
                     <li class="flex-container">
                         {/* <a>  */}
                             <div class="flex-item-left">
