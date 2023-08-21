@@ -22,24 +22,26 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor 
 @AllArgsConstructor 
-@ToString(exclude = {"writer"})
+//@ToString(exclude = {"writer"})
 
-public class Youtuber {
+public class Influencer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long yno;
+	private Long ino;
 	private String name;
 	private String title;
 	private String content;	
 	private int likes;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Member writer;  // Member와 연관관계 지정
+	private String imageUrl; // 이미지 파일의 경로나 URL을 저장할 필드
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	private Member writer;  // Member와 연관관계 지정
 	
 	
-    @OneToMany(mappedBy = "youtuber")
-    private List<PostYoutuber> postYoutubers = new ArrayList<>();
+    @OneToMany(mappedBy = "influencer")
+    private List<PostYoutuber> postInfluencers = new ArrayList<>();
 
 	
     

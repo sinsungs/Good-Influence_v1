@@ -23,8 +23,8 @@ public static PostYoutuberDTO of(PostYoutuber postyoutuber) {
    return PostYoutuberDTO.builder()
 //           .pyno(postyoutuber.getPyno())
            .postName(postyoutuber.getPost().getContent())
-           .youtuberName(postyoutuber.getYoutuber().getName())
-           .youtuberContent(postyoutuber.getYoutuber().getContent())
+           .youtuberName(postyoutuber.getInfluencer().getName())
+           .youtuberContent(postyoutuber.getInfluencer().getContent())
            
            .build();
 }

@@ -1,42 +1,47 @@
 package com.youtubers.controller;
 
-import java.util.List;
+import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.youtubers.Service.YoutuberService;
-import com.youtubers.dto.YoutuberDTO;
-import com.youtubers.entity.Youtuber;
+import com.youtubers.Service.InfluencerService;
+import com.youtubers.dto.InfluencerDTO;
+import com.youtubers.entity.Influencer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
-@RequestMapping("/youtuber")
+@RequestMapping("/influencer")
 @Log4j2
 @RequiredArgsConstructor
-public class YoutuberController {
+public class InfluencerController {
 
-    private final YoutuberService youtuberService;
+    private final InfluencerService influencerService;
 
     /* API 버전 ( @RequestBody 사용 )*/
     
 	@PostMapping("/register")
-    public ResponseEntity<Youtuber> createYoutuber(@RequestBody YoutuberDTO dto) {
-        Youtuber createdYoutuber = youtuberService.createYoutuber(dto);
-        return ResponseEntity.ok(createdYoutuber);
+//    public ResponseEntity<Influencer> createYoutuber(@RequestBody InfluencerDTO dto,  @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+	public ResponseEntity<Influencer> createYoutuber(@RequestBody InfluencerDTO dto) {
+		
+//        Influencer createdInfluencer = influencerService.createInfluencer(dto, imageFile);
+        Influencer createdInfluencer = influencerService.createInfluencer(dto);
+        
+        return ResponseEntity.ok(createdInfluencer);
     }
     
-	@GetMapping("/list")
-	public ResponseEntity<List<YoutuberDTO>> getAllYoutubersWithWriters() {
-		List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
-		return ResponseEntity.ok(youtubers);
-	}
+//	@GetMapping("/list")
+//	public ResponseEntity<List<InfluencerDTO>> getAllYoutubersWithWriters() {
+//		List<InfluencerDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
+//		return ResponseEntity.ok(youtubers);
+//	}
     
 //    @GetMapping({"/read/{yno}", "/modify/{yno}"})
 //    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {

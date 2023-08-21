@@ -22,7 +22,7 @@ public class PostYoutuber {
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "youtuber_id")
-    private Youtuber youtuber;
+    private Influencer influencer;
 
 
 }

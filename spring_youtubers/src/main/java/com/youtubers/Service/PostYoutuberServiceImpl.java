@@ -9,10 +9,10 @@ import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostYoutuberDTO;
 import com.youtubers.entity.Post;
 import com.youtubers.entity.PostYoutuber;
-import com.youtubers.entity.Youtuber;
+import com.youtubers.entity.Influencer;
 import com.youtubers.repository.PostRepository;
 import com.youtubers.repository.PostYoutuberRepository;
-import com.youtubers.repository.YoutuberRepository;
+import com.youtubers.repository.InfluencerRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 public class PostYoutuberServiceImpl implements PostYoutuberService {
 	
 	private final PostRepository postRepository;
-	private final YoutuberRepository youtuberRepository;
+	private final InfluencerRepository youtuberRepository;
 	private final PostYoutuberRepository postyoutuberRepository;
 	
 //    @Override
@@ -50,7 +50,7 @@ public class PostYoutuberServiceImpl implements PostYoutuberService {
     public String createPost(PostRequestDTO dto) {
     	
         Post post = postRepository.findById(dto.getPno()).get();
-        Youtuber youtuber = youtuberRepository.findById(dto.getYno()).get();
+        Influencer youtuber = youtuberRepository.findById(dto.getYno()).get();
         
         PostYoutuber postYoutuber = new PostYoutuber();
         postYoutuber.setPost(post);

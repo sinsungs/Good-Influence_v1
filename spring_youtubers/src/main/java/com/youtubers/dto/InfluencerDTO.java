@@ -14,15 +14,16 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class YoutuberDTO {
+public class InfluencerDTO {
 	
-    private Long yno;
+    private Long ino;
     private String name;
     private String title;
     private String content;
     private int likes;
-	private String writerEmail;
-	private String writerName;
+    private String image_url;
+//	private String writerEmail;
+//	private String writerName;
 
     // Constructors, getters, and setters
 }
