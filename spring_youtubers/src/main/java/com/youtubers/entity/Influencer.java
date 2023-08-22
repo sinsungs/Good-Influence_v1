@@ -41,7 +41,7 @@ public class Influencer {
 	
 	
     @OneToMany(mappedBy = "influencer")
-    private List<PostYoutuber> postInfluencers = new ArrayList<>();
+    private List<PostInfluencer> postInfluencers = new ArrayList<>();
 
 	
     

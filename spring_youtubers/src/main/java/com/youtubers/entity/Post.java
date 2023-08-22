@@ -25,7 +25,7 @@ public class Post extends BaseEntity{
 	private String content;	
 	
     @OneToMany(mappedBy = "post")
-    private List<PostYoutuber> postYoutubers = new ArrayList<>();
+    private List<PostInfluencer> postYoutubers = new ArrayList<>();
 
 //    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL) // Post와 Payment는 1:1 관계
 //    private Payment payment;

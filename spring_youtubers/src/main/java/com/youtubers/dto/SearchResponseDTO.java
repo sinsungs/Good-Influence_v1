@@ -1,7 +1,5 @@
 package com.youtubers.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,12 +11,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostRequestDTO {
+public class SearchResponseDTO {
 	
-	private Long pno;
-	private String title;
-	private String content;
-	
-    private Long ino;
-
+    private String name;
 }

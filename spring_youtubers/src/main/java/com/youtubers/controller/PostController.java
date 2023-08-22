@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.youtubers.Service.PostInfluencerService;
 import com.youtubers.Service.PostService;
-import com.youtubers.Service.PostYoutuberService;
 import com.youtubers.dto.PostRequestDTO;
-import com.youtubers.dto.PostYoutuberDTO;
+import com.youtubers.dto.PostResponseDTO;
+import com.youtubers.entity.PostInfluencer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,27 +23,26 @@ import lombok.RequiredArgsConstructor;
 public class PostController {
 	
     private final PostService postService;
-    private final PostYoutuberService postyoutuberService;
+    private final PostInfluencerService postInfluencerService;
     
     @PostMapping("/register")
-    public  ResponseEntity<String> createPost(@RequestBody PostRequestDTO dto) {
-    	
-    	System.out.print(dto);
+    public  ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO dto) {
     	
     	Long pno = postService.createPost(dto);
     	
     	dto.setPno(pno);
     	
-    	String response = postyoutuberService.createPost(dto);
+    	PostResponseDTO postResponseDTO = postInfluencerService.createInfluencerPost(dto);
+//    	List<PostResponseDTO> postResponseDTO = postInfluencerService.createInfluencerPost(dto);
         
-//        String response = "success";
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(postResponseDTO);
     }
     
+    
     @GetMapping("/list")
-    public ResponseEntity<List<PostYoutuberDTO>> listPost() {
+    public ResponseEntity<List<PostResponseDTO>> listPost() {
     	
-        List<PostYoutuberDTO> response = postyoutuberService.getList();
+        List<PostResponseDTO> response = postInfluencerService.getList();
         return ResponseEntity.ok(response);
         
     }

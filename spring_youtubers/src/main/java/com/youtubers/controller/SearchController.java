@@ -21,13 +21,13 @@ public class SearchController {
     private final SearchService searchService;
     
     @PostMapping("/search")
-    public  ResponseEntity<String> createPost(@RequestBody SearchDTO dto) {
+    public  ResponseEntity<List<SearchDTO>> createPost(@RequestBody SearchDTO dto) {
     	
     	System.out.print(dto);
     	
-    	List<Influencer> response = searchService.searchInfluencer(dto);
+    	List<SearchDTO> response = searchService.searchInfluencer(dto);
     	
-        return ResponseEntity.ok("성공");
+        return ResponseEntity.ok(response);
     }
   
 }

@@ -13,6 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class SearchDTO {
 	
+	
+    private Long ino;
     private String name;
     
 }

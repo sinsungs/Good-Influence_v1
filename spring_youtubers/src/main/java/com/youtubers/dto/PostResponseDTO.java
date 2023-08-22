@@ -1,6 +1,6 @@
 package com.youtubers.dto;
 
-import com.youtubers.entity.PostYoutuber;
+import com.youtubers.entity.PostInfluencer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,18 +13,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostYoutuberDTO {
+public class PostResponseDTO {
 //private Long pyno;
-private String postName;
-private String youtuberName;
-private String youtuberContent;
+	
+private String postTitle;
+private String postContent;
 
-public static PostYoutuberDTO of(PostYoutuber postyoutuber) {
-   return PostYoutuberDTO.builder()
-//           .pyno(postyoutuber.getPyno())
-           .postName(postyoutuber.getPost().getContent())
-           .youtuberName(postyoutuber.getInfluencer().getName())
-           .youtuberContent(postyoutuber.getInfluencer().getContent())
+private String influencerName;
+private String influencerContent;
+
+public static PostResponseDTO of(PostInfluencer postInfluencer) {
+   return PostResponseDTO.builder()
+		   
+		   .postTitle(postInfluencer.getPost().getTitle())
+           .postContent(postInfluencer.getPost().getContent())
+           .influencerName(postInfluencer.getInfluencer().getName())
+           .influencerContent(postInfluencer.getInfluencer().getContent())
            
            .build();
 }

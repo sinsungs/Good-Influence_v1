@@ -7,14 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Data
-public class PostYoutuber {
+@Builder
+public class PostInfluencer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pyno;
+    private Long pino;
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "post_id")
