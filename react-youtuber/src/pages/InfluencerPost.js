@@ -1,15 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-function YoutuberPost() {
+function InfluencerPost() {
 
+  // 모달창 State
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedField, setSelectedField] = useState(null);
+
+  // 검색창 State
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  // 인플루언서 State
+  const [ino, setino] = useState(null);
+  const [secondino, setSecondino] = useState(null);
+  const [thirdino, setThirdino] = useState(null);
+
 
 // 모달창 열기 Start 
-const handleModalOpen = () => {
+// const handleModalOpen = () => {
+//   setIsModalOpen(true);
+// };
+
+const handleModalOpen = (field) => {
+  setSelectedField(field);
   setIsModalOpen(true);
 };
 
@@ -30,6 +44,7 @@ const handleSearchSubmit = async (e) => {
   try {
     const response = await axios.post('/search', { name : searchQuery }); // POST 요청으로 변경
     const data = response.data;
+    // alert(data);
     setSearchResults(data);
   } catch (error) {
     console.error("Error fetching search results:", error);
@@ -45,7 +60,9 @@ const handleSearchSubmit = async (e) => {
     const postData = {
       title: event.target.elements.title.value,
       content: event.target.elements.content.value,
-      yno: event.target.elements.yno.value,
+      ino: event.target.elements.ino.value,
+      secondino : event.target.elements.secondino.value,
+      thirdino: event.target.elements.thirdino.value,
     };
   
     axios.post('/post/register', postData)
@@ -55,7 +72,7 @@ const handleSearchSubmit = async (e) => {
 
         alert('추천글 작성을 완료했습니다.', response.data);
 
-        // history.push('/'); // 작성 후 홈으로 이동
+        // window.location.href = '/list';
 
       })
       .catch(error => {
@@ -69,11 +86,26 @@ const handleSearchSubmit = async (e) => {
 
 // 선택한 인플루언서 처리 로직 구현 (예: 상태 업데이트 또는 백엔드로 보내기)
   const handleInfluencerSelection = (influencer) => {
-
+    setino(influencer);
     console.log('Selected influencer:', influencer);
   };
 
 // 선택한 인플루언서 처리 로직 구현 (예: 상태 업데이트 또는 백엔드로 보내기) 
+
+
+// 선택한 인플루언서 값을 수정하는 함수
+const handleInfluencerEdit = (field, influencer) => {
+  if (field === 'ino') {
+    setino(influencer);
+  } else if (field === 'secondino') {
+    setSecondino(influencer);
+  } else if (field === 'thirdino') {
+    setThirdino(influencer);
+  }
+  setIsModalOpen(false); // 모달 창 닫기
+};
+
+
 
   return (
     
@@ -97,17 +129,21 @@ const handleSearchSubmit = async (e) => {
 
               <label>인플루언서</label>
               <p>* 인플루언서를 1명에서 3명까지 선택할 수 있습니다.</p>
-              <input type="text" className="custom-input" name="yno" placeholder="추천 인플루언서를 선택해주세요." />
+              <input type="text" className="custom-input" name="ino" value={ino} onClick={() => handleModalOpen('ino')} placeholder="첫번째 인플루언서를 선택해주세요."   readOnly/>
+              <div style={{ height: '30px' }}></div>
+              <input type="text" className="custom-input" name="secondino" value={secondino} onClick={() => handleModalOpen('secondino')} placeholder="두번째 인플루언서를 선택해주세요."   readOnly/>
+              <div style={{ height: '30px' }}></div>
+              <input type="text" className="custom-input" name="thirdino" value={thirdino} onClick={() => handleModalOpen('thirdino')} placeholder="세번째 인플루언서를 선택해주세요."   readOnly/>
               <div style={{ height: '30px' }}></div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div className="rectangle" onClick={handleModalOpen}>
+                <div className="rectangle"   onClick={() => handleModalOpen('ino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
                 </div>
-                <div className="rectangle" onClick={handleModalOpen}>
+                <div className="rectangle"   onClick={() => handleModalOpen('secondino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
                 </div>
-                <div className="rectangle" onClick={handleModalOpen}>
+                <div className="rectangle"   onClick={() => handleModalOpen('thirdino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
                 </div>
               </div>
@@ -157,17 +193,20 @@ const handleSearchSubmit = async (e) => {
               style={{ marginBottom: '10px' }}
             />
             <button type="submit">검색</button>
-          </form>
-          <div className='modal-search'>
+
+          {/* <div className='modal-search'> */}
             {searchResults.map((influencer) => (
               <div
-                key={influencer.id}
-                onClick={() => handleInfluencerSelection(influencer)}
+                key={influencer.ino}
+                onClick={() => handleInfluencerEdit(selectedField, influencer.ino)}
+                // onClick={() => handleInfluencerSelection(selectedField, influencer.ino)}
               >
+                {influencer.ino}
                 {influencer.name}
               </div>
             ))}
-          </div>
+          {/* </div> */}
+          </form>
           <div>
             <button onClick={handleModalClose} style={{ float: 'right' }}>닫기</button>
           </div>
@@ -184,4 +223,4 @@ const handleSearchSubmit = async (e) => {
   );
 }
 
-export default YoutuberPost;
+export default InfluencerPost;

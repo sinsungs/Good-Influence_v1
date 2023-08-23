@@ -10,10 +10,10 @@ import axios from 'axios';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import YoutuberCreate from './pages/YoutuberCreate';
-import YoutuberList from './pages/YoutuberList';
+
 import YoutuberRead from './pages/YoutuberRead';
 import Youtuber from './pages/Youtuber';
-import YoutuberPost from './pages/YoutuberPost';
+
 import Join from './pages/Join';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
@@ -21,6 +21,9 @@ import Meeting from './pages/Meeting';
 import Quill from './pages/Quill';
 import Banner from './components/Banner';
 import Category from './components/Category';
+
+import InfluencerPost from './pages/InfluencerPost';
+import InfluencerList from './pages/InfluencerList';
 
 function App() {
 
@@ -55,14 +58,17 @@ function App() {
 
 
         <Routes>
+          <Route path="/post" element={<InfluencerPost/>}/>
+          <Route path="/list" element={<InfluencerList/>}/>
+
           <Route path="/quill" element={<Quill/>}/>
           <Route path="/meeting" element={<Meeting/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/join" element={<Join/>}/>
           <Route path="/youtuber" element={<Youtuber/>}/>
-          <Route path="/list" element={<YoutuberList/>}/>
-          <Route path="/post" element={<YoutuberPost/>}/>
+
+
           {/* <Route exact path="/" component={YoutuberList} /> */}
           <Route exact path="/YoutuberRead" element={<YoutuberRead/>} /> // Define the YoutuberRead route
         </Routes>

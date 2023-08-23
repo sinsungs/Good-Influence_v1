@@ -212,7 +212,7 @@ header .bottom {
 
 /* List Start */
 .y-box {
-  height: 350px;
+  height: 250px;
   width: 180px;
   background-color: #ffffff;
   /* border: 1px solid #000; */
@@ -223,22 +223,23 @@ header .bottom {
 .y-box-header {
   height: 150px;
   width: 100%;
-  /* background-color:#61dafb; */
 
-  background-image: url('https://yt3.googleusercontent.com/TFDsP7GTkb-adv_BnBNNv5gjHpFmCrYvJ5QP1I5CMgyUnjuV3l0ZopTGPf0noTssor-3mooh=s176-c-k-c0x00ffffff-no-rj');
+  /* background-color:#61dafb; */
+  background-image: url('./img/influencer1.jpg');
+  /* background-image: url('https://yt3.googleusercontent.com/TFDsP7GTkb-adv_BnBNNv5gjHpFmCrYvJ5QP1I5CMgyUnjuV3l0ZopTGPf0noTssor-3mooh=s176-c-k-c0x00ffffff-no-rj'); */
   background-size: cover;
   background-position: center;
 }
 
 
 .y-box-body {
-  height: 150px;
+  height: 80px;
   width: 100%;
 }
 .y-box-footer {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 20px;
   width: 100%;
   background-color: red;
 }

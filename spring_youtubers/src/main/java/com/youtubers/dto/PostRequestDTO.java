@@ -20,5 +20,7 @@ public class PostRequestDTO {
 	private String content;
 	
     private Long ino;
+    private Long secondino;
+    private Long thirdino;
 
 }

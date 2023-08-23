@@ -1,27 +1,20 @@
 package com.youtubers.Service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.youtubers.dto.InfluencerDTO;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
 import com.youtubers.entity.Influencer;
 import com.youtubers.entity.Post;
 import com.youtubers.entity.PostInfluencer;
 import com.youtubers.repository.InfluencerRepository;
-import com.youtubers.repository.PostRepository;
 import com.youtubers.repository.PostInfluencerRepository;
+import com.youtubers.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,19 +28,22 @@ public class PostInfluencerService{
 	private final InfluencerRepository influencerRepository;
 	private final PostInfluencerRepository postInfluencerRepository;
 	
-//    public List<PostResponseDTO> createInfluencerPost(PostRequestDTO dto) {
+	
       public PostResponseDTO createInfluencerPost(PostRequestDTO dto) {
+    	  
+    	  List<PostInfluencer> postInfluencers = dtoToEntity(dto);
         
-        PostInfluencer postInfluencer = dtoToEntity(dto);
+    	  postInfluencerRepository.saveAll(postInfluencers);
         
-        postInfluencerRepository.save(postInfluencer);
-
-        return entityToDTO(postInfluencer);
+        return entityToDTO(postInfluencers.get(0));
         
     }
+      
     
     public List<PostResponseDTO> getList() {
+    	
         List<PostInfluencer> postInfluencers = postInfluencerRepository.findAll();
+        
         List<PostResponseDTO> dtoList = new ArrayList<>();
         
         for (PostInfluencer postInfluencer : postInfluencers) {
@@ -58,21 +54,48 @@ public class PostInfluencerService{
     }
     
     
+//    
+//    	PostInfluencer dtoToEntity(PostRequestDTO dto) {
+//    		
+//	        Post post = postRepository.findById(dto.getPno()).orElseThrow(() -> new RuntimeException("Post not found"));
+//	        Influencer influencer = influencerRepository.findById(dto.getIno()).orElseThrow(() -> new RuntimeException("Influencer not found"));
+//		    
+//	        
+//	        PostInfluencer postInfluencer = PostInfluencer.builder()
+//	                .post(post)
+//	                .influencer(influencer)
+//	                .build();
+//	        
+//	        return postInfluencer;
+//    }
     
-    	PostInfluencer dtoToEntity(PostRequestDTO dto) {
-    		
-	        Post post = postRepository.findById(dto.getPno()).orElseThrow(() -> new RuntimeException("Post not found"));
-	        Influencer influencer = influencerRepository.findById(dto.getIno()).orElseThrow(() -> new RuntimeException("Influencer not found"));
-		        
-	        PostInfluencer postInfluencer = PostInfluencer.builder()
-	                .post(post)
-	                .influencer(influencer)
-	                .build();
+    
+		private List<PostInfluencer> dtoToEntity(PostRequestDTO dto) {
+		
+	    	Post post = postRepository.findById(dto.getPno()).orElseThrow(() -> new RuntimeException("Post not found"));
 	        
-	        return postInfluencer;
-    }
+	    	List<Long> influencerIds = Arrays.asList(dto.getIno(), dto.getSecondino(), dto.getThirdino());
+	    	
+	        List<PostInfluencer> postInfluencers = influencerIds.stream()
+	                .map(influencerId -> createPostInfluencer(post, influencerId))
+	                .collect(Collectors.toList());
+	        
+	    return postInfluencers;
+        
+		}
+    		
+		private PostInfluencer createPostInfluencer(Post post, Long influencerId) {
+			
+		    Influencer influencer = influencerRepository.findById(influencerId).orElseThrow(() -> new RuntimeException("Influencer not found"));
+	
+		    return PostInfluencer.builder()
+		            .post(post)
+		            .influencer(influencer)
+		            .build();
+		}
+	
     	
-    	PostResponseDTO entityToDTO(PostInfluencer postInfluencer) {
+    	private PostResponseDTO entityToDTO(PostInfluencer postInfluencer) {
     		
     		PostResponseDTO postResponseDTO = PostResponseDTO.builder()
     				

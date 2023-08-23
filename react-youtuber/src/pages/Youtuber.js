@@ -233,10 +233,10 @@ function Youtuber() {
           onChange={(event) => setWriter(event.target.value)}
         /> */}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">등록</button>
     </form>
 
-              <button onClick={handleModalClose}>Close</button>
+              <button onClick={handleModalClose} style={{float:'right', marginTop:'20px'}}>닫기</button>
 
           </div>
         </div>

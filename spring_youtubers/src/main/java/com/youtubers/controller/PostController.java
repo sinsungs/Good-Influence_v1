@@ -43,6 +43,7 @@ public class PostController {
     public ResponseEntity<List<PostResponseDTO>> listPost() {
     	
         List<PostResponseDTO> response = postInfluencerService.getList();
+        
         return ResponseEntity.ok(response);
         
     }
