@@ -1,14 +1,13 @@
 package com.youtubers.controller;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.InfluencerService;
 import com.youtubers.dto.InfluencerDTO;
@@ -29,7 +28,7 @@ public class InfluencerController {
     
 	@PostMapping("/register")
 //    public ResponseEntity<Influencer> createYoutuber(@RequestBody InfluencerDTO dto,  @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-	public ResponseEntity<Influencer> createYoutuber(@RequestBody InfluencerDTO dto) {
+	public ResponseEntity<Influencer> createInfluencer(@RequestBody InfluencerDTO dto) {
 		
 //        Influencer createdInfluencer = influencerService.createInfluencer(dto, imageFile);
         Influencer createdInfluencer = influencerService.createInfluencer(dto);
@@ -37,11 +36,11 @@ public class InfluencerController {
         return ResponseEntity.ok(createdInfluencer);
     }
     
-//	@GetMapping("/list")
-//	public ResponseEntity<List<InfluencerDTO>> getAllYoutubersWithWriters() {
-//		List<InfluencerDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
-//		return ResponseEntity.ok(youtubers);
-//	}
+	@GetMapping("/list")
+	public ResponseEntity<List<InfluencerDTO>> listInfluencer() {
+		List<InfluencerDTO> listInfluencer = influencerService.listInfluencer();
+		return ResponseEntity.ok(listInfluencer);
+	}
     
 //    @GetMapping({"/read/{yno}", "/modify/{yno}"})
 //    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {
@@ -73,69 +72,6 @@ public class InfluencerController {
 //	}
     
     
-    /* ============================================================   */
-    
-//	@GetMapping("/register")
-//	public void register() {
-//		log.info("register get..........");
-//	}
-	
-    
-//	@PostMapping("/register")
-//	public String createYoutuber(YoutuberDTO dto) {
-//		
-//		youtuberService.createYoutuber(dto);
-//		
-//		return "redirect:/youtuber/list";
-//	}
-	
-//	@GetMapping("/list")
-//	public void getAllYoutubersWithWriters(Model model) {
-//	    List<YoutuberDTO> youtubers = youtuberService.getAllYoutubersWithWriters();
-//	    model.addAttribute("youtubers", youtubers);
-//	}
-	
-	
-	
-//    @GetMapping({"/read", "/modify"})
-//    public void getYoutuberWithWriter(@RequestParam("yno") Long yno, Model model) {
-//    	
-//    	YoutuberDTO youtuberDTO = youtuberService.getYoutuberWithWriter(yno);
-//    	model.addAttribute("dto", youtuberDTO);
-//    	
-//    }
-    
-//    @PostMapping("/modify")
-//	public String modify(YoutuberDTO dto, RedirectAttributes redirectAttributes){
-//		
-//		log.info(dto);
-//		
-//		youtuberService.modify(dto);
-//		
-//		redirectAttributes.addAttribute("yno", dto.getYno());
-//		
-////		redirectAttributes 리디렉션 URL에 'yno' 매개변수를 쿼리 매개변수로 추가하는 역할을 합니다
-//		
-//		return "redirect:/youtuber/read";
-//	}
-	
-	
-//    @PostMapping("/remove")
-//    public String remove(@RequestParam("yno") Long yno){
-//
-//    	log.info("YNO : " + yno);
-//
-//    	youtuberService.remove(yno);
-//
-//    	return "redirect:/youtuber/list";
-//    }
-	
-//	@PostMapping("/remove")
-//	public String remove(long bno, RedirectAttributes redirectAttributes) {
-//		log.info("bon: " + bno);
-//		boardService.removeWithReplies(bno);
-//		redirectAttributes.addFlashAttribute("msg", bno);
-//		return "redirect:/board/list";
-//	}
+ 
 	
 }

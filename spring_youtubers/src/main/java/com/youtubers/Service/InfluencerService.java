@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.dto.InfluencerDTO;
+import com.youtubers.dto.MeetDTO;
 import com.youtubers.entity.Influencer;
+import com.youtubers.entity.Meet;
 import com.youtubers.repository.InfluencerRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -32,8 +36,6 @@ public class InfluencerService{
 //	public Influencer createInfluencer(InfluencerDTO dto,  MultipartFile imageFile) throws IOException {
 	public Influencer createInfluencer(InfluencerDTO dto) {
 		
-		log.info("---BoardServiceImpl register()---" + dto);
-		
 //        if (imageFile != null && !imageFile.isEmpty()) {
 //        	
 //	   		 String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
@@ -48,112 +50,20 @@ public class InfluencerService{
 		
 	}
 	
-//    public List<Youtuber> getAllYoutubers() {
-//        return youtuberRepository.findAll();
-//    }
-	
-//	public List<InfluencerDTO> getAllYoutubersWithWriters() {
-//	    List<Object[]> results = youtuberRepository.getAllYoutubersWithWriters();
-//	    List<InfluencerDTO> youtubers = new ArrayList<>();
-//
-//	    for (Object[] arr : results) {
-//	        Youtuber youtuber = (Youtuber) arr[0];
-//	        Member writer = (Member) arr[1];
-//	        youtubers.add(entityToDTO(youtuber, writer));
-//	    }
-//
-//	    return youtubers;
-//	}  
-	
-//	public InfluencerDTO getYoutuberWithWriter(Long yno) {
-//		Object result = youtuberRepository.getYoutuberWithWriter(yno);
-//		Object[] arr = (Object[])result;
-//		
-//		return entityToDTO((Youtuber)arr[0], (Member)arr[1]);
-//	}
-	
-//	public void modify(InfluencerDTO dto) {
-//		
-//		Youtuber youtuber = youtuberRepository.getOne(dto.getYno());
-//		
-//		System.out.println("youtuber1--------" + youtuber);
-//		
-////		youtuber.changeTitle(dto.getTitle());
-////		youtuber.changeContent(dto.getContent());
-//		
-//		System.out.println("youtuber2--------" + youtuber);
-//		
-//		youtuberRepository.save(youtuber);
-//	}
-	/* 이렇게 수정하면 member와의 연관관계를 이어주지 않아도 youtuber의 엔티티만 수정가능 하게된다 */
-	
-	
-	
-//	@Override
-//	public void modify(YoutuberDTO dto) {
-//		Youtuber youtuber = dtoToEntity(dto);
-//		youtuberRepository.save(youtuber);
-//	}
-	
-//	public void remove(Long yno) {
-//		youtuberRepository.deleteById(yno);
-//		
-//	}
+    public List<InfluencerDTO> listInfluencer() {
+    	
+        List<Influencer> Influencers = influencerRepository.findAll();
+        
+        List<InfluencerDTO> dtoList = new ArrayList<>();
+        
+	     for (Influencer influencer : Influencers) {
+	      dtoList.add(entityToDTO(influencer));
+	     }
+	  
+	     return dtoList;
+    	
+    }
 
-
-//	@Override
-//	public BoardDTO get(Long bno) {
-//		Object result = boardRepository.getBoardByBno(bno);
-//		Object[] arr = (Object[])result;
-//		
-//		return entityToDTO((Board)arr[0], (Member)arr[1], (Long)arr[2]);
-//	}
-
-//
-//	@Override
-//	public PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO) {
-//		log.info(pageRequestDTO);
-//		
-//		Function<Object[], BoardDTO> fn = ( en -> entityToDTO((Board)en[0], (Member)en[1], (Long)en[2]));
-//		
-//		Page<Object[]> result = boardRepository.searchPage(
-//				pageRequestDTO.getType(),
-//				pageRequestDTO.getKeyword(),
-//				pageRequestDTO.getPageable(Sort.by("bno").descending()));
-//		
-//		return new PageResultDTO<>(result, fn);
-//	}
-//
-//	
-//	@Override
-//	public BoardDTO get(Long bno) {
-//		Object result = boardRepository.getBoardByBno(bno);
-//		Object[] arr = (Object[])result;
-//		
-//		return entityToDTO((Board)arr[0], (Member)arr[1], (Long)arr[2]);
-//	}
-//	
-//	@Transactional
-//	@Override
-//	public void removeWithReplies(Long bno) {
-//		replyRepository.deleteByBno(bno);
-//		
-//		boardRepository.deleteById(bno);
-//	}
-//
-//	@Override
-//	public void modify(BoardDTO boardDTO) {
-//		
-//		Board board = boardRepository.getOne(boardDTO.getBno());
-//		
-//		board.changeTitle(boardDTO.getTitle());
-//		board.changeContent(boardDTO.getContent());
-//		
-//		System.out.println("board--------" + board);
-//		
-//		boardRepository.save(board);
-//	}
-//
 	
 	Influencer dtoToEntity(InfluencerDTO dto) {
 //		Member member = Member.builder()

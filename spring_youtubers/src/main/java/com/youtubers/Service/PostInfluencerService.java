@@ -47,7 +47,7 @@ public class PostInfluencerService{
         List<PostResponseDTO> dtoList = new ArrayList<>();
         
         for (PostInfluencer postInfluencer : postInfluencers) {
-            dtoList.add(PostResponseDTO.of(postInfluencer));
+            dtoList.add(entityToDTO(postInfluencer));
         }
         
         return dtoList;

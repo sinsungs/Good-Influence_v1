@@ -31,6 +31,8 @@ public class Meet{
     private String startTime;
     private int maxPlayers;
     private int currentPlayers;
+    private String region;
+    private String result;
 
     
     @OneToMany(mappedBy = "meet")

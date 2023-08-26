@@ -19,5 +19,6 @@ public class MeetDTO {
     private String startTime;
     private int maxPlayers;
     private int currentPlayers;
-
+    private String region;
+    private String result;
 }
