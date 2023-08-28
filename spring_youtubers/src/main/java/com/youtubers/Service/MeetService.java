@@ -60,6 +60,7 @@ public class MeetService {
                 .maxPlayers(dto.getMaxPlayers())
                 .currentPlayers(dto.getCurrentPlayers())
                 .region(dto.getRegion())
+                .result(dto.getResult())
                 .build();
 		
 		return meet;

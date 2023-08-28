@@ -29,12 +29,30 @@ public class MeetUserService {
         User user = userRepository.findById(dto.getUserid()).orElse(null);
         Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
         
+        // 신청 마감 처리 
+        if (meet.getCurrentPlayers() >= meet.getMaxPlayers()) {
+            return "이미 모임이 가득 찼습니다.";
+        }
+        
         MeetUser meetuser = MeetUser.builder()
         		.user(user)
         		.meet(meet)
         		.build();
     	
         meetUserRepository.save(meetuser);
+        
+        // 로직 추가 
+        // currentPlayers 값 증가
+        meet.setCurrentPlayers(meet.getCurrentPlayers() + 1);
+
+        // currentPlayers와 maxPlayers 비교하여 result 값 설정
+        if (meet.getCurrentPlayers() >= meet.getMaxPlayers()) {
+            meet.setResult("마감");
+        } else {
+            meet.setResult("신청가능");
+        }
+
+        meetRepository.save(meet); // 업데이트된 Meet 객체 저장
 
 //        System.out.println(result);
         return "성공했습니다";
