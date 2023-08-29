@@ -1,5 +1,9 @@
 package com.youtubers.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,28 +67,38 @@ public class MeetUserService {
         
     }
     
-//    public String createPost(PostRequestDTO dto) {
-//    	
-//        Post post = postRepository.findById(dto.getPno()).get();
-//        Youtuber youtuber = youtuberRepository.findById(dto.getYno()).get();
-//        
-//        PostYoutuber postYoutuber = new PostYoutuber();
-//        postYoutuber.setPost(post);
-//        postYoutuber.setYoutuber(youtuber);
-//        postyoutuberRepository.save(postYoutuber);
-//        
-//        String response = String.format("%s번 게시물에 %s 유튜버를 등록하였습니다.", post.getPno(), youtuber.getName()); 
-//        return response;
-////        return postYoutuber;
-//        
-//        // 유튜버 여러명 받는 버전 만들어야 함 이거 할려면 dto yno를 List 형태로 만들어야 함 
-////        List<Long> youTuberIds = dto.getYouTuberIds(); // Assuming you receive YouTuber IDs in the request
-////        for (Long youTuberId : youTuberIds) {
-////            Intermediate intermediate = new Intermediate(postId, youTuberId); // Assuming Intermediate entity with postId and youTuberId fields
-////            intermediateRepository.save(intermediate);
-////        }
-//    }
-    
+    public List<MeetUserDTO> getApplicationHistory(Long userId) {
+    	
+        List<MeetUser> applicationHistory = meetUserRepository.findByUserUserId(userId);
+        List<MeetUserDTO> historyDTOs = new ArrayList<>();
+
+        for (MeetUser meetUser : applicationHistory) {
+            MeetUserDTO dto = new MeetUserDTO();
+//            dto.setId(meetUser.getUmid());
+            dto.setUserid(meetUser.getUser().getId());
+            dto.setMeetid(meetUser.getMeet().getMeetid());
+            // You can populate other fields as needed
+            historyDTOs.add(dto);
+        }
+
+        return historyDTOs;
+    }
+
+	
+	    public String cancelApplication(Long applicationId) {
+	        // Find the application to cancel
+	        Optional<MeetUser> optionalMeetUser = meetUserRepository.findById(applicationId);
+	
+	        if (optionalMeetUser.isPresent()) {
+	            MeetUser meetUser = optionalMeetUser.get();
+	            // Implement the cancellation process
+	            meetUserRepository.delete(meetUser);
+	
+	            return "Application cancelled successfully!";
+	        } else {
+	            return null;
+	        }
+	    }
     
     
 
