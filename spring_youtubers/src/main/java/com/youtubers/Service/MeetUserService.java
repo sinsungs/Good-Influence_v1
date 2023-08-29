@@ -67,22 +67,22 @@ public class MeetUserService {
         
     }
     
-    public List<MeetUserDTO> getApplicationHistory(Long userId) {
-    	
-        List<MeetUser> applicationHistory = meetUserRepository.findByUserUserId(userId);
-        List<MeetUserDTO> historyDTOs = new ArrayList<>();
-
-        for (MeetUser meetUser : applicationHistory) {
-            MeetUserDTO dto = new MeetUserDTO();
-//            dto.setId(meetUser.getUmid());
-            dto.setUserid(meetUser.getUser().getId());
-            dto.setMeetid(meetUser.getMeet().getMeetid());
-            // You can populate other fields as needed
-            historyDTOs.add(dto);
-        }
-
-        return historyDTOs;
-    }
+//    public List<MeetUserDTO> getApplicationHistory(Long userId) {
+//    	
+//        List<MeetUser> applicationHistory = meetUserRepository.findByUserUserId(userId);
+//        List<MeetUserDTO> historyDTOs = new ArrayList<>();
+//
+//        for (MeetUser meetUser : applicationHistory) {
+//            MeetUserDTO dto = new MeetUserDTO();
+////            dto.setId(meetUser.getUmid());
+//            dto.setUserid(meetUser.getUser().getId());
+//            dto.setMeetid(meetUser.getMeet().getMeetid());
+//            // You can populate other fields as needed
+//            historyDTOs.add(dto);
+//        }
+//
+//        return historyDTOs;
+//    }
 
 	
 	    public String cancelApplication(Long applicationId) {

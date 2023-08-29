@@ -22,6 +22,8 @@ public class InfluencerDTO {
     private String content;
     private int likes;
     private String image_url;
+    private String sns;
+    private String category;
 //	private String writerEmail;
 //	private String writerName;
 

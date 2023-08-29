@@ -27,18 +27,28 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity
-				.httpBasic().disable()
-				.csrf().disable()
-				.cors().and()
-				.authorizeRequests()
-				.antMatchers("/**").permitAll()
+				.httpBasic().disable()  			// HTTP Basic 인증 비활성화
+				.csrf().disable() 					// CSRF 보안 기능 비활성화
+				.cors()								// CORS 활성화
+				.and() 								// and란 설정 연결 
+
+				.authorizeRequests()				// 요청에 대한 권한 설정 시작
+				.antMatchers("/**").permitAll()   	// 모든 경로에 대한 접근 허용
+//			    .antMatchers("/admin/**").hasRole("ADMIN") // ADMIN 권한만 접근 가능
+//			    .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") // USER 또는 ADMIN 권한 접근 가능
 //				.antMatchers("/user/login","/user/join","/youtuber/register").permitAll()
-//				.antMatchers(HttpMethod.POST, "/**").authenticated()
+//				.antMatchers(HttpMethod.POST, "/**").authenticated()  
+				// authenticated란 인증된 사용자에게만 접근을 허용 , antMatchers랑 같이사용 
 				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				
+				.sessionManagement()               // 세션 관리 설정 시작
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)  
+				// JWT를 사용하기에 세션을 생성하지 않고 상태를 관리하지 않도록 설정
 				.and()
+				
 				.addFilterBefore(new JwtFilter(userSerivce, secretKey), UsernamePasswordAuthenticationFilter.class)
+				// JwtFilter 추가
 				.build();
+				// SecurityFilterChain 빌드하여 반환
 	}
 }

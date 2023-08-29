@@ -36,13 +36,13 @@ public class MeetUserController {
     }
     
     
-    @GetMapping("/history/{userId}")
-    public ResponseEntity<List<MeetUserDTO>> getApplicationHistory(@PathVariable Long userId) {
-    	
-        List<MeetUserDTO> applicationHistory = meetuserService.getApplicationHistory(userId);
-        
-        return ResponseEntity.ok(applicationHistory);
-    }
+//    @GetMapping("/history/{userId}")
+//    public ResponseEntity<List<MeetUserDTO>> getApplicationHistory(@PathVariable Long userId) {
+//    	
+//        List<MeetUserDTO> applicationHistory = meetuserService.getApplicationHistory(userId);
+//        
+//        return ResponseEntity.ok(applicationHistory);
+//    }
 
     
     @DeleteMapping("/cancel/{applicationId}")

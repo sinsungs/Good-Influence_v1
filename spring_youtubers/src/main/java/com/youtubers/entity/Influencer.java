@@ -33,6 +33,8 @@ public class Influencer {
 	private String title;
 	private String content;	
 	private int likes;
+	private String sns;
+	private String category;
 	
 	private String imageUrl; // 이미지 파일의 경로나 URL을 저장할 필드
 	

@@ -8,6 +8,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,20 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	// 프론트 HTTP 요청 헤더에 저장된 JWT를 받아서 다시 추출해서 사용하는 로직
+    @GetMapping("/profile")
+    public ResponseEntity<String> getUserProfile(Authentication authentication) {
+        // 현재 인증된 사용자의 정보를 가져옴
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String name = userDetails.getUsername();
+        // 유저 아이디를 이용하여 프로필 정보를 조회
+//        User user = retrieveUserProfileFromDatabase(userDetails.getUsername());
+
+        return ResponseEntity.ok(name);
+    }
+    
 
 	@PostMapping("/user/join")
 	public ResponseEntity<User> joinUser(@RequestBody User user) {

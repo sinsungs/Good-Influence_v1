@@ -112,6 +112,8 @@ public class InfluencerService{
 				.content(dto.getContent())
 				.likes(dto.getLikes())
 				.name(dto.getName())
+				.sns(dto.getSns())
+				.category(dto.getCategory())
 //				.writer(member)
 				.build();
 		
@@ -127,6 +129,8 @@ public class InfluencerService{
 	            .title(influencer.getTitle())
 	            .content(influencer.getContent())
 	            .likes(influencer.getLikes())
+	            .sns(influencer.getSns())
+	            .category(influencer.getCategory())
 //				.writerEmail(member.getEmail())
 //				.writerName(member.getName())
 	            
