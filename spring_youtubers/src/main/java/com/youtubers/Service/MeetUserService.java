@@ -29,6 +29,10 @@ public class MeetUserService {
         User user = userRepository.findById(dto.getUserid()).orElse(null);
         Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
         
+        if (meetUserRepository.existsByUserAndMeet(user, meet)) {
+            return "이미 참가한 모임입니다.";
+        }
+        
         // 신청 마감 처리 
         if (meet.getCurrentPlayers() >= meet.getMaxPlayers()) {
             return "이미 모임이 가득 찼습니다.";

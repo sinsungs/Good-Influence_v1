@@ -65,6 +65,43 @@ public class InfluencerService{
     }
 
 	
+    public Influencer updateInfluencer(Long id, InfluencerDTO dto) {
+
+        Influencer existingInfluencer = influencerRepository.findById(id).orElse(null);
+
+        if (existingInfluencer != null) {
+
+            existingInfluencer.setName(dto.getName());
+            existingInfluencer.setTitle(dto.getTitle());
+            existingInfluencer.setContent(dto.getContent());
+            existingInfluencer.setLikes(dto.getLikes());
+
+            Influencer updatedInfluencer = influencerRepository.save(existingInfluencer);
+            
+            return updatedInfluencer;
+            
+        } else {
+        	
+            return null;
+        }
+    }
+    
+
+    public boolean deleteInfluencer(Long id) {
+        // Check if influencer exists
+        Influencer existingInfluencer = influencerRepository.findById(id).orElse(null);
+
+        if (existingInfluencer != null) {
+            // Delete the influencer
+            influencerRepository.delete(existingInfluencer);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    // Mapper 정리 
 	Influencer dtoToEntity(InfluencerDTO dto) {
 //		Member member = Member.builder()
 //				.email(dto.getWriterEmail()).build();

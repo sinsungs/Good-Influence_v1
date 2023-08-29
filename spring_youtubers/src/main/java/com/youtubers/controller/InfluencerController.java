@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,43 +38,46 @@ public class InfluencerController {
         
         return ResponseEntity.ok(createdInfluencer);
     }
+	
     
 	@GetMapping("/list")
 	public ResponseEntity<List<InfluencerDTO>> listInfluencer() {
+		
 		List<InfluencerDTO> listInfluencer = influencerService.listInfluencer();
+		
 		return ResponseEntity.ok(listInfluencer);
 	}
+	
     
-//    @GetMapping({"/read/{yno}", "/modify/{yno}"})
-//    public ResponseEntity<Object> getYoutuberWithWriter(@PathVariable("yno") Long yno) {
-//    	YoutuberDTO youtuberWithWriter = youtuberService.getYoutuberWithWriter(yno);
-//        return new ResponseEntity<>(youtuberWithWriter, HttpStatus.OK);
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Influencer> updateInfluencer(@PathVariable Long id, @RequestBody InfluencerDTO dto) {
+    	
+        Influencer updatedInfluencer = influencerService.updateInfluencer(id, dto);
+        
+        if (updatedInfluencer != null) {
+        	
+            return ResponseEntity.ok(updatedInfluencer);
+            
+        } else {
+        	
+            return ResponseEntity.notFound().build();
+        }
+    }
     
-//	@PutMapping("/update")
-//	public ResponseEntity<String> modify(@RequestBody YoutuberDTO dto){
-//		
-//		log.info(dto);
-//		
-//		youtuberService.modify(dto);
-//		
-//		return new ResponseEntity<>("success", HttpStatus.OK);
-//	}
-//	
-//	// yno값이 자동으로 안들어가고 주소창 yno가 dto바로 적용되는 구문을 찾아야함 
-//	// 아니다 이코드가 맞다 hidden으로 yno을 뷰단에서 받아서 자동으로 처리하는게 맞다 
-    
-//	@DeleteMapping("/delete/{yno}")
-//	public ResponseEntity<String> remove(@PathVariable("yno") Long yno){
-//		
-//		log.info("RNO : " + yno);
-//		
-//		youtuberService.remove(yno);
-//		
-//		return new ResponseEntity<>("success", HttpStatus.OK);
-//	}
-    
-    
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteInfluencer(@PathVariable Long id) {
+    	
+        boolean deleted = influencerService.deleteInfluencer(id);
+        
+        if (deleted) {
+        	
+            return ResponseEntity.noContent().build();
+        } else {
+        	
+            return ResponseEntity.notFound().build();
+        }
+    }
  
 	
 }

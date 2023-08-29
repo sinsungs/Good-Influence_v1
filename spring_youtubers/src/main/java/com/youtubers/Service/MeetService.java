@@ -2,12 +2,14 @@ package com.youtubers.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.youtubers.dto.MeetDTO;
 import com.youtubers.entity.Meet;
 import com.youtubers.entity.MeetUser;
+import com.youtubers.entity.User;
 import com.youtubers.repository.MeetRepository;
 import com.youtubers.repository.MeetUserRepository;
 
@@ -36,6 +38,7 @@ public class MeetService {
         return UsermeetRepository.save(userMeet);
     }
     
+    
     public List<MeetDTO> listMeet() {
     	
         List<Meet> meets = meetRepository.findAll();
@@ -51,6 +54,42 @@ public class MeetService {
     }
     
     
+    public String updateMeet(Long meetId, MeetDTO dto) {
+        Meet meet = meetRepository.findById(meetId).orElse(null);
+        
+        if (meet != null) {
+            meet.setTitle(dto.getTitle());
+            meet.setContent(dto.getContent());
+            meet.setStartTime(dto.getStartTime());
+            meet.setMaxPlayers(dto.getMaxPlayers());
+            meet.setCurrentPlayers(dto.getCurrentPlayers());
+            meet.setRegion(dto.getRegion());
+            meet.setResult(dto.getResult());
+            
+            // Update other properties
+            
+            meetRepository.save(meet);
+            return "수정 완료"; 
+        }
+
+        return null; // Meet not found
+    }
+
+    
+    public boolean deleteMeet(Long meetId) {
+    	
+        Optional<Meet> optionalMeet = meetRepository.findById(meetId);
+        
+        if (optionalMeet.isPresent()) {
+            meetRepository.deleteById(meetId);
+            return true;
+        }
+        
+        return false; // Meet not found
+    }
+    
+    
+    // Mapper 구역 
 	private Meet dtoToEntity(MeetDTO dto) {
 		
         Meet meet = Meet.builder()
