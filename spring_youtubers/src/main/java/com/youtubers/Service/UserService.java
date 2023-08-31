@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.youtubers.dto.UserDTO;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.RoleType;
 import com.youtubers.entity.User;
@@ -22,10 +23,28 @@ public class UserService {
 	
 	// 로컬 회원가입 
 	@Transactional
-	public User Join(User user) {
-		// TODO Auto-generated method stub
-		user.setRole(RoleType.USER);
-        return userRepository.save(user);
+	public boolean Join(UserDTO dto) {
+		
+		// username 중복 check
+		userRepository.findByUsername(dto.getUsername())
+				.ifPresent(user -> {
+					
+					throw new RuntimeException(user.getUsername() + "는 이미 있습니다.");
+		
+				});
+		
+		// 저장
+		User user = User.builder()
+				.username(dto.getUsername())
+				.password(dto.getPassword())
+				.email(dto.getEmail())
+				.role(RoleType.USER)
+				.build();
+		
+        userRepository.save(user);
+        
+        return true;
+        
 	}
 	
 	// 로컬 로그인 

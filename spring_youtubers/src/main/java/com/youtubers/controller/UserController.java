@@ -24,12 +24,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtubers.Service.UserService;
 import com.youtubers.dto.LoginRequest;
+import com.youtubers.dto.UserDTO;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.OAuthToken;
 import com.youtubers.entity.User;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -52,13 +55,13 @@ public class UserController {
     
 
 	@PostMapping("/user/join")
-	public ResponseEntity<User> joinUser(@RequestBody User user) {
-		System.out.println(user);
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		System.out.println(user.getEmail());
-		User joinUser = userService.Join(user);
-		return ResponseEntity.ok(joinUser);
+	public ResponseEntity<Boolean> joinUser(@RequestBody UserDTO dto) {
+
+		log.info("request : " + dto);
+		
+		Boolean result = userService.Join(dto);
+		
+		return ResponseEntity.ok(result);
 	}
 	
 //	@PostMapping("/user/login")
