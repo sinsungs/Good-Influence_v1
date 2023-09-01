@@ -74,13 +74,13 @@ public class UserController {
 	public ResponseEntity<String> Login(@RequestBody User user, HttpSession session) {
 //		return ResponseEntity.ok("로그인 성공");
 		
-		User principal = userService.Login(user);
+		String principal = userService.Login(user);
 		
-		if(principal != null) {
-			session.setAttribute("principal", principal);
-		}
+//		if(principal != null) {
+//			session.setAttribute("principal", principal);
+//		}
 		
-		return ResponseEntity.ok("안녕");
+		return ResponseEntity.ok(principal);
 	}
 	
 	
