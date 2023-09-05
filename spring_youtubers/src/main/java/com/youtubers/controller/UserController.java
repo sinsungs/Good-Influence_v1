@@ -40,20 +40,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	// 프론트 HTTP 요청 헤더에 저장된 JWT를 받아서 다시 추출해서 사용하는 로직
-    @GetMapping("/profile")
-    public ResponseEntity<String> getUserProfile(Authentication authentication) {
-        // 현재 인증된 사용자의 정보를 가져옴
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        String name = userDetails.getUsername();
-        // 유저 아이디를 이용하여 프로필 정보를 조회
-//        User user = retrieveUserProfileFromDatabase(userDetails.getUsername());
-
-        return ResponseEntity.ok(name);
-    }
-    
-
+	// 회원 가입
 	@PostMapping("/user/join")
 	public ResponseEntity<Boolean> joinUser(@RequestBody UserDTO dto) {
 
@@ -64,11 +51,14 @@ public class UserController {
 		return ResponseEntity.ok(result);
 	}
 	
-//	@PostMapping("/user/login")
-//	public ResponseEntity<String> login() {
-////		return ResponseEntity.ok("로그인 성공");
-//		return ResponseEntity.ok().body(userService.login("", ""));
-//	}
+	
+	// JWT 로그인 
+	@PostMapping("/user/jwtlogin")
+	public ResponseEntity<String> jwtLogin(@RequestBody LoginRequest dto) {
+//		return ResponseEntity.ok("로그인 성공");
+		return ResponseEntity.ok().body(userService.jwtLogin(dto.getEmail(), dto.getPassword()));
+	}
+	
 	
 	@PostMapping("/user/login")
 	public ResponseEntity<String> Login(@RequestBody User user, HttpSession session) {
@@ -83,14 +73,6 @@ public class UserController {
 		return ResponseEntity.ok(principal);
 	}
 	
-	
-	@PostMapping("/user/jwtlogin")
-	public ResponseEntity<String> jwtLogin(@RequestBody LoginRequest dto) {
-//		return ResponseEntity.ok("로그인 성공");
-		return ResponseEntity.ok().body(userService.jwtLogin(dto.getUserName(), ""));
-	}
-	
-
 	
 	// 카카오 로그인 
 	@GetMapping("/auth/kakao/callback")

@@ -3,6 +3,7 @@ package com.youtubers.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import com.youtubers.Service.PostInfluencerService;
 import com.youtubers.Service.PostService;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
-import com.youtubers.entity.PostInfluencer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +26,11 @@ public class PostController {
     private final PostInfluencerService postInfluencerService;
     
     @PostMapping("/register")
-    public  ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO dto) {
+    public  ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO dto, Authentication authentication) {
+    	
+    	System.out.println("정보" + authentication.getName());
+    	
+    	dto.setWriter(authentication.getName());
     	
     	Long pno = postService.createPost(dto);
     	

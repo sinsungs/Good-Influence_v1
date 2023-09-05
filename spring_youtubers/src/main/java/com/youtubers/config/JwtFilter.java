@@ -32,6 +32,7 @@ public class JwtFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
+		// Header에서 토큰 꺼내기 
 		final String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 		log.info("authentication : {}", authorization);
 		

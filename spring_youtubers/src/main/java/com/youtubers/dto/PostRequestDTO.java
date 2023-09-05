@@ -18,9 +18,10 @@ public class PostRequestDTO {
 	private Long pno;
 	private String title;
 	private String content;
-	
+
     private Long ino;
     private Long secondino;
     private Long thirdino;
 
+    private String writer;
 }

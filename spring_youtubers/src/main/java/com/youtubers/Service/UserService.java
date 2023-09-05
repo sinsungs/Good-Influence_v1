@@ -26,6 +26,21 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder encoder;
 	
+	
+	// jwt 로그인 
+	@Value("${jwt.secret}")
+	private String secretKey;
+	// 시크릿키를 이렇게 등록하지 않으면 git에서 전세계 사람들이 다 볼 수 있음
+	
+	private Long expiredMs = 1000 * 60 * 60l;
+	// 1시간으로 만들어주기 , 밀리세컨드 , long타입이라 l 붙이기
+	
+	public String jwtLogin(String email, String password) {
+		
+		return JwtUtil.createJwt(email, secretKey, expiredMs);
+	}
+	
+	
 	// 로컬 회원가입 
 	@Transactional
 	public boolean Join(UserDTO dto) {
@@ -71,7 +86,7 @@ public class UserService {
 				.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOTFOUND, "존재하지 않는 아이디 입니다."));
 				
 		// password 틀림 
-		if (!encoder.matches(selectedUser.getPassword(), user.getPassword())) {
+		if (!encoder.matches( user.getPassword(), selectedUser.getPassword())) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드를 잘못 입력 했습니다.");
 		} 
 		
@@ -80,16 +95,7 @@ public class UserService {
 	
 	}
 	
-	// jwt 로그인 
-	@Value("${jwt.secret}")
-	private String secretKey;
-	
-	private Long expiredMs = 1000 * 60 * 60l;
-	
-	public String jwtLogin(String userName, String password) {
-		
-		return JwtUtil.createJwt(userName, secretKey, expiredMs);
-	}
+
 	
 	// 카카오 로그인
 	public void KakaoTest(KakaoProfile kakao) {

@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+// 모든 인증에 시큐리티 적용이 기본값으로 적용된다 
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
@@ -33,12 +34,15 @@ public class SecurityConfig {
 				.and() 								// and란 설정 연결 
 
 				.authorizeRequests()				// 요청에 대한 권한 설정 시작
-				.antMatchers("/**").permitAll()   	// 모든 경로에 대한 접근 허용
+//				.antMatchers("/**").permitAll()   	// 모든 경로에 대한 접근 허용
+				.antMatchers("/user/join","/user/login","/user/jwtlogin").permitAll()   // 회원가입 , 로그인 전체 허용
+				.antMatchers(HttpMethod.POST, "/**").authenticated()  
+				// authenticated란 인증된 사용자에게만 접근을 허용 , antMatchers랑 같이사용 
+				
 //			    .antMatchers("/admin/**").hasRole("ADMIN") // ADMIN 권한만 접근 가능
 //			    .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") // USER 또는 ADMIN 권한 접근 가능
-//				.antMatchers("/user/login","/user/join","/youtuber/register").permitAll()
-//				.antMatchers(HttpMethod.POST, "/**").authenticated()  
-				// authenticated란 인증된 사용자에게만 접근을 허용 , antMatchers랑 같이사용 
+
+
 				.and()
 				
 				.sessionManagement()               // 세션 관리 설정 시작
@@ -47,7 +51,7 @@ public class SecurityConfig {
 				.and()
 				
 				.addFilterBefore(new JwtFilter(userSerivce, secretKey), UsernamePasswordAuthenticationFilter.class)
-				// JwtFilter 추가
+				// JwtFilter 추가 => jwt토큰 받고 해석 
 				.build();
 				// SecurityFilterChain 빌드하여 반환
 	}
