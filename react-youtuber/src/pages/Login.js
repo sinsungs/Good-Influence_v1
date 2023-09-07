@@ -11,6 +11,8 @@ function Login() {
     email: '',
     password: '',
   });
+  const [jwtToken, setJwtToken] = useState('');
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,18 +23,27 @@ function Login() {
     e.preventDefault();
 
     // POST 요청을 보낼 서버의 엔드포인트 URL을 입력합니다.
-    const serverURL = '/user/login';
+    const serverURL = '/user/jwtlogin';
 
     // formData를 서버로 전송합니다.
     axios.post(serverURL, formData)
       .then((response) => {
         console.log(response.data); // 서버 응답 확인
+        setJwtToken(response.data);
+
+        // Axios의 설정을 통해 JWT 토큰을 헤더에 저장합니다.
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`;
+
+        // 요청이 성공하면 서버로부터 받은 JWT 토큰을 쿠키에 저장합니다.
+        document.cookie = `jwtToken=${response.data};`;
+        
+
       })
       .catch((error) => {
         console.error(error); // 오류 처리
       });
     }
-
+  
   return (
     <div className="App">
       <div className='back'>
@@ -63,8 +74,9 @@ function Login() {
         <div style={{ textAlign: 'center', margin: '50px 0'}}>
             <p>간편 로그인</p>
 
-            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
+            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:3000/login/oauth2/callback/kakao">
             <img src={kakao_login_button} alt='kakao_image' /></a>
+
         </div>
 
         </div>

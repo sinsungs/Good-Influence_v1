@@ -22,6 +22,7 @@ import Quill from './pages/Quill';
 import Banner from './components/Banner';
 import Category from './components/Category';
 
+import LoginHandeler from './pages/LoginHandeler'
 import InfluencerPost from './pages/InfluencerPost';
 import InfluencerList from './pages/InfluencerList';
 
@@ -58,6 +59,8 @@ function App() {
 
 
         <Routes>
+          <Route path="/login/oauth2/callback/kakao" element={<LoginHandeler />} 
+  />
           <Route path="/post" element={<InfluencerPost/>}/>
           <Route path="/list" element={<InfluencerList/>}/>
 
