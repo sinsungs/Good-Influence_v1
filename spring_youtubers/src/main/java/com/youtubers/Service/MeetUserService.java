@@ -30,7 +30,7 @@ public class MeetUserService {
 	@Transactional
     public String registerMeet(MeetUserDTO dto) {
     	
-        User user = userRepository.findById(dto.getUserid()).orElse(null);
+        User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
         Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
         
         if (meetUserRepository.existsByUserAndMeet(user, meet)) {

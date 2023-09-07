@@ -60,6 +60,7 @@ public class UserController {
 	}
 	
 	
+	// 일반 로그인 
 	@PostMapping("/user/login")
 	public ResponseEntity<String> Login(@RequestBody User user, HttpSession session) {
 //		return ResponseEntity.ok("로그인 성공");
@@ -76,8 +77,9 @@ public class UserController {
 	
 	// 카카오 로그인 
 	@GetMapping("/auth/kakao/callback")
-	public @ResponseBody String kakaoCallback(String code) {
+	public String kakaoCallback(String code) {
 		
+		// 토큰을 받아오기위해 POST 요청 
 		// POST 방식으로 key=value 데이터 요청 
 		RestTemplate rt = new RestTemplate();
 		
@@ -89,7 +91,7 @@ public class UserController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "b58919f7c93ec635d5c0b3697d4aac6b");
-		params.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+		params.add("redirect_uri", "http://localhost:3000/login/oauth2/callback/kakao");
 		params.add("code", code);
 		
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
@@ -104,6 +106,7 @@ public class UserController {
 			String.class
 		);
 		
+		// 카카오 Response 값 매핑 ( json ) 
 		ObjectMapper objectMapper = new ObjectMapper();
 		OAuthToken oauthToken = null;
 		
@@ -121,7 +124,7 @@ public class UserController {
 		
 		
 		
-		
+		// 토큰을 이용한 POST 요청 사용자 정보 조회 
 		// POST 방식으로 key=value 데이터 요청 
 		RestTemplate rt2 = new RestTemplate();
 		
@@ -155,10 +158,23 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(kakaoProfile);
+//		System.out.println(kakaoProfile);
+//		System.out.println("카카오 이메일 : " + kakaoProfile.getKakao_account().getEmail());
+        log.info("카카오 이메일 : " + kakaoProfile.getKakao_account().getEmail());
+        log.info("카카오 유저네임 : " + kakaoProfile.getKakao_account().getEmail()+"_"+ kakaoProfile.getId());
 		
-		userService.KakaoTest(kakaoProfile);
+        // 가입자 혹은 비가입자 체크해서 처리 
+        User originUser = userService.회원찾기(kakaoProfile.getKakao_account().getEmail());
+        log.info(originUser);
+        
+        if(originUser.getEmail()==null) {
+            // 회원가입 처리
+    		userService.KakaoTest(kakaoProfile);
+        }
+        	// 로그인 처리 
+        String jwt = userService.jwtLogin(kakaoProfile.getKakao_account().getEmail(), "");
+        log.info(jwt);
 		
-		return response2.getBody();
+		return jwt;
 	}
 }

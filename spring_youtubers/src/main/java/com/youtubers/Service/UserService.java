@@ -1,6 +1,8 @@
 package com.youtubers.Service;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -98,19 +100,33 @@ public class UserService {
 
 	
 	// 카카오 로그인
+	@Transactional
 	public void KakaoTest(KakaoProfile kakao) {
 		
-		log.info("---test---" + kakao);
+		User user = User.builder()
+				.username(kakao.getKakao_account().getEmail()+"_"+ kakao.getId())
+				.email(kakao.getKakao_account().getEmail())
+				.password("examplePassword")
+				.role(RoleType.USER)
+				.oauth("kakao")
+				.build();
 		
-		User user = new User();
-		user.setUsername("exampleUser");
-		user.setEmail(kakao.getKakao_account().getEmail());
-		user.setPassword("examplePassword");
-		user.setRole(RoleType.USER);
-		userRepository.save(user); 
+		userRepository.save(user);
 		
-//		Youtuber youtuber = dtoToEntity(dto);
 		return;
+		
+	}
+	
+	
+	// 이미 가입한 유저인지 체크하고 처리하는 로직 추가 해야함 
+	@Transactional
+	public User 회원찾기(String email) {
+		
+		User user = userRepository.findByEmail(email).orElseGet(()->{
+			return new User();
+		});
+		
+		return user;
 		
 	}
 	

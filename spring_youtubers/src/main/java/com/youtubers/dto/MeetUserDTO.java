@@ -14,6 +14,6 @@ import lombok.ToString;
 public class MeetUserDTO {
 	
     private Long meetid;
-    private Long userid;
+    private String email;
 
 }

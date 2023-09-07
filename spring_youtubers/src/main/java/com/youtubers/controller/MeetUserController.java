@@ -3,6 +3,7 @@ package com.youtubers.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,12 @@ public class MeetUserController {
  
     
     @PostMapping("/register")
-    public ResponseEntity<String> registerMeet(@RequestBody MeetUserDTO dto) {
+    public ResponseEntity<String> registerMeet(@RequestBody MeetUserDTO dto,  Authentication authentication) {
     	
 //    	MeetUser registerMeet ;
+    	System.out.println("정보" + authentication.getName());
+    	
+    	dto.setEmail(authentication.getName());
     	
     	String sss = meetuserService.registerMeet(dto);
         

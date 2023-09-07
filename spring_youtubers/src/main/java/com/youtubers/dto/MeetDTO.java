@@ -21,4 +21,5 @@ public class MeetDTO {
     private int currentPlayers;
     private String region;
     private String result;
+    private String writer;
 }
