@@ -37,12 +37,16 @@ public class PaymentService {
 	
     public Payment savePayment(PaymentDTO dto) {
     	
-        Post post = postRepository.findById(dto.getPost_id()).get();
-        User user = userRepository.findById(dto.getUser_id()).get();
+//        Post post = postRepository.findById(dto.getPost_id()).get();
+//        User user = userRepository.findById(dto.getUser_id()).get();
+        User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
         
         Payment payment = new Payment();
-        payment.setPost(post);
+//        payment.setPost(post);
         payment.setUser(user);
+        payment.setDeposit(dto.getDeposit());
+        payment.setPaytype("kakaopay");
+        
         return paymentRepository.save(payment);
     }
     

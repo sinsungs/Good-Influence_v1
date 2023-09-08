@@ -48,10 +48,12 @@ public class User {
 	
 	private String oauth;
 	
+	private Long amount;
+	
 	@CreationTimestamp // 시간이 자동 입력
 	private Timestamp createDate;
 	
-	private int experience;
+	private Long experience;
 	
     @OneToMany(mappedBy = "user")
     private List<MeetUser> meetUser = new ArrayList<>();

@@ -28,13 +28,17 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long payid;
 	
+	private int deposit;
+	
+	private String paytype;
+	
     @ManyToOne // Payment와 User는 N:1 관계
     @JoinColumn(name = "user_id") // 외래키를 가리킬 컬럼 이름 지정
     private User user;
 
-    @OneToOne // Payment와 Post는 1:1 관계
-    @JoinColumn(name = "post_id") // 외래키를 가리킬 컬럼 이름 지정
-    private Post post;
+//    @OneToOne // Payment와 Post는 1:1 관계
+//    @JoinColumn(name = "post_id") // 외래키를 가리킬 컬럼 이름 지정
+//    private Post post;
 
 	@CreationTimestamp // 시간이 자동 입력
     private Timestamp paymentDate;

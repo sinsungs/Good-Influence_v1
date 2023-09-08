@@ -14,7 +14,8 @@ import lombok.ToString;
 public class PaymentDTO {
 	
 //    private Long payid;
-    private Long post_id;
-    private Long user_id;
+//    private Long post_id;
+    private String email;
+    private int deposit;
     
 }
