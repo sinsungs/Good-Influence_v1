@@ -36,7 +36,7 @@ public class SecurityConfig {
 				.authorizeRequests()				// 요청에 대한 권한 설정 시작
 //				.antMatchers("/**").permitAll()   	// 모든 경로에 대한 접근 허용
 				.antMatchers("/user/join","/user/login","/user/jwtlogin").permitAll()   // 회원가입 , 로그인 전체 허용
-				.antMatchers(HttpMethod.POST, "/**").authenticated()  
+//				.antMatchers(HttpMethod.POST, "/**").authenticated()  
 				// authenticated란 인증된 사용자에게만 접근을 허용 , antMatchers랑 같이사용 
 				
 //			    .antMatchers("/admin/**").hasRole("ADMIN") // ADMIN 권한만 접근 가능

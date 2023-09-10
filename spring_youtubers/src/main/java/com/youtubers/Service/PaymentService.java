@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import com.youtubers.dto.KakaoApproveResponse;
 import com.youtubers.dto.KakaoReadyResponse;
 import com.youtubers.dto.PaymentDTO;
+import com.youtubers.entity.Influencer;
 import com.youtubers.entity.Payment;
 import com.youtubers.entity.Post;
 import com.youtubers.entity.User;
@@ -35,20 +36,26 @@ public class PaymentService {
 	static final String admin_Key = "12b3220cbea8b0c831b8e89749e396ec";
 	private KakaoReadyResponse kakaoReady;
 	
+	
+	
     public Payment savePayment(PaymentDTO dto) {
     	
-//        Post post = postRepository.findById(dto.getPost_id()).get();
-//        User user = userRepository.findById(dto.getUser_id()).get();
         User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
+        
+        user.setAmount(user.getAmount() + dto.getDeposit() );
+        
+        User depositUser = userRepository.save(user);
+        
         
         Payment payment = new Payment();
 //        payment.setPost(post);
-        payment.setUser(user);
+        payment.setUser(depositUser);
         payment.setDeposit(dto.getDeposit());
         payment.setPaytype("kakaopay");
         
         return paymentRepository.save(payment);
     }
+    
     
     public String kakaoPayReady() {
     	

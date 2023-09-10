@@ -79,6 +79,8 @@ public class UserController {
 	@GetMapping("/auth/kakao/callback")
 	public String kakaoCallback(String code) {
 		
+		log.info(code);
+		
 		// 토큰을 받아오기위해 POST 요청 
 		// POST 방식으로 key=value 데이터 요청 
 		RestTemplate rt = new RestTemplate();
@@ -172,9 +174,9 @@ public class UserController {
     		userService.KakaoTest(kakaoProfile);
         }
         	// 로그인 처리 
-        String jwt = userService.jwtLogin(kakaoProfile.getKakao_account().getEmail(), "");
+        String jwt = userService.jwtLogin(kakaoProfile.getKakao_account().getEmail(), "examplePassword");
         log.info(jwt);
 		
-		return jwt;
+		return jwt ;
 	}
 }

@@ -71,6 +71,7 @@ public class UserService {
 				.password(encoder.encode(dto.getPassword()))
 				.email(dto.getEmail())
 				.role(RoleType.USER)
+				.oauth("local")
 				.build();
 		
         userRepository.save(user);
