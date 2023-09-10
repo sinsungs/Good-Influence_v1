@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import kakao_login_button from '../img/kakao_login_button.png';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   // const [username, setUsername] = useState('');
   // const [password, setPassword] = useState('');
   // const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-  const [jwtToken, setJwtToken] = useState('');
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,22 +23,18 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // POST 요청을 보낼 서버의 엔드포인트 URL을 입력합니다.
+    // 이 로직은 일반 로그인 로직이고 LoginHandeler.js 에서 카카오 로그인 jwt 처리합니다.
     const serverURL = '/user/jwtlogin';
 
-    // formData를 서버로 전송합니다.
     axios.post(serverURL, formData)
       .then((response) => {
         console.log(response.data); // 서버 응답 확인
-        setJwtToken(response.data);
-
-        // Axios의 설정을 통해 JWT 토큰을 헤더에 저장합니다.
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data}`;
 
         // 요청이 성공하면 서버로부터 받은 JWT 토큰을 쿠키에 저장합니다.
         document.cookie = `jwtToken=${response.data};`;
-        
 
+        // navigate를 사용하여 페이지 이동
+        navigate('/meeting');
       })
       .catch((error) => {
         console.error(error); // 오류 처리

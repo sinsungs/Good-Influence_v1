@@ -3,8 +3,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import kakao_login_button from '../img/kakao_login_button.png';
 import kakao_payment_button from '../img/kakao_payment_button.png';
+import { useNavigate } from 'react-router-dom';
+import {useState, useEffect} from 'react';
 
 function Header() {
+
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 저장하는 상태 변수
 
   const handleKakaoPaymentClick = () => {
     // Replace 'http://localhost:8080/payment/ready' with the correct URL for your payment endpoint
@@ -18,12 +23,28 @@ function Header() {
         // Redirect to the payment page, if required
         // window.location.href = paymentEndpoint;
         window.open(response.data, '_blank');
+
+          // // navigate를 사용하여 페이지 이동
+          // navigate('/meeting');
       })
       .catch(error => {
         // Handle errors, if necessary
         console.error('Error making payment request:', error);
       });
   };
+
+  useEffect(() => {
+    // 쿠키에서 JWT를 가져오는 로직을 추가합니다.
+    const jwtFromCookie = document.cookie ; // 예시: 쿠키에서 JWT를 가져오는 함수
+
+    console.log(jwtFromCookie)
+    // JWT가 존재하면 로그인 상태를 true로 설정합니다.
+    if (jwtFromCookie) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   return (
     <header>
@@ -34,23 +55,39 @@ function Header() {
         </div>
 
         <div>
-          {/* <button class="mypage-button">내 정보</button> */}
-
-          {/* <Link to="/mypage"><button class="login-button">마이페이지</button></Link> */}
-          <Link to="/join"><button class="login-button">회원가입</button></Link>
-          <Link to="/login"><button class="login-button">로그인</button></Link>
-          
-          <button class="login-button">SNS 인증</button>        
-        </div>
-
-        {/* <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
-        <img src={kakao_login_button} alt='kakao_image' /></a>
-        <a href="http://localhost:8080/payment/ready">
-        <img src={kakao_payment_button} alt='kakao_payment' /></a> */}
-
         {/* <button onClick={handleKakaoPaymentClick}>
           <img src={kakao_payment_button} alt='kakao_payment' />
         </button> */}
+          {/* <button class="mypage-button">내 정보</button> */}
+
+          {/* <Link to="/mypage"><button class="login-button">마이페이지</button></Link> */}
+          {/* <Link to="/join"><button class="login-button">회원가입</button></Link>
+          <Link to="/login"><button class="login-button">로그인</button></Link>
+          
+          <button class="login-button">SNS 인증</button>         */}
+
+{isLoggedIn ? (
+            <>
+              {/* <button onClick={handleLogout}>로그아웃</button> */}
+              <Link to="/profile">프로필</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/join"><button className="login-button">회원가입</button></Link>
+              <Link to="/login"><button className="login-button">로그인</button></Link>
+              <button className="login-button">SNS 인증</button>
+            </>
+          )}
+        </div>
+
+
+
+        {/* <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:8080/auth/kakao/callback">
+        <img src={kakao_login_button} alt='kakao_image' /></a> */}
+        {/* <a href="http://localhost:8080/payment/ready">
+        <img src={kakao_payment_button} alt='kakao_payment' /></a> */}
+
+
         {/* <form method="post" action="/kakaoPay">
         <button type="button">카카오페이로 결제하기</button>
         </form> */}
