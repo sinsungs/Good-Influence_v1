@@ -10,6 +10,7 @@ function Header() {
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 저장하는 상태 변수
+  const [userProfile, setUserProfile] = useState(null);
 
   const handleKakaoPaymentClick = () => {
     // Replace 'http://localhost:8080/payment/ready' with the correct URL for your payment endpoint
@@ -39,8 +40,27 @@ function Header() {
 
     console.log(jwtFromCookie)
     // JWT가 존재하면 로그인 상태를 true로 설정합니다.
+
     if (jwtFromCookie) {
       setIsLoggedIn(true);
+
+      const headers = {
+        'Authorization': `Bearer ${jwtFromCookie}`, // JWT 토큰을 'Bearer' 스키마와 함께 보냅니다.
+        'Content-Type': 'application/json', // 요청의 컨텐츠 타입을 지정할 수 있습니다.
+      };
+
+      // 사용자 프로필 정보를 가져오는 API 호출
+      axios.post('/user/profile', { headers })
+        .then(response => {
+          setUserProfile(response.data); // 프로필 정보를 상태 변수에 저장
+          console.log(userProfile);
+
+        })
+        .catch(error => {
+          console.error('Error fetching user profile:', error);
+        });
+
+
     } else {
       setIsLoggedIn(false);
     }
@@ -70,6 +90,7 @@ function Header() {
             <>
               {/* <button onClick={handleLogout}>로그아웃</button> */}
               <Link to="/profile">프로필</Link>
+              <Link to="/profile">{userProfile ? userProfile.name : '프로필'}</Link>
             </>
           ) : (
             <>

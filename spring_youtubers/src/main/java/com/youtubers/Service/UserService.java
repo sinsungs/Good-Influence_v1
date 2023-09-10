@@ -1,13 +1,12 @@
 package com.youtubers.Service;
 
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.youtubers.dto.ProfileDTO;
 import com.youtubers.dto.UserDTO;
 import com.youtubers.entity.KakaoProfile;
 import com.youtubers.entity.RoleType;
@@ -130,6 +129,8 @@ public class UserService {
 		return user;
 		
 	}
+
+
 	
 
 }

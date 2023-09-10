@@ -2,9 +2,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import kakao_login_button from '../img/kakao_login_button.png';
+import { useNavigate } from 'react-router-dom';
 
 
 function Join() {
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -27,6 +30,10 @@ function Join() {
     axios.post(serverURL, formData)
       .then((response) => {
         console.log(response.data); // 서버 응답 확인
+        alert(response.data)
+      // navigate를 사용하여 페이지 이동
+      navigate('/meeting');
+
       })
       .catch((error) => {
         console.error(error); // 오류 처리

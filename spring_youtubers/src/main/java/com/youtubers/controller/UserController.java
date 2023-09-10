@@ -9,13 +9,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -72,6 +70,19 @@ public class UserController {
 //		}
 		
 		return ResponseEntity.ok(principal);
+	}
+	
+	// 프로필 정보 
+	@PostMapping("/user/profile")
+	public ResponseEntity<?> Profile(@RequestBody Authentication authentication){
+		
+    	System.out.println("정보" + authentication.getName());
+    	
+//    	dto.setWriter(authentication.getName());
+    	
+    	User user = userService.회원찾기(authentication.getName());
+        
+        return ResponseEntity.ok(user);
 	}
 	
 	
