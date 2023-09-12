@@ -71,6 +71,9 @@ public class UserService {
 				.email(dto.getEmail())
 				.role(RoleType.USER)
 				.oauth("local")
+				.amount(0)
+				.experience(0)
+				.sns("default")
 				.build();
 		
         userRepository.save(user);
@@ -109,6 +112,9 @@ public class UserService {
 				.password("examplePassword")
 				.role(RoleType.USER)
 				.oauth("kakao")
+				.amount(0)
+				.experience(0)
+				.sns("default")
 				.build();
 		
 		userRepository.save(user);

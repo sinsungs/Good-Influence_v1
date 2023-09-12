@@ -22,4 +22,12 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
 //	List<Object[]> getAllYoutubersWithWriters();
 	
 	List<Influencer> findByNameLike(String query);
+
+    @Query("SELECT COUNT(i) FROM Influencer i")
+    int countAllInfluencers();
+    
+    @Query("SELECT COUNT(i) FROM Influencer i WHERE i.category = '먹방'")
+    int countInfluencersByCategory();
+    
+    
 }
