@@ -28,6 +28,9 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
     
     @Query("SELECT COUNT(i) FROM Influencer i WHERE i.category = '먹방'")
     int countInfluencersByCategory();
+
+    @Query("SELECT COUNT(m) FROM Meet m")
+	int countMeet();
     
     
 }
