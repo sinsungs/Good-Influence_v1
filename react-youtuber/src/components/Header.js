@@ -10,7 +10,7 @@ function Header() {
 
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 저장하는 상태 변수
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState([]);
 
   const handleKakaoPaymentClick = () => {
     // Replace 'http://localhost:8080/payment/ready' with the correct URL for your payment endpoint
@@ -34,26 +34,36 @@ function Header() {
       });
   };
 
-  useEffect(() => {
-    // 쿠키에서 JWT를 가져오는 로직을 추가합니다.
-    const jwtFromCookie = document.cookie ; // 예시: 쿠키에서 JWT를 가져오는 함수
+  const handleLogout = () => {
+    
+  }
 
-    console.log(jwtFromCookie)
+  useEffect(() => {
+    // document.cookie에서 JWT 토큰 추출
+    const jwtCookie = document.cookie;
+
+    // JWT 토큰이 존재하면 추출
+    let jwtToken = null;
+    jwtToken = jwtCookie.trim().substring('jwtToken='.length);
+    console.log(jwtToken)
     // JWT가 존재하면 로그인 상태를 true로 설정합니다.
 
-    if (jwtFromCookie) {
+    if (jwtCookie) {
       setIsLoggedIn(true);
 
       const headers = {
-        'Authorization': `Bearer ${jwtFromCookie}`, // JWT 토큰을 'Bearer' 스키마와 함께 보냅니다.
+        'Authorization': `Bearer ${jwtToken}`, // JWT 토큰을 'Bearer' 스키마와 함께 보냅니다.
         'Content-Type': 'application/json', // 요청의 컨텐츠 타입을 지정할 수 있습니다.
       };
 
       // 사용자 프로필 정보를 가져오는 API 호출
-      axios.post('/user/profile', { headers })
+      axios.post('/user/profile', {}, { headers })
         .then(response => {
-          setUserProfile(response.data); // 프로필 정보를 상태 변수에 저장
-          console.log(userProfile);
+          // setUserProfile(response.data); // 프로필 정보를 상태 변수에 저장
+          // console(userProfile.username);
+          setUserProfile(response.data);
+          // console.log(userProfile.username)
+          console.log(response.data);
 
         })
         .catch(error => {
@@ -88,12 +98,16 @@ function Header() {
 
 {isLoggedIn ? (
             <>
-              {/* <button onClick={handleLogout}>로그아웃</button> */}
-              <Link to="/profile">프로필</Link>
-              <Link to="/profile">{userProfile ? userProfile.name : '프로필'}</Link>
+              <button onClick={handleLogout}>로그아웃</button>
+              <Link to="/profile">프로필보기</Link><br/>
+              {/* <Link to="/profile"></Link> */}
+              닉네임 : {userProfile.username}<br/>
+              보유금 : {userProfile.amount}<br/>
+              경험치 : {userProfile.experience}
             </>
           ) : (
             <>
+              <Link to="/admin"><button className="login-button">관리자</button></Link>
               <Link to="/join"><button className="login-button">회원가입</button></Link>
               <Link to="/login"><button className="login-button">로그인</button></Link>
               <button className="login-button">SNS 인증</button>

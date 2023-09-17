@@ -17,8 +17,13 @@ public class InfluencerStatisticsDTO {
     private int influenceCount;
     private int categoryCount;
     private int postCount;
+    private int meetCount;
+    private int meetUserCount;
+    private int totalDeposit;
+    private Double totalDepositToday;
+    
     private int ranking;
-
+    
 
     // Constructors, getters, and setters
 }

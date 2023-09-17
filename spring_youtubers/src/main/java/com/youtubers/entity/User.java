@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity // 테이블 생성 효과
-public class User {
+public class User extends BaseEntity {
 
 	@Id // PK
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // autoincrement 
@@ -48,12 +48,14 @@ public class User {
 	
 	private String oauth;
 	
-	private Long amount;
+	private int amount;
 	
-	@CreationTimestamp // 시간이 자동 입력
-	private Timestamp createDate;
+//	@CreationTimestamp // 시간이 자동 입력
+//	private Timestamp createDate;
 	
-	private Long experience;
+	private int experience;
+	
+	private String sns;
 	
     @OneToMany(mappedBy = "user")
     private List<MeetUser> meetUser = new ArrayList<>();

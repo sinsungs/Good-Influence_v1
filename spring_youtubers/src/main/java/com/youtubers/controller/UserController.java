@@ -35,8 +35,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	// 회원 가입
 	@PostMapping("/user/join")
@@ -74,7 +73,7 @@ public class UserController {
 	
 	// 프로필 정보 
 	@PostMapping("/user/profile")
-	public ResponseEntity<?> Profile(@RequestBody Authentication authentication){
+	public ResponseEntity<?> Profile(Authentication authentication){
 		
     	System.out.println("정보" + authentication.getName());
     	

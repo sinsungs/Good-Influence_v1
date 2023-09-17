@@ -21,6 +21,7 @@ import Meeting from './pages/Meeting';
 import Quill from './pages/Quill';
 import Banner from './components/Banner';
 import Category from './components/Category';
+import Admin from './pages/Admin'
 
 import KakaoLoginHandeler from './pages/KakaoLoginHandeler'
 import InfluencerPost from './pages/InfluencerPost';
@@ -70,6 +71,7 @@ function App() {
           <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/join" element={<Join/>}/>
           <Route path="/youtuber" element={<Youtuber/>}/>
+          <Route path="/admin" element={<Admin/>}/>
 
 
           {/* <Route exact path="/" component={YoutuberList} /> */}

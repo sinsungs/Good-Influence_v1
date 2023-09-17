@@ -1,6 +1,5 @@
 package com.youtubers.entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meet{
+public class Meet extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +27,15 @@ public class Meet{
 	
 	private String title;
 	private String content;	
-    private String startTime;
+	
     private int maxPlayers;
     private int currentPlayers;
+    
     private String region;
     private String result;
-
+    
+//	@CreationTimestamp // 시간이 자동 입력
+//	private Timestamp createDate;
     
     @OneToMany(mappedBy = "meet")
     private List<MeetUser> meetUser = new ArrayList<>();

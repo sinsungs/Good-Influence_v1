@@ -60,7 +60,6 @@ public class MeetService {
         if (meet != null) {
             meet.setTitle(dto.getTitle());
             meet.setContent(dto.getContent());
-            meet.setStartTime(dto.getStartTime());
             meet.setMaxPlayers(dto.getMaxPlayers());
             meet.setCurrentPlayers(dto.getCurrentPlayers());
             meet.setRegion(dto.getRegion());
@@ -95,7 +94,6 @@ public class MeetService {
         Meet meet = Meet.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .startTime(dto.getStartTime())
                 .maxPlayers(dto.getMaxPlayers())
                 .currentPlayers(dto.getCurrentPlayers())
                 .region(dto.getRegion())
@@ -111,7 +109,6 @@ public class MeetService {
 				.meetid(meet.getMeetid())
 	            .title(meet.getTitle())
                 .content(meet.getContent())
-                .startTime(meet.getStartTime())
                 .maxPlayers(meet.getMaxPlayers())
                 .currentPlayers(meet.getCurrentPlayers())
                 .region(meet.getRegion())
