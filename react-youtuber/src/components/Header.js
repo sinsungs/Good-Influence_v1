@@ -85,9 +85,9 @@ function Header() {
         </div>
 
         <div>
-        {/* <button onClick={handleKakaoPaymentClick}>
+        <button onClick={handleKakaoPaymentClick}>
           <img src={kakao_payment_button} alt='kakao_payment' />
-        </button> */}
+        </button>
           {/* <button class="mypage-button">내 정보</button> */}
 
           {/* <Link to="/mypage"><button class="login-button">마이페이지</button></Link> */}
@@ -99,7 +99,7 @@ function Header() {
 {isLoggedIn ? (
             <>
               <button onClick={handleLogout}>로그아웃</button>
-              <Link to="/profile">프로필보기</Link><br/>
+              <Link to="/mypage">마이페이지</Link><br/>
               {/* <Link to="/profile"></Link> */}
               닉네임 : {userProfile.username}<br/>
               보유금 : {userProfile.amount}<br/>
@@ -171,7 +171,7 @@ function Header() {
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
               <p>인플루언서<br/>추천글 작성하기</p>
             </Link>
-            <Link to="/list">
+            <Link to="/ranking">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_fire.svg" />
               <p>HOT 인플루언서</p>
             </Link>

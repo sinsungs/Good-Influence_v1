@@ -28,7 +28,6 @@ function Admin() {
             axios.delete(`/admin/delete/${userId}`)
             .then(response => {
 
-                console.log('User deleted:', response.data);
                 alert('삭제 성공했습니다.')
                 window.location.reload();
                 
@@ -39,12 +38,31 @@ function Admin() {
         }   else {
             // User canceled, do nothing
         }
+        
         };
         
 
         const handleEditUser = (userId) => {
 
-            console.log('Edit user clicked for user ID:', userId);
+            const confirmDelete = window.confirm("유저를 인플루언서로 등록 하시겠습니까 ?");
+
+            if (confirmDelete) {
+                
+            axios.patch(`/admin/verify/${userId}`)
+            .then(response => {
+
+                alert('인플루언서로 설정 했습니다.')
+
+                window.location.reload();
+                
+            })
+            .catch(error => {
+                console.error('Error deleting user:', error);
+            });
+        }   else {
+            // User canceled, do nothing
+        }
+
         };
 
 
@@ -91,7 +109,8 @@ return (
                             </div> 
                             <div class="flex-item-right">
                                 <div class="full">
-                                <button onClick={() => handleEditUser(user.id)}>수정</button>
+                                <span>{user.sns}</span><br/>
+                                <button onClick={() => handleEditUser(user.id)}>인증</button>
                                 <button onClick={() => handleDeleteUser(user.id)}>삭제</button>
                                 </div>
                             </div>
