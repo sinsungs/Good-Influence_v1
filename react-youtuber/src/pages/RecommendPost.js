@@ -1,7 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from './JwtTokenState';
+import { useNavigate } from 'react-router-dom';
 
-function InfluencerPost() {
+function RecommendPost() {
+
+  const navigate = useNavigate();
+
+  // Recoil을 사용하여 JWT 토큰을 가져옵니다
+  const jwtToken = useRecoilValue(tokenState); 
 
   // 모달창 State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,12 +73,17 @@ const handleSearchSubmit = async (e) => {
       thirdino: event.target.elements.thirdino.value,
     };
   
-    axios.post('/post/register', postData)
+    axios.post('/post/register', postData, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
+      },
+    })
       .then(response => {
 
         console.log('Server response:', response.data);
 
         alert('추천글 작성을 완료했습니다.', response.data);
+        navigate('/list');
 
         // window.location.href = '/list';
 
@@ -223,4 +236,4 @@ const handleInfluencerEdit = (field, influencer) => {
   );
 }
 
-export default InfluencerPost;
+export default RecommendPost;

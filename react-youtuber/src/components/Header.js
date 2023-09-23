@@ -81,7 +81,9 @@ function Header() {
       <div className='top'>
 
         <div>
+        <Link to="/meet">
           <h1>Good Influence 인플루언스</h1>
+        </Link>
         </div>
 
         <div>
@@ -110,7 +112,6 @@ function Header() {
               <Link to="/admin"><button className="login-button">관리자</button></Link>
               <Link to="/join"><button className="login-button">회원가입</button></Link>
               <Link to="/login"><button className="login-button">로그인</button></Link>
-              <button className="login-button">SNS 인증</button>
             </>
           )}
         </div>
@@ -128,38 +129,16 @@ function Header() {
         </form> */}
       </div>
 
-      
-
-      {/* <div className='bottom'>
-
-<nav>
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
-      <li>
-        <Link to="/contact">Contact</Link>
-      </li>
-    </ul>
-  </nav>
-
-</div> */}
-
-
-
       <div className='center'>
         <div class="explore--wrapper">
 
           <div class="explore--item">
 
-            <Link to="/meeting">
+            <Link to="/meet">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_heart.svg" />
               <p>인플루언서<br/>소셜 모임</p>
             </Link>
-            <Link to="/youtuber">
+            <Link to="/influencer">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_earlybird.svg" />
               <p>인플루언서<br/>둘러보기</p>
             </Link>
@@ -171,20 +150,14 @@ function Header() {
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
               <p>인플루언서<br/>추천글 작성하기</p>
             </Link>
-            <Link to="/ranking">
+            <Link to="/rank">
               <img src="https://plab-football.s3.amazonaws.com/static/img/explore_fire.svg" />
               <p>HOT 인플루언서</p>
             </Link>
 
-
           </div>
         </div>
-
       </div>
-
-
-
-
 
     </header>
   );

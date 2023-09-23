@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import kakao_login_button from '../img/kakao_login_button.png';
 import { useNavigate } from 'react-router-dom';
+import { atom } from 'recoil';
 
 function Login() {
   // const [username, setUsername] = useState('');

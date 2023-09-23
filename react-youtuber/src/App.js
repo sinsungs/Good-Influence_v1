@@ -1,7 +1,3 @@
-
-// import PostList from './PostList';
-// import PostDetail from './PostDetail';
-// import NotFound from './NotFound';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import React, {useState, useEffect} from 'react';
@@ -9,23 +5,23 @@ import axios from 'axios';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import YoutuberCreate from './pages/YoutuberCreate';
-import Youtuber from './pages/Youtuber';
+import Banner from './components/Banner';
+import Category from './components/Category';
+
+import Meet from './pages/Meeting';
+import Influencer from './pages/Influencer';
+import RecommendPost from './pages/RecommendPost';
+import RecommendList from './pages/RecommendList';
+import Ranking from './pages/Ranking';
 
 import Join from './pages/Join';
 import Login from './pages/Login';
 import MyPage from './pages/MyPage';
-import Meeting from './pages/Meeting';
+import KakaoLoginHandeler from './pages/KakaoLoginHandeler'
+
 import Quill from './pages/Quill';
-import Banner from './components/Banner';
-import Category from './components/Category';
 import Admin from './pages/Admin'
 
-import KakaoLoginHandeler from './pages/KakaoLoginHandeler'
-import InfluencerPost from './pages/InfluencerPost';
-import InfluencerList from './pages/InfluencerList';
-
-import Ranking from './pages/Ranking';
 
 function App() {
 
@@ -60,19 +56,22 @@ function App() {
 
 
         <Routes>
-          <Route path="/login/oauth2/callback/kakao" element={<KakaoLoginHandeler />} 
-  />
-          <Route path="/post" element={<InfluencerPost/>}/>
-          <Route path="/list" element={<InfluencerList/>}/>
 
+          <Route path="/meet" element={<Meet/>}/>
+          <Route path="/Influencer" element={<Influencer/>}/>
+          <Route path="/post" element={<RecommendPost/>}/>
+          <Route path="/list" element={<RecommendList/>}/>
+          <Route path="/rank" element={<Ranking/>}/>
+          
           <Route path="/quill" element={<Quill/>}/>
-          <Route path="/meeting" element={<Meeting/>}/>
+
           <Route path="/login" element={<Login/>}/>
           <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/join" element={<Join/>}/>
-          <Route path="/youtuber" element={<Youtuber/>}/>
+
           <Route path="/admin" element={<Admin/>}/>
-          <Route path="/ranking" element={<Ranking/>}/>
+
+          <Route path="/login/oauth2/callback/kakao" element={<KakaoLoginHandeler />} />
 
         </Routes>
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 import data from '../data/data.js';
 import React, {useState, useEffect} from 'react';
 
-function YoutuberList() {
+function RecommendList() {
 
   const [Influencer, setInfluencer] = useState([]);
 
@@ -72,4 +72,4 @@ function YoutuberList() {
   );
 }
 
-export default YoutuberList;
+export default RecommendList;
