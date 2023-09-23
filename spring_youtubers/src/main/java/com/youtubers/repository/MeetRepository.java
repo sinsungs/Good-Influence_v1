@@ -9,4 +9,7 @@ public interface MeetRepository extends JpaRepository<Meet, Long> {
 
     @Query("SELECT COUNT(m) FROM Meet m")
 	int countMeet();
+
+    @Query("SELECT COUNT(mu) FROM MeetUser mu")
+	int meetRank();
 }

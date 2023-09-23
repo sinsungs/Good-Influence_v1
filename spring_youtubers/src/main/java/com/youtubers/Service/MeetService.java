@@ -98,6 +98,7 @@ public class MeetService {
                 .currentPlayers(dto.getCurrentPlayers())
                 .region(dto.getRegion())
                 .result(dto.getResult())
+                .meettime(dto.getMeettime())
                 .build();
 		
 		return meet;
@@ -113,6 +114,7 @@ public class MeetService {
                 .currentPlayers(meet.getCurrentPlayers())
                 .region(meet.getRegion())
                 .result(meet.getResult())
+                .meettime(meet.getMeettime())
 				.build();
 		
 		return meetDTO;

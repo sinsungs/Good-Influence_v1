@@ -25,7 +25,7 @@ public class Reward {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // autoincrement 
 	private Long rewardid;
 	
-	private String reardname;
+	private String rewardname;
 	
 	private Long activityscore;
 	

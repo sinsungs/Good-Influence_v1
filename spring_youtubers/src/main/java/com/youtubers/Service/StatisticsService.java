@@ -1,11 +1,15 @@
 package com.youtubers.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.youtubers.entity.User;
 import com.youtubers.repository.InfluencerRepository;
 import com.youtubers.repository.MeetRepository;
 import com.youtubers.repository.MeetUserRepository;
 import com.youtubers.repository.PaymentRepository;
+import com.youtubers.repository.PostInfluencerRepository;
 import com.youtubers.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,11 +22,28 @@ public class StatisticsService {
 	
 	private final InfluencerRepository influencerRepositoy;
 	private final PostRepository postRepository;
+	private final PostInfluencerRepository postInfluencerRepository;
 	private final MeetRepository meetRepository;
 	private final MeetUserRepository meetuserRepository;
 	private final PaymentRepository paymentRepository;
 	
 
+	public List<User> meetRank() {
+		// TODO Auto-generated method stub
+		return meetuserRepository.findTop5UsersWithMostMeets();
+	}
+	
+	public int recommnedRank() {
+		// TODO Auto-generated method stub
+		return postInfluencerRepository.recommnedRank();
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	public int influenceCount() {
 		// TODO Auto-generated method stub
@@ -57,6 +78,18 @@ public class StatisticsService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 //	public Double  totalDepositToday() {
 //		// TODO Auto-generated method stub

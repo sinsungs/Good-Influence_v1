@@ -15,6 +15,13 @@ public interface MeetUserRepository extends JpaRepository<MeetUser, Long> {
 	
     @Query("SELECT COUNT(mu) FROM MeetUser mu")
 	int countMeetUser();
+    
+    
+    @Query("SELECT mu.user FROM MeetUser mu " +
+            "GROUP BY mu.user " +
+            "ORDER BY COUNT(mu.meet) DESC")
+     List<User> findTop5UsersWithMostMeets();
+
 
 //	List<MeetUser> findByUserUserId(Long userId);
 

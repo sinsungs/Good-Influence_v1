@@ -1,5 +1,7 @@
 package com.youtubers.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,10 +18,10 @@ public class MeetDTO {
     private Long meetid;
     private String title;
     private String content;
-    private String startTime;
     private int maxPlayers;
     private int currentPlayers;
     private String region;
     private String result;
     private String writer;
+	private LocalDateTime meettime;
 }

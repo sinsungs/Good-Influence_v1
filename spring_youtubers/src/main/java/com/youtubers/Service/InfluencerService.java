@@ -33,18 +33,10 @@ public class InfluencerService{
     private String uploadDir;
 	
 // 인플루언서 등록 
-//	public Influencer createInfluencer(InfluencerDTO dto,  MultipartFile imageFile) throws IOException {
-	public Influencer createInfluencer(InfluencerDTO dto) {
-		
-//        if (imageFile != null && !imageFile.isEmpty()) {
-//        	
-//	   		 String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
-//	         Path filePath = Paths.get(uploadDir, fileName);
-//	         Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-//	         dto.setImage_url(filePath.toString()); // 이미지 파일 경로를 엔티티에 저장
-//        }
+	public Influencer createInfluencer(InfluencerDTO dto, String uploadedFileName) {
 		
 		Influencer influencer = dtoToEntity(dto);
+		influencer.setImageUrl(uploadedFileName);
 		
 		return influencerRepository.save(influencer); 
 		
@@ -103,8 +95,6 @@ public class InfluencerService{
     
     // Mapper 정리 
 	Influencer dtoToEntity(InfluencerDTO dto) {
-//		Member member = Member.builder()
-//				.email(dto.getWriterEmail()).build();
 
 		Influencer influencer = Influencer.builder()
 				.ino(dto.getIno())
@@ -114,13 +104,12 @@ public class InfluencerService{
 				.name(dto.getName())
 				.sns(dto.getSns())
 				.category(dto.getCategory())
-//				.writer(member)
 				.build();
 		
 		return influencer;
 	}
 	
-//	InfluencerDTO entityToDTO(Influencer youtuber, Member member) {
+
 	InfluencerDTO entityToDTO(Influencer influencer) {
 		
 		InfluencerDTO influencerDTO = InfluencerDTO.builder()
@@ -131,8 +120,7 @@ public class InfluencerService{
 	            .likes(influencer.getLikes())
 	            .sns(influencer.getSns())
 	            .category(influencer.getCategory())
-//				.writerEmail(member.getEmail())
-//				.writerName(member.getName())
+	            .image_url(influencer.getImageUrl())
 	            
 				.build();
 		

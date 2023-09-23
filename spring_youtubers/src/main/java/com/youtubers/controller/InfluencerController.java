@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.InfluencerService;
 import com.youtubers.dto.InfluencerDTO;
@@ -30,11 +32,12 @@ public class InfluencerController {
     /* API 버전 ( @RequestBody 사용 )*/
     
 	@PostMapping("/register")
-//    public ResponseEntity<Influencer> createYoutuber(@RequestBody InfluencerDTO dto,  @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-	public ResponseEntity<Influencer> createInfluencer(@RequestBody InfluencerDTO dto) {
+	public ResponseEntity<Influencer> createInfluencer( @RequestPart InfluencerDTO dto,  @RequestPart("file") MultipartFile file) {
 		
-//        Influencer createdInfluencer = influencerService.createInfluencer(dto, imageFile);
-        Influencer createdInfluencer = influencerService.createInfluencer(dto);
+        // 파일 업로드 로직 추가
+        String uploadedFileName = "./img/" + file.getOriginalFilename();
+        
+        Influencer createdInfluencer = influencerService.createInfluencer(dto, uploadedFileName);
         
         return ResponseEntity.ok(createdInfluencer);
     }
@@ -43,6 +46,7 @@ public class InfluencerController {
 	@GetMapping("/list")
 	public ResponseEntity<List<InfluencerDTO>> listInfluencer() {
 		
+
 		List<InfluencerDTO> listInfluencer = influencerService.listInfluencer();
 		
 		return ResponseEntity.ok(listInfluencer);

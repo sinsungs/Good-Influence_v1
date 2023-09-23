@@ -42,6 +42,15 @@ public class AdminService {
         userRepository.deleteById(userId);
         
     }
+    
+	public void updateUserById(Long userId) {
+
+		 User user = userRepository.findById(userId).orElse(null);
+		 user.setSns("influence");
+		 
+		 userRepository.save(user); 
+		
+	}
 
 
 
@@ -54,11 +63,13 @@ public class AdminService {
 	            .password(user.getPassword())
 	            .username(user.getUsername())
 	            .regdate(user.getRegDate())
-	            
+	            .sns(user.getSns())
 				.build();
 		
 		return userDTO;
 		
 	}
+
+
 
 }

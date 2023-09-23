@@ -1,13 +1,16 @@
 package com.youtubers.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.youtubers.Service.AdminService;
 import com.youtubers.Service.StatisticsService;
 import com.youtubers.dto.InfluencerStatisticsDTO;
+import com.youtubers.dto.RankDTO;
+import com.youtubers.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +22,30 @@ import lombok.extern.log4j.Log4j2;
 public class StatisticsController {
 	
 	private final StatisticsService statisticsService;
+	
+	// 미팅과 추천 많이 받은 순위로 매기기 
+	@GetMapping("/ranking")
+	public ResponseEntity<?> influencerRank() {
+		
+		// 미팅 순위
+		List<User> meetRank = statisticsService.meetRank();
+		
+		// 추천 순위 
+		int recommnedRank = statisticsService.recommnedRank();
+		
+		// 
+		
+        RankDTO dto = new RankDTO();
+        
+        dto.setMeetRank(meetRank);
+        dto.setRecommnedRank(recommnedRank);
+
+		
+		return ResponseEntity.ok(dto);
+		
+		
+	}
+	
 
 	@GetMapping("/influencer")
 	public ResponseEntity<?> influenceStatistics() {

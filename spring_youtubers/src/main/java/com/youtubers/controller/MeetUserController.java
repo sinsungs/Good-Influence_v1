@@ -26,13 +26,14 @@ public class MeetUserController {
 	
  
     
-    @PostMapping("/register")
-    public ResponseEntity<String> registerMeet(@RequestBody MeetUserDTO dto,  Authentication authentication) {
+    @PostMapping("/register/{id}")
+    public ResponseEntity<String> registerMeet(@PathVariable Long id, @RequestBody MeetUserDTO dto,  Authentication authentication) {
     	
 //    	MeetUser registerMeet ;
     	System.out.println("정보" + authentication.getName());
     	
     	dto.setEmail(authentication.getName());
+    	dto.setMeetid(id);
     	
     	String sss = meetuserService.registerMeet(dto);
         

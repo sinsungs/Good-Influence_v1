@@ -40,5 +40,7 @@ public class UserDTO {
 	private String email;
 	
 	private LocalDateTime regdate;
+	
+	private String sns;
 		
 }

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -45,6 +46,10 @@ public class Influencer {
     @OneToMany(mappedBy = "influencer")
     private List<PostInfluencer> postInfluencers = new ArrayList<>();
 
+    // 등록된 인플루언서 중 user 인증을 할 수 있다 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true) // User 엔티티와의 관계, nullable = true로 설정
+    private User user;
 	
     
 }
