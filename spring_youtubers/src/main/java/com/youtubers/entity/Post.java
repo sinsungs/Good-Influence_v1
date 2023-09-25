@@ -25,6 +25,8 @@ public class Post extends BaseEntity{
 	private String title;
 	private String content;	
 	
+	private String imageUrl; // 이미지 파일의 경로나 URL을 저장할 필드
+	
     @OneToMany(mappedBy = "post")
     private List<PostInfluencer> postYoutubers = new ArrayList<>();
 

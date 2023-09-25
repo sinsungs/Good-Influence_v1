@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.youtubers.entity.Influencer;
 import com.youtubers.entity.User;
 import com.youtubers.repository.InfluencerRepository;
 import com.youtubers.repository.MeetRepository;
@@ -28,21 +29,42 @@ public class StatisticsService {
 	private final PaymentRepository paymentRepository;
 	
 
-	public List<User> meetRank() {
-		// TODO Auto-generated method stub
-		return meetuserRepository.findTop5UsersWithMostMeets();
+	public List<User> findTop5UsersWithMostMeets() {
+
+		List<User> top5Users = meetuserRepository.findTop5UsersWithMostMeets();
+		
+		int limit = 5;
+		if (top5Users.size() > limit) {
+		    top5Users = top5Users.subList(0, limit);
+		}
+		
+		return top5Users;
 	}
+	
+	
+	public List<Influencer> findTop5UsersWithMostRecommend() {
+
+		List<Influencer> top5Influencers = postInfluencerRepository.findTop5UsersWithMostRecommend();
+		
+		int limit = 5;
+		if (top5Influencers.size() > limit) {
+			top5Influencers = top5Influencers.subList(0, limit);
+		}
+		
+		return top5Influencers;
+	}
+
+	
+	public int meetRank() {
+		// TODO Auto-generated method stub
+		return meetuserRepository.countMeetUser();
+	}
+	
 	
 	public int recommnedRank() {
 		// TODO Auto-generated method stub
 		return postInfluencerRepository.recommnedRank();
 	}
-	
-	
-	
-	
-	
-	
 	
 
 	public int influenceCount() {
@@ -78,6 +100,8 @@ public class StatisticsService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 
 

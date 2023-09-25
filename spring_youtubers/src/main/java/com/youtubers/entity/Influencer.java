@@ -43,8 +43,8 @@ public class Influencer {
 //	private Member writer;  // Member와 연관관계 지정
 	
 	
-    @OneToMany(mappedBy = "influencer")
-    private List<PostInfluencer> postInfluencers = new ArrayList<>();
+//    @OneToMany(mappedBy = "influencer")
+//    private List<PostInfluencer> postInfluencers = new ArrayList<>();
 
     // 등록된 인플루언서 중 user 인증을 할 수 있다 
     @ManyToOne

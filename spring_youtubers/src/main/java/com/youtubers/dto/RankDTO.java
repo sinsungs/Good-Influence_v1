@@ -2,6 +2,7 @@ package com.youtubers.dto;
 
 import java.util.List;
 
+import com.youtubers.entity.Influencer;
 import com.youtubers.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,11 @@ import lombok.ToString;
 public class RankDTO {
 	
 
-    private List<User> meetRank;
-    private int recommnedRank;
+
+//    private int meetRank;
+//    private int recommnedRank;
+	private List<User> meetRanks;
+    private List<Influencer> recommendRank;
 
     
 

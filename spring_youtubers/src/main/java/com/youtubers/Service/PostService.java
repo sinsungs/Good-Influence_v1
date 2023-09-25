@@ -1,85 +1,43 @@
 package com.youtubers.Service;
 
+import org.springframework.stereotype.Service;
+
 import com.youtubers.dto.PostRequestDTO;
+import com.youtubers.entity.Post;
+import com.youtubers.entity.User;
+import com.youtubers.repository.PostRepository;
+import com.youtubers.repository.UserRepository;
 
-public interface PostService {
-	
-	Long createPost(PostRequestDTO dto);
-	
-//	PostYoutuber getList();
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
-//	Post createPost(PostDTO dto);
+@Service
+@RequiredArgsConstructor
+@Log4j2
+public class PostService {
 	
-//	boolean addYouTubersToPost(Long postId, List<Long> youtuberIds);
-//	
-//	PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
-//	
-//	BoardDTO get(Long bno);
-//	
-//	void removeWithReplies(Long bno);
-//	
-//	void modify(BoardDTO boardDTO);
-	
+	private final PostRepository postRepository;
+	private final UserRepository userRepository;
 
-	
+    
 
-	
-	
-//    default Post dtoToEntity(PostRequestDTO dto) {
-//        Youtuber youtuber = Youtuber.builder()
-//                .yno(dto.getYno())
-//                .build();
-//
-//        Post post = Post.builder()
-//                .pno(dto.getPno())
-////                .title(dto.getTitle())
-////                .content(dto.getContent())
-//                .build();
-//
-//        PostYoutuber postYoutuber = PostYoutuber.builder()
-//                .post(post)
-//                .youtuber(youtuber)
-//                .build();
-//
-//        post.addPostYoutuber(postYoutuber);
-//
-//        return post;
-//    }
-//    
-//	
-//	default Board dtoToEntity(BoardDTO dto) {
-//		Member member = Member.builder()
-//				.email(dto.getWriterEmail()).build();
-//		
-//		Board board = Board.builder()
-//				.bno(dto.getBno())
-//				.title(dto.getTitle())
-//				.content(dto.getContent())
-//				.writer(member)
-//				.build();
-//		
-//		return board;
-//	}
-
-
-	
-//	
-//	default BoardDTO entityToDTO(Board board, Member member, Long replyCount) {
-//		
-//		BoardDTO boardDTO = BoardDTO.builder()
-//				.bno(board.getBno())
-//				.title(board.getTitle())
-//				.content(board.getContent())
-//				.regDate(board.getRegDate())
-//				.modDate(board.getModDate())
-//				.writerEmail(member.getEmail())
-//				.writerName(member.getName())
-//				.replyCount(replyCount.intValue())
-//				.build();
-//		
-//		return boardDTO;
-//		
-//	}
+    	public Long createPost(PostRequestDTO dto, String uploadedFileName) {
+    	
+    	User user = userRepository.findByEmail(dto.getWriter()).orElse(null);
+    	
+        Post post = new Post();
+        post.setTitle(dto.getTitle());
+        post.setContent(dto.getContent());
+        post.setImageUrl(uploadedFileName);
+        post.setUser(user);
+        
+        postRepository.save(post);
+        
+        Long postId = post.getPno();
+        
+        return postId;
+//        return postYoutuber;
+    }
+    
     
 }
-

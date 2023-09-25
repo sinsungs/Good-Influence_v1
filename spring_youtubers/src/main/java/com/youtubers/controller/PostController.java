@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.PostInfluencerService;
 import com.youtubers.Service.PostService;
+import com.youtubers.dto.InfluencerDTO;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
+import com.youtubers.entity.Influencer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,13 +30,17 @@ public class PostController {
     private final PostInfluencerService postInfluencerService;
     
     @PostMapping("/register")
-    public  ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO dto, Authentication authentication) {
+    public  ResponseEntity<PostResponseDTO> createPost(@RequestPart PostRequestDTO dto, @RequestPart("file") MultipartFile file, 
+    		Authentication authentication) {
     	
+        // 파일 업로드 로직 추가
+        String uploadedFileName = "./img/" + file.getOriginalFilename();
+        
     	System.out.println("정보" + authentication.getName());
     	
     	dto.setWriter(authentication.getName());
     	
-    	Long pno = postService.createPost(dto);
+    	Long pno = postService.createPost(dto, uploadedFileName);
     	
     	dto.setPno(pno);
     	
@@ -41,6 +49,7 @@ public class PostController {
         
         return ResponseEntity.ok(postResponseDTO);
     }
+    
     
     
     @GetMapping("/list")

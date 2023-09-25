@@ -57,8 +57,8 @@ public class User extends BaseEntity {
 	
 	private String sns;
 	
-    @OneToMany(mappedBy = "user")
-    private List<MeetUser> meetUser = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<MeetUser> meetUser = new ArrayList<>();
 	
     // Rank를 참조(조인)하는 부분 추가
 //    @ManyToOne

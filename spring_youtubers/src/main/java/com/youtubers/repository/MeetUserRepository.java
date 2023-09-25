@@ -13,7 +13,7 @@ public interface MeetUserRepository extends JpaRepository<MeetUser, Long> {
 	
 	boolean existsByUserAndMeet(User user, Meet meet);
 	
-    @Query("SELECT COUNT(mu) FROM MeetUser mu")
+    @Query("SELECT COUNT(mu.user) FROM MeetUser mu")
 	int countMeetUser();
     
     
@@ -21,6 +21,15 @@ public interface MeetUserRepository extends JpaRepository<MeetUser, Long> {
             "GROUP BY mu.user " +
             "ORDER BY COUNT(mu.meet) DESC")
      List<User> findTop5UsersWithMostMeets();
+    
+    
+//    @Query("SELECT mu FROM MeetUser mu " +
+//            "GROUP BY mu.user ")
+//     List<MeetUser> findTop5UsersWithMostMeets();
+    
+//    @Query("SELECT mu FROM MeetUser mu" +
+//          "ORDER BY COUNT(mu.meet) DESC")
+//     List<MeetUser> findTop5UsersWithMostMeets();
 
 
 //	List<MeetUser> findByUserUserId(Long userId);
