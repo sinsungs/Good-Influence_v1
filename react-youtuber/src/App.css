@@ -148,6 +148,13 @@ header .bottom {
 
 }
 
+.rank-container {
+  width : 100%;
+  /* height: 500px; */
+  background-color: #ffffff;
+}
+
+
 .search {
   height: 50px;
   width: 1300px;

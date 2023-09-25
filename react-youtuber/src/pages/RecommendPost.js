@@ -24,11 +24,15 @@ function RecommendPost() {
   const [secondino, setSecondino] = useState(null);
   const [thirdino, setThirdino] = useState(null);
 
+  // 이미지 State
+  const [file, setFile] = useState(null);
+  const [imagePath, setImagePath] = useState('');
 
-// 모달창 열기 Start 
-// const handleModalOpen = () => {
-//   setIsModalOpen(true);
-// };
+  const handleImageUpload = (event) => {
+    const selectedImage = event.target.files[0];
+    setFile(selectedImage);
+  };
+
 
 const handleModalOpen = (field) => {
   setSelectedField(field);
@@ -72,8 +76,13 @@ const handleSearchSubmit = async (e) => {
       secondino : event.target.elements.secondino.value,
       thirdino: event.target.elements.thirdino.value,
     };
-  
-    axios.post('/post/register', postData, {
+
+    const formData  = new FormData();
+
+    formData.append('dto', new Blob([JSON.stringify(postData)], { type: "application/json" }));
+    formData.append('file', file);
+
+    axios.post('/post/register', formData, {
       headers: {
         Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
       },
@@ -120,6 +129,7 @@ const handleInfluencerEdit = (field, influencer) => {
 
 
 
+
   return (
     
     <div className="App">
@@ -132,15 +142,25 @@ const handleInfluencerEdit = (field, influencer) => {
           <p>좋은 영향력을 가지고있는 인플루언서를 추천해주세요</p>
 
           <form onSubmit={handleSubmit}>
-              <label>제목</label>
+              <div>
+                <label htmlFor="image">배경 이미지:</label>
+                <input
+                  type="file"
+                  id="image"
+                  accept="image/*" // 이미지 파일만 업로드 가능하도록 설정
+                  onChange={handleImageUpload}
+                />
+              </div>
+
+              <label>게시글 제목</label>
               <input type="text" className="custom-input" name="title" placeholder="제목을 입력해주세요." />
               <div style={{ height: '30px' }}></div> {/* 마진을 통해 간격 추가 */}
 
-              <label>내용</label>
+              <label>추천 내용</label>
               <input type="text" className="custom-input" name="content" placeholder="내용을 입력해주세요." />
               <div style={{ height: '30px' }}></div> {/* 마진을 통해 간격 추가 */}
 
-              <label>인플루언서</label>
+              <label>추천 인플루언서</label>
               <p>* 인플루언서를 1명에서 3명까지 선택할 수 있습니다.</p>
               <input type="text" className="custom-input" name="ino" value={ino} onClick={() => handleModalOpen('ino')} placeholder="첫번째 인플루언서를 선택해주세요."   readOnly/>
               <div style={{ height: '30px' }}></div>
@@ -160,7 +180,6 @@ const handleInfluencerEdit = (field, influencer) => {
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
                 </div>
               </div>
-
 
               <button type="submit">작성하기</button>
           </form>

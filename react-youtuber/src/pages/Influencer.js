@@ -31,8 +31,8 @@ function Influencer() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [likes, setLikes] = useState(0);
+  
   const [file, setFile] = useState(null);
-
   const [imagePath, setImagePath] = useState('');
 
   const handleImageUpload = (event) => {
