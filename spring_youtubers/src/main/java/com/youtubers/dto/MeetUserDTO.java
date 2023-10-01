@@ -15,5 +15,6 @@ public class MeetUserDTO {
 	
     private Long meetid;
     private String email;
+    private int price;
 
 }

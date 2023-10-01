@@ -1,7 +1,5 @@
 package com.youtubers.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +11,7 @@ import com.youtubers.entity.MeetUser;
 import com.youtubers.entity.User;
 import com.youtubers.repository.MeetRepository;
 import com.youtubers.repository.MeetUserRepository;
+import com.youtubers.repository.OrdersRepository;
 import com.youtubers.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,12 +25,16 @@ public class MeetUserService {
 	private final UserRepository userRepository;
 	private final MeetRepository meetRepository;
 	private final MeetUserRepository meetUserRepository;
+	private final OrdersRepository ordersRepository;
 
 	@Transactional
     public String registerMeet(MeetUserDTO dto) {
     	
         User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
         Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
+        
+//        ordersRepository.save(null);
+        //주문내역 추가해야함 
         
         if (meetUserRepository.existsByUserAndMeet(user, meet)) {
             return "이미 참가한 모임입니다.";
@@ -67,27 +70,13 @@ public class MeetUserService {
         
     }
     
-//    public List<MeetUserDTO> getApplicationHistory(Long userId) {
-//    	
-//        List<MeetUser> applicationHistory = meetUserRepository.findByUserUserId(userId);
-//        List<MeetUserDTO> historyDTOs = new ArrayList<>();
-//
-//        for (MeetUser meetUser : applicationHistory) {
-//            MeetUserDTO dto = new MeetUserDTO();
-////            dto.setId(meetUser.getUmid());
-//            dto.setUserid(meetUser.getUser().getId());
-//            dto.setMeetid(meetUser.getMeet().getMeetid());
-//            // You can populate other fields as needed
-//            historyDTOs.add(dto);
-//        }
-//
-//        return historyDTOs;
-//    }
 
-	
 	    public String cancelApplication(Long applicationId) {
 	        // Find the application to cancel
 	        Optional<MeetUser> optionalMeetUser = meetUserRepository.findById(applicationId);
+	        
+//	        ordersRepository.save(null);
+	        //주문 취소 내역 추가해야함 
 	
 	        if (optionalMeetUser.isPresent()) {
 	            MeetUser meetUser = optionalMeetUser.get();

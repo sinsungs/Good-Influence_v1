@@ -71,20 +71,20 @@ public class UserController {
 		return ResponseEntity.ok(principal);
 	}
 	
-//	// 프로필 정보 
-//	@PostMapping("/user/profile")
-//	public ResponseEntity<?> Profile(Authentication authentication){
-//		
-//    	System.out.println("정보" + authentication.getName());
-//    	
-////    	dto.setWriter(authentication.getName());
-//    	
-//    	User user = userService.회원찾기(authentication.getName());
-//        
-//        return ResponseEntity.ok(user);
-//	}
-	
 	// 프로필 정보 
+	@PostMapping("/user/profile")
+	public ResponseEntity<?> Profile(Authentication authentication){
+		
+    	System.out.println("정보" + authentication.getName());
+    	
+//    	dto.setWriter(authentication.getName());
+    	
+    	User user = userService.회원찾기(authentication.getName());
+        
+        return ResponseEntity.ok(user);
+	}
+	
+	// 마이페이지 
 	@PostMapping("/user/mypage")
 	public ResponseEntity<?> Mypage(Authentication authentication){
 		

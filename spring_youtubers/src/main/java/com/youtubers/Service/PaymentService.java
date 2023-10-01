@@ -2,6 +2,7 @@ package com.youtubers.Service;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -57,13 +58,13 @@ public class PaymentService {
     }
     
     
-    public String kakaoPayReady() {
+    public String kakaoPayReady(Authentication authentication) {
     	
     	// 카카오페이 요청 양식
     	MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
         parameters.add("partner_order_id", "가맹점 주문 번호");
-        parameters.add("partner_user_id", "가맹점 회원 ID");
+        parameters.add("partner_user_id", authentication.getName());
         parameters.add("item_name", "상품명");
         parameters.add("quantity", "1");
         parameters.add("total_amount", "33000");
@@ -86,6 +87,8 @@ public class PaymentService {
         
         System.out.println(kakaoReady.getNext_redirect_pc_url());
         
+        kakaoReady.setPartner_user_id(authentication.getName());
+        
         return kakaoReady.getNext_redirect_pc_url();    	
     	
     }
@@ -98,7 +101,7 @@ public class PaymentService {
         parameters.add("tid", kakaoReady.getTid());
 //        parameters.add("tid", "T1234567890123456789");
         parameters.add("partner_order_id", "가맹점 주문 번호");
-        parameters.add("partner_user_id", "가맹점 회원 ID");
+        parameters.add("partner_user_id", kakaoReady.getPartner_user_id());
         parameters.add("pg_token", pgToken);
 
         // 파라미터, 헤더
@@ -111,6 +114,16 @@ public class PaymentService {
                 "https://kapi.kakao.com/v1/payment/approve",
                 requestEntity,
                 KakaoApproveResponse.class);
+        
+	      PaymentDTO dto = new PaymentDTO();
+	      
+	      dto.setDeposit(approveResponse.getAmount().getTotal());
+//	      paymentDTO.setEmail("rkdtlstjd123@naver.com");
+	  	  dto.setEmail(approveResponse.getPartner_user_id());
+	  	  log.info("유저아이디 : "+approveResponse.getPartner_user_id());
+	  	  
+	      
+	      savePayment(dto);
                 
         return approveResponse;    	
     	

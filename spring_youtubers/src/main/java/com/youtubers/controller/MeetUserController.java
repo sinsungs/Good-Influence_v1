@@ -30,10 +30,13 @@ public class MeetUserController {
     public ResponseEntity<String> registerMeet(@PathVariable Long id, @RequestBody MeetUserDTO dto,  Authentication authentication) {
     	
 //    	MeetUser registerMeet ;
-    	System.out.println("정보" + authentication.getName());
+    	System.out.println("결제금액" + dto.getPrice());
+    
     	
     	dto.setEmail(authentication.getName());
     	dto.setMeetid(id);
+    	
+    	dto.setPrice(dto.getPrice());
     	
     	String sss = meetuserService.registerMeet(dto);
         

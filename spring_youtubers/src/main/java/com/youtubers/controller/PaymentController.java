@@ -29,23 +29,23 @@ public class PaymentController {
 //    }
     
     @GetMapping("/ready")
-    public String readyToKakaoPay() {
+    public String readyToKakaoPay(Authentication authentication) {
 
-        return paymentService.kakaoPayReady();
+        return paymentService.kakaoPayReady(authentication);
     }
     
     @GetMapping("/success")
-    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken,  Authentication authentication) {
+    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken) {
 
         KakaoApproveResponse kakaoApprove = paymentService.ApproveResponse(pgToken);
         
-        PaymentDTO dto = new PaymentDTO();
-        
-        dto.setDeposit(kakaoApprove.getAmount().getTotal());
-//        paymentDTO.setEmail("rkdtlstjd123@naver.com");
-    	dto.setEmail(authentication.getName());
-        
-        paymentService.savePayment(dto);
+//        PaymentDTO dto = new PaymentDTO();
+//        
+//        dto.setDeposit(kakaoApprove.getAmount().getTotal());
+////        paymentDTO.setEmail("rkdtlstjd123@naver.com");
+//    	dto.setEmail(authentication.getName());
+//        
+//        paymentService.savePayment(dto);
 
         return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
     }
