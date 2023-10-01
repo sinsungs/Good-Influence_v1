@@ -3,8 +3,6 @@ import React, {useState, useEffect} from 'react';
 
 function MyPage() {
 
-
-  
   return (
     <div className="App">
       <div className='back'>

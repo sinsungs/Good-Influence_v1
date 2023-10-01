@@ -16,6 +16,12 @@ function Meeting() {
     const [isModalOpen, setIsModalOpen] = useState(false);
   
     const handleRectangleClick = () => {
+
+      if (!jwtToken) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
+  
       setIsModalOpen(true);
     };
 
@@ -43,6 +49,12 @@ function Meeting() {
   
     const handleSubmit = (event) => {
       event.preventDefault();
+
+      if (!jwtToken) {
+        // JWT 토큰이 없으면 메시지를 출력하고 POST 요청을 보내지 않음
+        alert('로그인이 필요합니다.');
+        return;
+      }
   
       // 엔티티 데이터를 생성하고 서버로 전송하는 로직을 작성하세요.
       const meetData = {
@@ -73,8 +85,17 @@ function Meeting() {
     };
 
     const registerMeet = (meetid) => {
+
+      if (!jwtToken) {
+        // JWT 토큰이 없으면 메시지를 출력하고 POST 요청을 보내지 않음
+        alert('로그인이 필요합니다.');
+        return;
+      }
     
-      axios.post(`/meeting/register/${meetid}`,{}, {
+      axios.post(`/meeting/register/${meetid}`,
+        {
+          price : 10000
+        }, {
         headers: {
           Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
         },

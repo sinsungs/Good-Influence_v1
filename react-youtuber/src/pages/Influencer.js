@@ -79,7 +79,7 @@ function Influencer() {
         // 요청에 성공하면 받아온 데이터를 상태로 설정합니다.
         console.log(response.data);
         setInfluencers(response.data);
-        setImagePath(response.data[4].image_url);
+        // setImagePath(response.data[4].image_url);
       })
       .catch(error => {
         // 오류 처리 로직을 작성하세요.
@@ -156,7 +156,9 @@ function Influencer() {
 
         {influencers.map((influencers) => (
           <div className="y-box" key={influencers.ino}>
-            <div className="y-box-header"><img src={imagePath} alt="s" />{influencers.name}</div>
+            {/* <div className="y-box-header"><img src={imagePath} alt="s" style={{ width: '100%', height: '150px' }}/></div> */}
+            <div className="y-box-header"><img src={influencers.image_url} alt="s" style={{ width: '100%', height: '150px' }}/></div>
+
             <div className="y-box-body">{influencers.title}{influencers.content}</div>
             <div className="y-box-footer">
                 <span className="y-box-name">by {influencers.name}{influencers.sns}</span>

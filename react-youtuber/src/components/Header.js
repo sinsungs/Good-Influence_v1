@@ -5,24 +5,31 @@ import kakao_login_button from '../img/kakao_login_button.png';
 import kakao_payment_button from '../img/kakao_payment_button.png';
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from '../pages/JwtTokenState';
 
 function Header() {
+      // Recoil을 사용하여 JWT 토큰을 가져옵니다
+  const jwtToken = useRecoilValue(tokenState); 
 
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 저장하는 상태 변수
+
   const [userProfile, setUserProfile] = useState([]);
+  
 
   const handleKakaoPaymentClick = () => {
-    // Replace 'http://localhost:8080/payment/ready' with the correct URL for your payment endpoint
+
+    const headers = {
+      'Authorization': `Bearer ${jwtToken}`,
+    };
+  
     const paymentEndpoint = '/payment/ready';
 
-    // Perform the Axios GET request
-    axios.get(paymentEndpoint)
+    axios.get(paymentEndpoint, { headers })
       .then(response => {
-        // Handle the response if needed
+
         console.log('Payment response:', response);
-        // Redirect to the payment page, if required
-        // window.location.href = paymentEndpoint;
+
         window.open(response.data, '_blank');
 
           // // navigate를 사용하여 페이지 이동
@@ -35,21 +42,16 @@ function Header() {
   };
 
   const handleLogout = () => {
-    
+            // navigate를 사용하여 페이지 이동
+            document.cookie = `jwtToken=;`;
+            navigate('/meet');
+            window.location.reload();
   }
 
   useEffect(() => {
-    // document.cookie에서 JWT 토큰 추출
-    const jwtCookie = document.cookie;
 
-    // JWT 토큰이 존재하면 추출
-    let jwtToken = null;
-    jwtToken = jwtCookie.trim().substring('jwtToken='.length);
-    console.log(jwtToken)
-    // JWT가 존재하면 로그인 상태를 true로 설정합니다.
+    if (jwtToken) {
 
-    if (jwtCookie) {
-      setIsLoggedIn(true);
 
       const headers = {
         'Authorization': `Bearer ${jwtToken}`, // JWT 토큰을 'Bearer' 스키마와 함께 보냅니다.
@@ -72,9 +74,9 @@ function Header() {
 
 
     } else {
-      setIsLoggedIn(false);
+
     }
-  }, []);
+  }, [jwtToken]);
 
   return (
     <header>
@@ -87,9 +89,7 @@ function Header() {
         </div>
 
         <div>
-        <button onClick={handleKakaoPaymentClick}>
-          <img src={kakao_payment_button} alt='kakao_payment' />
-        </button>
+
           {/* <button class="mypage-button">내 정보</button> */}
 
           {/* <Link to="/mypage"><button class="login-button">마이페이지</button></Link> */}
@@ -98,11 +98,15 @@ function Header() {
           
           <button class="login-button">SNS 인증</button>         */}
 
-{isLoggedIn ? (
+{jwtToken ? (
             <>
+              <button onClick={handleKakaoPaymentClick}>
+              <img src={kakao_payment_button} alt='kakao_payment' />
+            </button>
               <button onClick={handleLogout}>로그아웃</button>
               <Link to="/mypage">마이페이지</Link><br/>
               {/* <Link to="/profile"></Link> */}
+              이메일 : {userProfile.email}<br/>
               닉네임 : {userProfile.username}<br/>
               보유금 : {userProfile.amount}<br/>
               경험치 : {userProfile.experience}

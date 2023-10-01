@@ -35,7 +35,9 @@ function Login() {
         document.cookie = `jwtToken=${response.data};`;
 
         // navigate를 사용하여 페이지 이동
-        navigate('/meeting');
+        navigate('/meet');
+        window.location.reload();
+
       })
       .catch((error) => {
         console.error(error); // 오류 처리

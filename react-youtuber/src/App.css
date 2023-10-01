@@ -82,7 +82,7 @@ input:focus {
 }
 
  header {
-  height: 200px;
+  height: 250px;
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -90,7 +90,7 @@ input:focus {
   
  }
  header .top {
-  height: 100px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
 
@@ -183,7 +183,8 @@ header .bottom {
   width: 100%;
   /* background-color:#61dafb; */
 
-  background-image: url('./img/react.webp');
+  /* background-image: url('./img/react.webp'); */
+  background-image: url('https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/room0.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -232,10 +233,10 @@ header .bottom {
   width: 100%;
 
   /* background-color:#61dafb; */
-  background-image: url('./img/bg.png');
-  /* background-image: url('https://yt3.googleusercontent.com/TFDsP7GTkb-adv_BnBNNv5gjHpFmCrYvJ5QP1I5CMgyUnjuV3l0ZopTGPf0noTssor-3mooh=s176-c-k-c0x00ffffff-no-rj'); */
+  /* background-image: url('./img/bg.png'); */
+  /* background-image: url('https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/room0.jpg'); */
   background-size: cover;
-  background-position: center;
+  background-position: center; 
 }
 
 

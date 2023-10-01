@@ -34,7 +34,8 @@ function KakaoLoginHandeler() {
         document.cookie = `jwtToken=${jwt}; path=/;`;
         // 카카오 로그인은 path 설정 해줘야 한다 ,, ㅠ 
 
-        navigate('/meeting');
+        navigate('/meet');
+        window.location.reload();
 
       })
       .catch((error) => {
