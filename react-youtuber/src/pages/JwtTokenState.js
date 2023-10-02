@@ -6,10 +6,10 @@ export const tokenState = atom({
 });
 
 // export function onFileUpload(e) {
-//   const ACCESS_KEY = 'AKIAXTUMJ6YERNKOJEMQ';
-//   const SECRET_ACCESS_KEY = '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';
-//   const REGION = "ap-northeast-2";
-//   const S3_BUCKET = 'sinsung-s3';
+//   const ACCESS_KEY = '';
+//   const SECRET_ACCESS_KEY = '';
+//   const REGION = "";
+//   const S3_BUCKET = '';
 
 //    // AWS ACCESS KEY를 세팅합니다.
 //    AWS.config.update({
