@@ -11,7 +11,7 @@ import com.youtubers.entity.Meet;
 import com.youtubers.entity.MeetUser;
 import com.youtubers.entity.User;
 import com.youtubers.repository.MeetRepository;
-import com.youtubers.repository.MeetUserRepository;
+import com.youtubers.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,23 +21,18 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class MeetService {
 	
+	private final UserRepository userRepository;
 	private final MeetRepository meetRepository;
-	private final MeetUserRepository UsermeetRepository;
-    
     
     public Meet createMeet(MeetDTO dto) {
     	
-    	Meet meet = dtoToEntity(dto);
+    	User user = userRepository.findByEmail(dto.getWriter()).orElse(null);
+    	
+    	Meet meet = dtoToEntity(dto, user);
 
         return meetRepository.save(meet);
     }
 
-
-    public MeetUser registerMeet(MeetUser userMeet) {
-    	
-        return UsermeetRepository.save(userMeet);
-    }
-    
     
     public List<MeetDTO> listMeet() {
     	
@@ -60,7 +55,7 @@ public class MeetService {
         if (meet != null) {
             meet.setTitle(dto.getTitle());
             meet.setContent(dto.getContent());
-            meet.setMaxPlayers(dto.getMaxPlayers());
+            meet.setMaxPlayers(dto.getMaxplayers());
             meet.setCurrentPlayers(dto.getCurrentPlayers());
             meet.setRegion(dto.getRegion());
             meet.setResult(dto.getResult());
@@ -79,8 +74,26 @@ public class MeetService {
     	
         Optional<Meet> optionalMeet = meetRepository.findById(meetId);
         
+//        if (optionalMeet.isPresent()) {
+//            meetRepository.deleteById(meetId);
+//            return true;
+//        }
+//        
         if (optionalMeet.isPresent()) {
-            meetRepository.deleteById(meetId);
+            Meet meet = optionalMeet.get();
+            
+            // Meet에 참여한 사용자들 가져오기
+            List<MeetUser> meetUsers = meet.getMeetUsers();
+            
+            // 보유금을 돌려주는 로직 구현
+            for (MeetUser meetUser : meetUsers) {
+                User user = meetUser.getUser();
+                
+    	        user.setAmount(user.getAmount() + 10000);
+    	        userRepository.save(user);
+            }
+            
+            meetRepository.delete(meet);
             return true;
         }
         
@@ -89,16 +102,18 @@ public class MeetService {
     
     
     // Mapper 구역 
-	private Meet dtoToEntity(MeetDTO dto) {
+	private Meet dtoToEntity(MeetDTO dto, User user) {
 		
         Meet meet = Meet.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .maxPlayers(dto.getMaxPlayers())
+                .maxPlayers(dto.getMaxplayers())
                 .currentPlayers(dto.getCurrentPlayers())
                 .region(dto.getRegion())
                 .result(dto.getResult())
                 .meettime(dto.getMeettime())
+                .result("신청가능")
+                .user(user)
                 .build();
 		
 		return meet;
@@ -110,11 +125,12 @@ public class MeetService {
 				.meetid(meet.getMeetid())
 	            .title(meet.getTitle())
                 .content(meet.getContent())
-                .maxPlayers(meet.getMaxPlayers())
+                .maxplayers(meet.getMaxPlayers())
                 .currentPlayers(meet.getCurrentPlayers())
                 .region(meet.getRegion())
                 .result(meet.getResult())
                 .meettime(meet.getMeettime())
+                .writer(meet.getUser().getUsername())
 				.build();
 		
 		return meetDTO;

@@ -35,9 +35,14 @@ public class Orders {
 	@CreationTimestamp // 시간이 자동 입력
     private Timestamp orderDate;
 	
-    @ManyToOne // Payment와 User는 N:1 관계
+    @ManyToOne // Orders와 User는 N:1 관계
     @JoinColumn(name = "user_id", nullable = true) // 외래키를 가리킬 컬럼 이름 지정
     private User user;
+    
+    @ManyToOne // Orders와 Meet는 N:1 관계
+    @JoinColumn(name = "meet_id", nullable = true)
+    private Meet meet;
+
 	
 
 }

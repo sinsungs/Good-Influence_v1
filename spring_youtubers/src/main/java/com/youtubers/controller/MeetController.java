@@ -30,6 +30,8 @@ public class MeetController {
     public ResponseEntity<Meet> createMeet(@RequestBody MeetDTO dto, Authentication authentication) {
     	
     	System.out.println("정보" + authentication.getName());
+    	System.out.println("수용인원" + dto.getMaxplayers());
+    	System.out.println("만남시간" + dto.getMeettime());
     	
     	dto.setWriter(authentication.getName());
     	
@@ -62,21 +64,19 @@ public class MeetController {
     
 
     @DeleteMapping("/delete/{meetId}")
-    public ResponseEntity<Void> deleteMeet(@PathVariable Long meetId) {
+    public ResponseEntity<String> deleteMeet(@PathVariable Long meetId, Authentication authentication) {
+    	
         boolean deleted = meetService.deleteMeet(meetId);
+        
+        String result = "삭제했습니다.";
+        
         if (deleted) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok(result);
         }
+        
         return ResponseEntity.notFound().build();
     }
     
     
     
-//    @GetMapping("/list")
-//    public ResponseEntity<List<PostYoutuberDTO>> listPost() {
-//    	
-//        List<PostYoutuberDTO> response = postyoutuberService.getList();
-//        return ResponseEntity.ok(response);
-//        
-//    }
 }

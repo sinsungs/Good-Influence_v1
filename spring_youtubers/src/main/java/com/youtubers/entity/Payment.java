@@ -36,7 +36,7 @@ public class Payment {
     private Timestamp paymentDate;
 	
     @ManyToOne // Payment와 User는 N:1 관계
-    @JoinColumn(name = "user_id", nullable = true) // 외래키를 가리킬 컬럼 이름 지정
+    @JoinColumn(name = "user_id") // 외래키를 가리킬 컬럼 이름 지정
     private User user;
 	
 

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.springframework.data.annotation.CreatedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,10 +44,14 @@ public class Meet extends BaseEntity{
 //    private List<MeetUser> meetUser = new ArrayList<>();
     
     @ManyToOne 
-    @JoinColumn(name = "user_id", nullable = true) // 외래키를 가리킬 컬럼 이름 지정
+    @JoinColumn(name = "user_id") // 외래키를 가리킬 컬럼 이름 지정
     private User user;
 
+    @OneToMany(mappedBy = "meet", cascade = CascadeType.ALL)
+    private List<MeetUser> meetUsers = new ArrayList<>();
     
+    @OneToMany(mappedBy = "meet", cascade = CascadeType.ALL)
+    private List<Orders> orders = new ArrayList<>();
     
 }
 

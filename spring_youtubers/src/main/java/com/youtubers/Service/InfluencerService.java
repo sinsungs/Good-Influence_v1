@@ -100,7 +100,7 @@ public class InfluencerService{
 				.ino(dto.getIno())
 				.title(dto.getTitle())
 				.content(dto.getContent())
-				.likes(dto.getLikes())
+				.likes(0)
 				.name(dto.getName())
 				.sns(dto.getSns())
 				.category(dto.getCategory())

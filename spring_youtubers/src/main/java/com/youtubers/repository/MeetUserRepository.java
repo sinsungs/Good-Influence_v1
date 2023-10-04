@@ -11,8 +11,6 @@ import com.youtubers.entity.User;
 
 public interface MeetUserRepository extends JpaRepository<MeetUser, Long> {
 	
-	boolean existsByUserAndMeet(User user, Meet meet);
-	
     @Query("SELECT COUNT(mu.user) FROM MeetUser mu")
 	int countMeetUser();
     
@@ -22,14 +20,9 @@ public interface MeetUserRepository extends JpaRepository<MeetUser, Long> {
             "ORDER BY COUNT(mu.meet) DESC")
      List<User> findTop5UsersWithMostMeets();
     
+//boolean existsByUserAndMeet(User user, Meet meet);
+	MeetUser findByUserAndMeet(User user, Meet meet);
     
-//    @Query("SELECT mu FROM MeetUser mu " +
-//            "GROUP BY mu.user ")
-//     List<MeetUser> findTop5UsersWithMostMeets();
-    
-//    @Query("SELECT mu FROM MeetUser mu" +
-//          "ORDER BY COUNT(mu.meet) DESC")
-//     List<MeetUser> findTop5UsersWithMostMeets();
 
 
 //	List<MeetUser> findByUserUserId(Long userId);

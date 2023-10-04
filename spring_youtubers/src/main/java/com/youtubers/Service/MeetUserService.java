@@ -1,13 +1,22 @@
 package com.youtubers.Service;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.youtubers.dto.MeetUserDTO;
 import com.youtubers.entity.Meet;
 import com.youtubers.entity.MeetUser;
+import com.youtubers.entity.Orders;
 import com.youtubers.entity.User;
 import com.youtubers.repository.MeetRepository;
 import com.youtubers.repository.MeetUserRepository;
@@ -33,11 +42,18 @@ public class MeetUserService {
         User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
         Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
         
-//        ordersRepository.save(null);
-        //주문내역 추가해야함 
+        if (user == null || meet == null) {
+            return "사용자 또는 모임을 찾을 수 없습니다.";
+        }
         
-        if (meetUserRepository.existsByUserAndMeet(user, meet)) {
-            return "이미 참가한 모임입니다.";
+        if(user.getAmount() < 10000) {
+        	return "보유금이 부족합니다";
+        }
+        
+        MeetUser meetUser = meetUserRepository.findByUserAndMeet(user, meet);
+        
+        if (meetUser != null) {
+            return "이미 참가중입니다.";
         }
         
         // 신청 마감 처리 
@@ -49,9 +65,24 @@ public class MeetUserService {
         		.user(user)
         		.meet(meet)
         		.build();
-    	
-        meetUserRepository.save(meetuser);
         
+        meetUserRepository.save(meetuser);
+        		
+
+        // 주문내역에 추가하고 보유금 차감해야함 
+        Orders orders = Orders.builder()
+        		.price(dto.getPrice())
+        		.user(user)
+        		.meet(meet)
+        		.build();
+        
+        ordersRepository.save(orders);
+        
+    	
+        user.setAmount(user.getAmount() - dto.getPrice());
+        userRepository.save(user);
+        
+      
         // 로직 추가 
         // currentPlayers 값 증가
         meet.setCurrentPlayers(meet.getCurrentPlayers() + 1);
@@ -65,28 +96,47 @@ public class MeetUserService {
 
         meetRepository.save(meet); // 업데이트된 Meet 객체 저장
 
-//        System.out.println(result);
-        return "성공했습니다";
+        
+        return "모임을 참여했습니다.";
         
     }
     
-
-	    public String cancelApplication(Long applicationId) {
-	        // Find the application to cancel
-	        Optional<MeetUser> optionalMeetUser = meetUserRepository.findById(applicationId);
+		@Transactional
+	    public String deleteMeeting(MeetUserDTO dto) {
+	    	
+	        User user = userRepository.findByEmail(dto.getEmail()).orElse(null);
+	        Meet meet = meetRepository.findById(dto.getMeetid()).orElse(null);
 	        
-//	        ordersRepository.save(null);
-	        //주문 취소 내역 추가해야함 
-	
-	        if (optionalMeetUser.isPresent()) {
-	            MeetUser meetUser = optionalMeetUser.get();
-	            // Implement the cancellation process
-	            meetUserRepository.delete(meetUser);
-	
-	            return "Application cancelled successfully!";
-	        } else {
-	            return null;
+	        if (user == null || meet == null) {
+	            return "사용자 또는 모임을 찾을 수 없습니다.";
 	        }
+	        
+//	        if (!meetUserRepository.existsByUserAndMeet(user, meet)) {
+//	            return "참가하고 있지 않은 모임입니다.";
+//	        }
+	        
+	        MeetUser meetUser = meetUserRepository.findByUserAndMeet(user, meet);
+
+	        if (meetUser == null) {
+	            return "해당 사용자는 이 모임에 참가하지 않았습니다.";
+	        }
+	        
+	        meetUserRepository.delete(meetUser);
+	        
+	        // 주문 내역 삭제
+	        ordersRepository.deleteByUserAndMeet(user, meet);
+	        
+	        user.setAmount(user.getAmount() + dto.getPrice());
+	        userRepository.save(user);
+	        
+//	        // 로직 추가 
+//	        // currentPlayers 값 감소
+	        meet.setCurrentPlayers(meet.getCurrentPlayers() - 1);
+
+	        meetRepository.save(meet); // 업데이트된 Meet 객체 저장
+	        
+	
+	        return "모임을 취소했습니다.";
 	    }
     
     

@@ -27,7 +27,7 @@ public class MeetUserController {
  
     
     @PostMapping("/register/{id}")
-    public ResponseEntity<String> registerMeet(@PathVariable Long id, @RequestBody MeetUserDTO dto,  Authentication authentication) {
+    public ResponseEntity<String> registerMeeting(@PathVariable Long id, @RequestBody MeetUserDTO dto,  Authentication authentication) {
     	
 //    	MeetUser registerMeet ;
     	System.out.println("결제금액" + dto.getPrice());
@@ -35,7 +35,6 @@ public class MeetUserController {
     	
     	dto.setEmail(authentication.getName());
     	dto.setMeetid(id);
-    	
     	dto.setPrice(dto.getPrice());
     	
     	String sss = meetuserService.registerMeet(dto);
@@ -43,33 +42,19 @@ public class MeetUserController {
         return ResponseEntity.ok(sss);
     }
     
-    
-//    @GetMapping("/history/{userId}")
-//    public ResponseEntity<List<MeetUserDTO>> getApplicationHistory(@PathVariable Long userId) {
-//    	
-//        List<MeetUserDTO> applicationHistory = meetuserService.getApplicationHistory(userId);
-//        
-//        return ResponseEntity.ok(applicationHistory);
-//    }
 
     
-    @DeleteMapping("/cancel/{applicationId}")
-    public ResponseEntity<String> cancelApplication(@PathVariable Long applicationId) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteMeeting(@PathVariable Long id, MeetUserDTO dto,  Authentication authentication) {
     	
-        String result = meetuserService.cancelApplication(applicationId);
+    	dto.setEmail(authentication.getName());
+    	dto.setMeetid(id);
+    	dto.setPrice(10000);
+    	
+        String result = meetuserService.deleteMeeting(dto);
         
-        if (result != null) {
-        	
-            return ResponseEntity.ok(result);
-            
-        } else {
-        	
-            return ResponseEntity.notFound().build();
-        }
-        
+        return ResponseEntity.ok(result);
     }
-    
-
     
     
 }
