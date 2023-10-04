@@ -3,12 +3,12 @@ package com.youtubers.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,14 +36,13 @@ import lombok.extern.log4j.Log4j2;
 public class UserController {
 	
 	private final UserService userService;
+
 	
 	// 회원 가입
 	@PostMapping("/user/join")
-	public ResponseEntity<Boolean> joinUser(@RequestBody UserDTO dto) {
-
-		log.info("request : " + dto);
+	public ResponseEntity<String> joinUser(@RequestBody UserDTO dto) {
 		
-		Boolean result = userService.Join(dto);
+		String result = userService.Join(dto);
 		
 		return ResponseEntity.ok(result);
 	}
@@ -193,12 +192,15 @@ public class UserController {
         
         if(originUser.getEmail()==null) {
             // 회원가입 처리
-    		userService.KakaoTest(kakaoProfile);
+    		User user = userService.KakaoTest(kakaoProfile);
+    		
+            String jwt = userService.jwtLogin(user.getEmail(), "examplePassword");
+            
+    		return jwt ;
         }
-        	// 로그인 처리 
-        String jwt = userService.jwtLogin(kakaoProfile.getKakao_account().getEmail(), "examplePassword");
-        log.info(jwt);
-		
+
+        String jwt = userService.jwtLogin(originUser.getEmail(), "examplePassword");
+        
 		return jwt ;
 	}
 }

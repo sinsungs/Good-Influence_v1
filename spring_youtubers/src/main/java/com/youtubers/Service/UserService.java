@@ -31,6 +31,7 @@ public class UserService {
 	
 	
 	// jwt 로그인 
+	// 로컬 로그인 예외 똑같이 들어가야함
 	@Value("${jwt.secret}")
 	private String secretKey;
 	// 시크릿키를 이렇게 등록하지 않으면 git에서 전세계 사람들이 다 볼 수 있음
@@ -38,54 +39,29 @@ public class UserService {
 	private Long expiredMs = 1000 * 60 * 60l;
 	// 1시간으로 만들어주기 , 밀리세컨드 , long타입이라 l 붙이기
 	
+	@Transactional(readOnly = true)
 	public String jwtLogin(String email, String password) {
+		
+		// email 없음
+		User selectedUser = userRepository.findByEmail(email).orElse(null);
+//		.orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOTFOUND, "존재하지 않는 아이디 입니다."));
+	
+			if(selectedUser == null) {
+				return "존재하지 않는 아이디 입니다.";
+			}
+//				
+						
+		// password 틀림 
+		if (!encoder.matches( password, selectedUser.getPassword())) {
+//			throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드를 잘못 입력 했습니다.");
+			return "패스워드를 잘못 입력 했습니다.";
+		} 
 		
 		return JwtUtil.createJwt(email, secretKey, expiredMs);
 	}
 	
-	
-	// 로컬 회원가입 
-	@Transactional
-	public boolean Join(UserDTO dto) {
-		
-		// email 중복 check 
-//		User selectedUser = 
-				userRepository.findByEmail(dto.getEmail())
-				.ifPresent((user) -> {
-					
-					throw new AppException(ErrorCode.USERNAME_NOTFOUND, "이미 사용중인 아이디입니다.");
-				
-				});
-					
-		
-		// username 중복 check
-		userRepository.findByUsername(dto.getUsername())
-				.ifPresent((user) -> {
-					
-					throw new AppException(ErrorCode.USERNAME_DUPLICATED , user.getUsername() + "는 이미 있습니다.");
-		
-				});
-		
-		// 저장
-		User user = User.builder()
-				.username(dto.getUsername())
-				.password(encoder.encode(dto.getPassword()))
-				.email(dto.getEmail())
-				.role(RoleType.USER)
-				.oauth("local")
-				.amount(0)
-				.experience(0)
-				.sns("default")
-				.build();
-		
-        userRepository.save(user);
-        
-        return true;
-        
-	}
-	
 	// 로컬 로그인 
-	@Transactional(readOnly = true) // select 할 때 트랜잭션 시작 , 서비스 종료시에 트랜잭션 종료 ( 정합성 ) 
+	@Transactional(readOnly = true) 
 	public String Login(User user) {
 		
 		// email 없음
@@ -102,16 +78,67 @@ public class UserService {
 	
 	}
 	
+	
+	
+	// 로컬 회원가입 
+	@Transactional
+	public String Join(UserDTO dto) {
+		
+		// email 중복 check 
+//		User selectedUser = 
+				User userID = userRepository.findByEmail(dto.getEmail()).orElse(null);
+				
+				if(userID != null) {
+					return "이미 사용중인 아이디입니다.";
+				}
+				
+//				.ifPresent((user) -> {
+//					
+//					throw new AppException(ErrorCode.USERNAME_NOTFOUND, "이미 사용중인 아이디입니다.");
+//				
+//				});
+					
+		
+		// username 중복 check
+				User userName = userRepository.findByUsername(dto.getUsername()).orElse(null);
+				
+				if(userName != null) {
+					return "닉네임 '" + userName.getUsername() + "' 사용중입니다.";
+				}
+				
+//				.ifPresent((user) -> {
+//					
+//					throw new AppException(ErrorCode.USERNAME_DUPLICATED , user.getUsername() + "는 이미 있습니다.");
+//		
+//				});
+		
+		// 저장
+		User user = User.builder()
+				.username(dto.getUsername())
+				.password(encoder.encode(dto.getPassword()))
+				.email(dto.getEmail())
+				.role(RoleType.USER)
+				.oauth("local")
+				.amount(0)
+				.experience(0)
+				.sns("default")
+				.build();
+		
+        userRepository.save(user);
+        
+        return "회원가입에 성공하셨습니다.";
+        
+	}
 
 	
 	// 카카오 로그인
 	@Transactional
-	public void KakaoTest(KakaoProfile kakao) {
+	public User KakaoTest(KakaoProfile kakao) {
 		
 		User user = User.builder()
 				.username(kakao.getKakao_account().getEmail()+"_"+ kakao.getId())
 				.email(kakao.getKakao_account().getEmail())
-				.password("examplePassword")
+				.password(encoder.encode("examplePassword"))
 				.role(RoleType.USER)
 				.oauth("kakao")
 				.amount(0)
@@ -119,9 +146,7 @@ public class UserService {
 				.sns("default")
 				.build();
 		
-		userRepository.save(user);
-		
-		return;
+		return userRepository.save(user);
 		
 	}
 	
