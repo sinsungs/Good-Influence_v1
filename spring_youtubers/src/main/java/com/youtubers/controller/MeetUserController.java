@@ -25,7 +25,6 @@ public class MeetUserController {
     private final MeetUserService meetuserService;
 	
  
-    
     @PostMapping("/register/{id}")
     public ResponseEntity<String> registerMeeting(@PathVariable Long id, @RequestBody MeetUserDTO dto,  Authentication authentication) {
     	
@@ -43,7 +42,6 @@ public class MeetUserController {
     }
     
 
-    
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteMeeting(@PathVariable Long id, MeetUserDTO dto,  Authentication authentication) {
     	

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
 import com.youtubers.entity.Influencer;
+import com.youtubers.entity.Meet;
+import com.youtubers.entity.MeetUser;
 import com.youtubers.entity.Post;
 import com.youtubers.entity.PostInfluencer;
+import com.youtubers.entity.User;
 import com.youtubers.repository.InfluencerRepository;
 import com.youtubers.repository.PostInfluencerRepository;
 import com.youtubers.repository.PostRepository;
@@ -39,6 +42,37 @@ public class PostInfluencerService{
         
     }
       
+      
+     public boolean deleteInfluencerPost(Long ino, Long pno) {
+    	 
+    	 
+	        Influencer influencer = influencerRepository.findById(ino).orElse(null);
+	        Post post = postRepository.findById(pno).orElse(null);
+
+    	 	PostInfluencer postInfluencers = postInfluencerRepository.findByInfluencerAndPost(influencer, post);
+
+	        if (postInfluencers == null) {
+	            return false;
+	        }
+	        
+	        postInfluencerRepository.delete(postInfluencers);
+         
+		return true;
+	}
+      
+     
+     public boolean deleteInfluencer(Long id) {
+         // Check if influencer exists
+         Influencer existingInfluencer = influencerRepository.findById(id).orElse(null);
+
+         if (existingInfluencer != null) {
+             // Delete the influencer
+             influencerRepository.delete(existingInfluencer);
+             return true;
+         } else {
+             return false;
+         }
+     }
     
     public List<PostResponseDTO> getList() {
     	
@@ -93,21 +127,28 @@ public class PostInfluencerService{
 		            .influencer(influencer)
 		            .build();
 		}
+		
+
 	
     	
     	private PostResponseDTO entityToDTO(PostInfluencer postInfluencer) {
     		
     		PostResponseDTO postResponseDTO = PostResponseDTO.builder()
-    				
-			   .postTitle(postInfluencer.getPost().getTitle())
-	           .postContent(postInfluencer.getPost().getContent())
-	           .influencerName(postInfluencer.getInfluencer().getName())
-	           .influencerContent(postInfluencer.getInfluencer().getContent())
+    			
+    		   .pno(postInfluencer.getPost().getPno())
+    		   .ino(postInfluencer.getInfluencer().getIno())
+			   .title(postInfluencer.getPost().getTitle())
+	           .content(postInfluencer.getPost().getContent())
+	           .name(postInfluencer.getInfluencer().getName())
+//	           .influencerContent(postInfluencer.getInfluencer().getContent())
 	            
 			   .build();
     		
     		return postResponseDTO;
     		
     	}
+
+
+
     	
 }

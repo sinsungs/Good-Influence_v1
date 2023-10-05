@@ -39,10 +39,6 @@ public class Influencer {
 	
 	private String imageUrl; // 이미지 파일의 경로나 URL을 저장할 필드
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private Member writer;  // Member와 연관관계 지정
-	
-	
 //    @OneToMany(mappedBy = "influencer")
 //    private List<PostInfluencer> postInfluencers = new ArrayList<>();
 

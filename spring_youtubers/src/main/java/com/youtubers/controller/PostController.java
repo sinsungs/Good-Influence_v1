@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.PostInfluencerService;
 import com.youtubers.Service.PostService;
-import com.youtubers.dto.InfluencerDTO;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
 import com.youtubers.entity.Influencer;
@@ -61,43 +61,38 @@ public class PostController {
         
     }
     
-//    @GetMapping({"/read", "/modify"})
-//    public ResponseEntity<String> Read(@RequestParam("pyno") Long pyno, Model model) {
+    @DeleteMapping("/delete/{ino}/{pno}")
+    public  ResponseEntity<String> deletePost(@PathVariable Long ino, @PathVariable Long pno) {
+    	
+        boolean deleted = postInfluencerService.deleteInfluencerPost(ino, pno);
+        
+        if (deleted) {
+        	
+            return ResponseEntity.ok("삭제되었습니다.");
+            
+        } else {
+        	
+            return ResponseEntity.ok("실패했습니다.");
+            
+        }
+        
+    }
+    
+    
+//    @DeleteMapping("/delete/{meetId}")
+//    public ResponseEntity<String> deleteMeet(@PathVariable Long meetId, Authentication authentication) {
 //    	
-//    	String response  = postyoutuberService.get(pyno);
-////    	model.addAttribute("dto", youtuberDTO);
-//    	
-//    	return ResponseEntity.ok(response);
-//  
+//        boolean deleted = meetService.deleteMeet(meetId);
+//        
+//        String result = "삭제했습니다.";
+//        
+//        if (deleted) {
+//            return ResponseEntity.ok(result);
+//        }
+//        
+//        return ResponseEntity.notFound().build();
 //    }
     
-//    
-//    @PostMapping("/modify")
-//	public String modify(YoutuberDTO dto, RedirectAttributes redirectAttributes){
-//		
-//		log.info(dto);
-//		
-//		youtuberService.modify(dto);
-//		
-//		redirectAttributes.addAttribute("yno", dto.getYno());
-//		
-////		redirectAttributes 리디렉션 URL에 'yno' 매개변수를 쿼리 매개변수로 추가하는 역할을 합니다
-//		
-//		return "redirect:/youtuber/read";
-//	}
-//	
-//	
-//    @PostMapping("/remove")
-//    public String remove(@RequestParam("yno") Long yno){
-//
-//    	log.info("YNO : " + yno);
-//
-//    	youtuberService.remove(yno);
-//
-//    	return "redirect:/youtuber/list";
-//    }
-	
-
     
 }
     

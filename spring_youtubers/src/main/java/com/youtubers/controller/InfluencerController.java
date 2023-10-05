@@ -3,6 +3,7 @@ package com.youtubers.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,18 @@ public class InfluencerController {
     private final InfluencerService influencerService;
 
     /* API 버전 ( @RequestBody 사용 )*/
+    
+    @PostMapping("/verify/{ino}")
+    public ResponseEntity<String> verifyInfluencer(@PathVariable Long ino, Authentication authentication) {
+    	
+    	String email = authentication.getName();
+    	
+        String result = influencerService.verifyInfluencer(ino, email);
+
+            return ResponseEntity.ok(result);
+
+    }
+    
     
 	@PostMapping("/register")
 	public ResponseEntity<Influencer> createInfluencer( @RequestPart InfluencerDTO dto,  @RequestPart("file") MultipartFile file) {

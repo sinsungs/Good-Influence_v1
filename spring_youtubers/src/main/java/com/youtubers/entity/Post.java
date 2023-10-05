@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,15 +28,13 @@ public class Post extends BaseEntity{
 	
 	private String imageUrl; // 이미지 파일의 경로나 URL을 저장할 필드
 	
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<PostInfluencer> postYoutubers = new ArrayList<>();
-
-//    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL) // Post와 Payment는 1:1 관계
-//    private Payment payment;
-    
     
     @ManyToOne 
     @JoinColumn(name = "user_id") // 외래키를 가리킬 컬럼 이름 지정
     private User user;
+    
+    
 }
 

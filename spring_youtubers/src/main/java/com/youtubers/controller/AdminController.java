@@ -27,12 +27,8 @@ public class AdminController {
 	private final AdminService adminService;
 	private final UserService userService;
 
-
-	
-	
 	// 미팅 승인 
 	// 모든 미팅 관리기능 
-	
 
     @GetMapping("/user")
     public List<UserDTO> listUsers() {

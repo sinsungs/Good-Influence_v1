@@ -46,7 +46,7 @@ public class AdminService {
 	public void updateUserById(Long userId) {
 
 		 User user = userRepository.findById(userId).orElse(null);
-		 user.setSns("influence");
+		 user.setSns("인플루언서");
 		 
 		 userRepository.save(user); 
 		

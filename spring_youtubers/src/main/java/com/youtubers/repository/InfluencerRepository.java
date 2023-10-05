@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.youtubers.entity.Influencer;
+import com.youtubers.entity.User;
 
 public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
 
@@ -31,6 +32,8 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Long> {
 
     @Query("SELECT COUNT(m) FROM Meet m")
 	int countMeet();
+
+	Influencer findByUser(User user);
     
     
 }

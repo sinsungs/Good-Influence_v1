@@ -83,15 +83,35 @@ public class UserService {
 	// 로컬 회원가입 
 	@Transactional
 	public String Join(UserDTO dto) {
+
+		// email 공백 check 
+		if(dto.getEmail() == "") {
+			return "이메일을 입력해 주세요.";
+		}
+		
+		// password 공백 check
+		if(dto.getPassword() == "") {
+			return "비밀번호를 입력해 주세요.";
+		} else if (dto.getPassword().length() < 6) {
+		    return "비밀번혼는 6자리 이상이어야 합니다.";
+		}
+		
+		// username 공백 및 글자 수 check
+		if (dto.getUsername() == "") {
+		    return "닉네임을 입력해 주세요.";
+		} else if (dto.getUsername().length() == 1) {
+		    return "닉네임은 최소 2글자 이상이어야 합니다.";
+		}
+		
+		
 		
 		// email 중복 check 
-//		User selectedUser = 
-				User userID = userRepository.findByEmail(dto.getEmail()).orElse(null);
-				
-				if(userID != null) {
-					return "이미 사용중인 아이디입니다.";
-				}
-				
+		User userID = userRepository.findByEmail(dto.getEmail()).orElse(null);
+		
+		if(userID != null) {
+			return "이미 사용중인 아이디입니다.";
+		}
+			
 //				.ifPresent((user) -> {
 //					
 //					throw new AppException(ErrorCode.USERNAME_NOTFOUND, "이미 사용중인 아이디입니다.");
@@ -121,7 +141,7 @@ public class UserService {
 				.oauth("local")
 				.amount(0)
 				.experience(0)
-				.sns("default")
+				.sns("유저")
 				.build();
 		
         userRepository.save(user);

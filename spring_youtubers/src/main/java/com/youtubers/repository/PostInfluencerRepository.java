@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.youtubers.entity.Influencer;
+import com.youtubers.entity.Post;
 import com.youtubers.entity.PostInfluencer;
 import com.youtubers.entity.User;
 
@@ -15,10 +16,14 @@ public interface PostInfluencerRepository extends JpaRepository<PostInfluencer, 
 	int recommnedRank();
     
     
-    @Query("SELECT pi.influencer FROM PostInfluencer pi " +
+    @Query("SELECT pi.influencer, COUNT(pi.influencer)" +
+    		"FROM PostInfluencer pi " +
             "GROUP BY pi.influencer " +
             "ORDER BY COUNT(pi.influencer) DESC")
-	List<Influencer> findTop5UsersWithMostRecommend();
+	List<Object[]> findTop5UsersWithMostRecommend();
+
+
+	PostInfluencer findByInfluencerAndPost(Influencer influencer, Post post);
     
     
 //    @Query("SELECT mu.user FROM MeetUser mu " +

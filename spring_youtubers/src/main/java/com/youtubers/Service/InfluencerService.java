@@ -1,23 +1,21 @@
 package com.youtubers.Service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.youtubers.dto.InfluencerDTO;
-import com.youtubers.dto.MeetDTO;
+import com.youtubers.dto.MeetUserDTO;
 import com.youtubers.entity.Influencer;
 import com.youtubers.entity.Meet;
+import com.youtubers.entity.MeetUser;
+import com.youtubers.entity.Orders;
+import com.youtubers.entity.User;
 import com.youtubers.repository.InfluencerRepository;
+import com.youtubers.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,15 +26,51 @@ import lombok.extern.log4j.Log4j2;
 public class InfluencerService{
 
 	private final InfluencerRepository influencerRepository;
+	private final UserRepository userRepository;
 	
     @Value("${upload.dir}")
     private String uploadDir;
 	
+    
+// 유저 인플루언서 인증
+	@Transactional
+	public String verifyInfluencer(Long ino, String email) {
+		
+        User user = userRepository.findByEmail(email).orElse(null);
+        Influencer findInfluencer = influencerRepository.findById(ino).orElse(null);
+        
+        if (user.getSns() != "인플루언서") {
+        	return "관리자에게 권한을 받고 요청해주세요.";
+        }
+        
+        if (user == null || findInfluencer == null) {
+            return "다시 시도해주세요.";
+        }
+        
+//        Influencer influencers = influencerRepository.findById(user.getId()).orElse(null);
+        Influencer influencer = influencerRepository.findByUser(user);
+        
+        if(influencer != null) {
+        	return "이미 인증된 유저입니다.";
+        }
+        
+        findInfluencer.setUser(user);
+        
+        influencerRepository.save(findInfluencer);
+        
+		return "인증에 성공했습니다.";
+	}
+	
+	
 // 인플루언서 등록 
 	public Influencer createInfluencer(InfluencerDTO dto, String uploadedFileName) {
 		
+//		Influencer findInfluencer = influencerRepository.findById()
+    	User user = userRepository.findByUsername("관리자").orElse(null);
+    	
 		Influencer influencer = dtoToEntity(dto);
 		influencer.setImageUrl(uploadedFileName);
+		influencer.setUser(user);
 		
 		return influencerRepository.save(influencer); 
 		
@@ -45,10 +79,12 @@ public class InfluencerService{
     public List<InfluencerDTO> listInfluencer() {
     	
         List<Influencer> Influencers = influencerRepository.findAll();
+
         
         List<InfluencerDTO> dtoList = new ArrayList<>();
         
 	     for (Influencer influencer : Influencers) {
+
 	      dtoList.add(entityToDTO(influencer));
 	     }
 	  
@@ -104,6 +140,7 @@ public class InfluencerService{
 				.name(dto.getName())
 				.sns(dto.getSns())
 				.category(dto.getCategory())
+//				.user()
 				.build();
 		
 		return influencer;
@@ -121,10 +158,12 @@ public class InfluencerService{
 	            .sns(influencer.getSns())
 	            .category(influencer.getCategory())
 	            .image_url(influencer.getImageUrl())
-	            
+	            .verifyuser(influencer.getUser().getUsername())
 				.build();
 		
 		return influencerDTO;
 		
 	}
+
+
 }

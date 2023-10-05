@@ -6,45 +6,26 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
-//ExamineeAcademyDto
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostResponseDTO {
-//private Long pyno;
 	
-private String postTitle;
-private String postContent;
+	private Long pno;
+	private String title;
+	private String content;
 
-private String influencerName;
-private String influencerContent;
+    private Long ino;
+    private String name;
+    
+    
+    private Long secondino;
+    private Long thirdino;
 
-public static PostResponseDTO of(PostInfluencer postInfluencer) {
-   return PostResponseDTO.builder()
-		   
-		   .postTitle(postInfluencer.getPost().getTitle())
-           .postContent(postInfluencer.getPost().getContent())
-           .influencerName(postInfluencer.getInfluencer().getName())
-           .influencerContent(postInfluencer.getInfluencer().getContent())
-           
-           .build();
+    private String writer;
 }
-}
-
-
-//public class ExamineeAcademyDTO {
-//	 private String examineeName;
-//	 private String academyName;
-//	 private LocalDateTime registerDate;
-//
-//	 public static ExamineeAcademyDTO of(ExamineeAcademy examineeAcademy) {
-//	     return ExamineeAcademyDTO.builder()
-//	             .examineeName(examineeAcademy.getExaminee().getName())
-//	             .academyName(examineeAcademy.getAcademy().getName())
-//	             .registerDate(examineeAcademy.getRegisterDate())
-//	             .build();
-//	 }
-//	}
