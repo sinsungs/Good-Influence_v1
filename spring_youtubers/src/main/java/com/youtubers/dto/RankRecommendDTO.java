@@ -16,12 +16,14 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RankDTO {
+public class RankRecommendDTO {
 	
 
-//  private int meetRank;
-//  private int recommnedRank;
-	private List<RankMeetDTO> meetRanks;
-	private List<RankRecommendDTO> recommendRank;
+
+	private Long id;
+	private String name;
+	private String sns;
+	private int experience;
+	private int recommendcount;
     
 }

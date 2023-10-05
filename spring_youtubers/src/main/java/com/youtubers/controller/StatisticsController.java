@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.youtubers.Service.StatisticsService;
 import com.youtubers.dto.InfluencerStatisticsDTO;
 import com.youtubers.dto.RankDTO;
+import com.youtubers.dto.RankMeetDTO;
+import com.youtubers.dto.RankRecommendDTO;
 import com.youtubers.entity.Influencer;
-import com.youtubers.entity.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,10 +30,10 @@ public class StatisticsController {
 	public ResponseEntity<?> influencerRank() {
 		
 		// 미팅 순위
-		List<User> meetRanks = statisticsService.findTop5UsersWithMostMeets();
+		List<RankMeetDTO> meetRanks = statisticsService.findTop5UsersWithMostMeets();
 		
 		// 추천 순위 
-		List<Influencer> recommendRank = statisticsService.findTop5UsersWithMostRecommend();
+		List<RankRecommendDTO> recommendRank = statisticsService.findTop5UsersWithMostRecommend();
 		
         RankDTO dto = new RankDTO();
         dto.setMeetRanks(meetRanks);
