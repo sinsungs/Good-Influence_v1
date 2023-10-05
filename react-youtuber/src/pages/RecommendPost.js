@@ -68,8 +68,15 @@ const handleSearchSubmit = async (e) => {
 
 // 게시글 작성 Start
   const handleSubmit = (event) => {
+
     event.preventDefault();
   
+    
+    if (!jwtToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    
     const postData = {
       title: event.target.elements.title.value,
       content: event.target.elements.content.value,
@@ -187,30 +194,6 @@ const handleInfluencerEdit = (field, influencer) => {
 
         </div>
       </div>
-
-      {/* {isModalOpen && (
-        <div className="modal">
-            <div className="modal-content">
-              <form onSubmit={handleSearchSubmit} style={{height : '240px'}}>
-                <p style={{marginBottom : '10px'}}>인풀루언서 등록하기</p>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={handleSearchInputChange}
-                  placeholder="인플루언서를 입력하세요."
-                  style={{marginBottom : '10px'}}
-                />
-                <button type="submit">검색</button>
-              <div className='modal-search'>
-
-              </div>
-              </form>
-              <div>
-                <button onClick={handleModalClose} style={{float : 'right'}}>닫기</button>
-              </div>
-          </div>
-        </div>
-      )} */}
 
 
 {isModalOpen && (

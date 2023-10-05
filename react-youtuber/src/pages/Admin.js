@@ -72,7 +72,6 @@ return (
         <div className='back'>
             <div className="container">
 
-
                 <ul>
                     <hr/>
                     <li class="flex-container">
@@ -85,9 +84,9 @@ return (
   
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
+                                {/* <div class="full"> */}
                                     <p>기능</p>
-                                </div>
+                                {/* </div> */}
                             </div>
                         {/* </a>  */}
                     </li>
@@ -99,21 +98,22 @@ return (
                         {/* <a>  */}
                             <div class="flex-item-left">
                                 <p>{user.regdate}</p><br/>
-                                <p>{user.id}</p>
+                                {/* <p>{user.id}</p> */}
                             </div>
                             <div class="flex-item-center">
                                 <span>{user.username}</span><br/>
                                 <span>{user.email}</span><br/>
                                 <span>{user.password}</span><br/>
+                            
 
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
+                                {/* <div class="full"> */}
                                 <span>{user.sns}</span><br/>
-                                <button onClick={() => handleEditUser(user.id)}>인증</button>
-                                <button onClick={() => handleDeleteUser(user.id)}>삭제</button>
+                                <button onClick={() => handleEditUser(user.id)}>인플루언서 등록</button>
+                                <button onClick={() => handleDeleteUser(user.id)} style={{backgroundColor:'red'}}  >탈퇴</button>
                                 </div>
-                            </div>
+                            {/* </div> */}
 
                     </li>  
                     <hr/>     

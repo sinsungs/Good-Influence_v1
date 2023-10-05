@@ -31,6 +31,16 @@ function Login() {
       .then((response) => {
         console.log(response.data); // 서버 응답 확인
 
+        if(response.data === '존재하지 않는 아이디 입니다.'){
+          alert(response.data);
+          return;
+        }
+
+        if(response.data === '패스워드를 잘못 입력 했습니다.'){
+          alert(response.data);
+          return;
+        }
+
         // 요청이 성공하면 서버로부터 받은 JWT 토큰을 쿠키에 저장합니다.
         document.cookie = `jwtToken=${response.data};`;
 

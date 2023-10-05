@@ -100,11 +100,12 @@ function Header() {
 
 {jwtToken ? (
             <>
-              <button onClick={handleKakaoPaymentClick}>
+              <button onClick={handleKakaoPaymentClick} style={{backgroundColor:'yellow'}}>
               <img src={kakao_payment_button} alt='kakao_payment' />
             </button>
               <button onClick={handleLogout}>로그아웃</button>
-              <Link to="/mypage">마이페이지</Link><br/>
+              {/* <Link to="/mypage">마이페이지</Link><br/> */}
+              <Link to="/admin"><button>관리자</button><br/></Link>
               {/* <Link to="/profile"></Link> */}
               이메일 : {userProfile.email}<br/>
               닉네임 : {userProfile.username}<br/>
@@ -113,7 +114,7 @@ function Header() {
             </>
           ) : (
             <>
-              <Link to="/admin"><button className="login-button">관리자</button></Link>
+
               <Link to="/join"><button className="login-button">회원가입</button></Link>
               <Link to="/login"><button className="login-button">로그인</button></Link>
             </>

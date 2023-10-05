@@ -144,7 +144,7 @@ header .bottom {
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 
 }
 
@@ -370,9 +370,20 @@ button[type='submit']:hover {
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
 }
 .flex-item-center {
-  width: 60%;
+  width: 40%;
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
 }
+
+.flex-item-center-one{
+  width: 10%;
+  box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
+}
+
+.flex-item-center-two{
+  width: 10%;
+  box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */
+}
+
 .flex-item-right {
   width: 20%;
   box-sizing: border-box; /* 패딩을 포함한 전체 박스 크기 유지 */

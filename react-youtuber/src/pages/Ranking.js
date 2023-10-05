@@ -31,7 +31,7 @@ return (
                 <ul>
     <div className='rank-container'>
                     <li class="flex-container">
-                      <h1>소셜 모임 랭킹</h1>
+                      <h1>소셜 모임 TOP5 랭킹</h1>
                     </li>
                     <hr/>
                     <li class="flex-container">
@@ -40,12 +40,12 @@ return (
                                 <p>순위</p>
                             </div>
                             <div class="flex-item-center">
-                                <p>유저 정보</p> 
+                                <p>유저 닉네임</p> 
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
-                                    <p>신청 여부</p>
-                                </div>
+                                {/* <div class="full"> */}
+                                    <p>총 참여 횟수</p>
+                                {/* </div> */}
                             </div>
                     </li>
                     <hr/>
@@ -61,14 +61,14 @@ return (
                             </div>
                             <div class="flex-item-center">
                                 <h3>{meetRanks.username}</h3>
-                                <span>{meetRanks.sns}</span> 
-                                <span>{meetRanks.experience}</span> 
+                                <span>{meetRanks.sns}</span> <br></br>
+                                {/* <span>경험치 : {meetRanks.experience}</span>  */}
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
+                                {/* <div class="full"> */}
                                     {/* <p>{rank.result}</p> */}
-                                    <button>신청하기</button>
-                                </div>
+                                    <span>{meetRanks.meetcount}</span>
+                                {/* </div> */}
                             </div>
                     </li>
                     <hr/>
@@ -78,7 +78,7 @@ return (
 
 
                     <li class="flex-container">
-                      <h1>인플루언서 추천 랭킹</h1>
+                      <h1>인플루언서 TOP5 랭킹</h1>
                     </li>
                     <hr/>
                     <li class="flex-container">
@@ -87,19 +87,19 @@ return (
                                 <p>순위</p>
                             </div>
                             <div class="flex-item-center">
-                                <p>유저 정보</p> 
+                                <p>인플루언서 정보</p> 
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
-                                    <p>신청 여부</p>
-                                </div>
+                                {/* <div class="full"> */}
+                                    <p>총 추천 횟수</p>
+                                {/* </div> */}
                             </div>
                     </li>
                     <hr/>
 
                     {recommendRank.map((recommendRank, index) => (
                     <div>
-                    <li class="flex-container" key={recommendRank.id}>
+                    <li class="flex-container" key={recommendRank.ino}>
                         {/* <a>  */}
                             <div class="flex-item-left">
                                 <p>{index + 1}</p>
@@ -107,14 +107,13 @@ return (
                             </div>
                             <div class="flex-item-center">
                                 <h3>{recommendRank.name}</h3>
-                                <span>{recommendRank.content}</span> 
-                                <span>{recommendRank.category}</span> 
+                                <span>{recommendRank.sns}</span> 
                             </div> 
                             <div class="flex-item-right">
-                                <div class="full">
+                                {/* <div class="full"> */}
                                     {/* <p>{rank.result}</p> */}
-                                    <button>신청하기</button>
-                                </div>
+                                    <span>{recommendRank.recommendcount}</span>
+                                {/* </div> */}
                             </div>
                     </li>
                     <hr/>

@@ -4,8 +4,14 @@ import $ from "jquery";
 import axios from 'axios';
 import data from '../data/data.js';
 import React, {useState, useEffect} from 'react';
+import { useRecoilValue } from 'recoil';
+import { tokenState } from './JwtTokenState';
+
 
 function RecommendList() {
+
+  // Recoil을 사용하여 JWT 토큰을 가져옵니다
+  const jwtToken = useRecoilValue(tokenState); 
 
   const [Influencer, setInfluencer] = useState([]);
 
@@ -22,18 +28,52 @@ function RecommendList() {
       });
   }, []);
 
+
+  const deletePost = (ino, pno) => {
+
+
+    if (!jwtToken) {
+      // JWT 토큰이 없으면 메시지를 출력하고 POST 요청을 보내지 않음
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    
+    alert('추천게시글 삭제 하시겠습니까 ?')
+  
+    axios.delete(`/post/delete/${ino}/${pno}`,
+    {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
+      },
+    })
+
+      .then(response => {
+        // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
+        console.log(response.data);
+        alert(response.data);
+        window.location.reload();
+        // handleModalClose();
+      })
+      .catch(error => {
+        // 오류 처리 로직을 작성하세요.
+        console.error('데이터 전송 중 오류가 발생했습니다.', error);
+      });
+
+  }
+
   return (
     <div className="App">
       <div className='back'>
       <div className="container">
         {Influencer.map(Influencer => (
-          <div className="box" key={Influencer.id}>
+          <div className="box" key={Influencer.ino}>
             <div className="box-header"></div>
             <div className="box-body">
 
-              인플루언서 내용 : {Influencer.postTitle}<br/>
-              추천 글 내용 : {Influencer.postContent}<br/>
-              추천 인플루언서 : {Influencer.influencerName}
+              인플루언서 내용 : {Influencer.title}<br/>
+              추천 글 내용 : {Influencer.content}<br/>
+              추천 인플루언서 : {Influencer.name}
+
               
             </div>
             <div className="box-footer">
@@ -44,26 +84,10 @@ function RecommendList() {
                   ♥ 33
               </span>
             </div>
+            <button onClick={() => deletePost(Influencer.ino, Influencer.pno)} style={{backgroundColor:"red"}}>추천글 삭제</button>
+            {/* <button>추천글 삭제하기</button> */}
           </div>
         ))}
-
-
-<div>
-      <h2>Youtuber List</h2>
-      <ul>
-        {Influencer.map(Influencer => (
-          <li>
-            <h3>{Influencer.postName}</h3>
-            <h3>{Influencer.postContent}</h3>
-            <p>Title: {Influencer.influencerName}</p>
-            <p>Content: {Influencer.influencerContent}</p>
-            {/* <p>Likes: {youtuber.likes}</p>
-            <p>WriterEmail: {youtuber.writerEmail}</p>
-            <p>Writername: {youtuber.writerName}</p> */}
-          </li>
-        ))}
-      </ul>
-</div>
 
       </div>
 

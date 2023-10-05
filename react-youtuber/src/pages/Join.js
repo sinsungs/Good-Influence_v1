@@ -32,7 +32,10 @@ function Join() {
         console.log(response.data); // 서버 응답 확인
         alert(response.data)
       // navigate를 사용하여 페이지 이동
-      navigate('/meeting');
+
+      if(response.data === '회원가입에 성공하셨습니다.'){
+        navigate('/login');
+      }
 
       })
       .catch((error) => {
