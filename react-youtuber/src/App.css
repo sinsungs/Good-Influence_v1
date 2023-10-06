@@ -82,7 +82,7 @@ input:focus {
 }
 
  header {
-  height: 250px;
+  height: 350px;
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -90,7 +90,7 @@ input:focus {
   
  }
  header .top {
-  height: 150px;
+  height: 250px;
   display: flex;
   justify-content: space-between;
 
@@ -121,12 +121,12 @@ header .bottom {
 }
 
 .login-button:hover {
-  background-color: #45a049;
+  background-color: black;
 }
 
 .login-button:focus {
   outline: none;
-  box-shadow: 0 0 5px #45a049;
+  box-shadow: 0 0 5px black;
 }
 
 .explore--item {
@@ -184,7 +184,7 @@ header .bottom {
   /* background-color:#61dafb; */
 
   /* background-image: url('./img/react.webp'); */
-  background-image: url('https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/room0.jpg');
+  /* background-image: url('https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84.jpeg'); */
   background-size: cover;
   background-position: center;
 }
@@ -341,13 +341,13 @@ button[type='submit'] {
 }
 
 button[type='submit']:hover {
-  background-color: #45a049;
+  background-color: black;
 }
 
 .rectangle {
-  width: 200px;
-  height: 200px;
-  margin-right: 50px;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
   
 
   background-image: url('./img/rectangle.png');

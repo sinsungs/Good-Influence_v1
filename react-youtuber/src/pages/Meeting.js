@@ -49,7 +49,10 @@ function Meeting() {
     // const [imageFile, setImageFile] = useState('');
   
     const handleSubmit = (event) => {
+
       event.preventDefault();
+
+
 
       if (!jwtToken) {
         // JWT 토큰이 없으면 메시지를 출력하고 POST 요청을 보내지 않음
@@ -67,6 +70,11 @@ function Meeting() {
         // imageFile
   
       };
+
+      if (!title || !content || !region || !meettime) {
+        alert('모든 필수 입력란을 채워주세요.');
+        return;
+      }
   
       // 예시: 데이터를 서버로 전송하는 코드
       axios.post('/meet/create', meetData, {
@@ -77,7 +85,7 @@ function Meeting() {
         .then(response => {
           // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
           console.log('meet 엔티티가 생성되었습니다.', response.data);
-          alert('meet 엔티티가 생성되었습니다.', response.data);
+          alert('소셜 모임을 생성했습니다.');
           handleModalClose();
           window.location.reload();
         })

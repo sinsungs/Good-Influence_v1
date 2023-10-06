@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import kakao_login_button from '../img/kakao_login_button.png';
 import kakao_payment_button from '../img/kakao_payment_button.png';
+// import image_url from 'https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84.jpeg'
 import { useNavigate } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import { useRecoilValue } from 'recoil';
@@ -86,6 +87,16 @@ function Header() {
         <Link to="/meet">
           <h1>Good Influence 인플루언스</h1>
         </Link>
+        <div style={{ width: '300px', height: '150px', margin: '20px', overflow: 'hidden' }}>
+        <Link to="/meet">
+        <img
+          src='https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/%EA%B5%BF%EC%9D%B8%ED%94%8C%EB%A3%A8%EC%96%B8%EC%8A%A4.jpg'
+          alt='이미지'
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        </Link>
+        </div>
+
         </div>
 
         <div>
@@ -100,17 +111,26 @@ function Header() {
 
 {jwtToken ? (
             <>
-              <button onClick={handleKakaoPaymentClick} style={{backgroundColor:'yellow'}}>
+            <div>
+              
+            <button onClick={handleKakaoPaymentClick} style={{backgroundColor:'yellow'}}>
               <img src={kakao_payment_button} alt='kakao_payment' />
             </button>
               <button onClick={handleLogout}>로그아웃</button>
               {/* <Link to="/mypage">마이페이지</Link><br/> */}
               <Link to="/admin"><button>관리자</button><br/></Link>
               {/* <Link to="/profile"></Link> */}
+            </div>
+
+              <div style={{float:'left'}}>
+              <img src={userProfile.imageUrl} alt='image' style={{width:'100px', height:'100px'}} />
+              </div>
+              <div>
               이메일 : {userProfile.email}<br/>
               닉네임 : {userProfile.username}<br/>
               보유금 : {userProfile.amount}<br/>
               경험치 : {userProfile.experience}
+              </div>
             </>
           ) : (
             <>
@@ -148,11 +168,12 @@ function Header() {
               <p>인플루언서<br/>둘러보기</p>
             </Link>
             <Link to="/list">
-              <img src="https://plab-football.s3.amazonaws.com/static/img/explore_dribbler.svg" />
+              <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
               <p>인플루언서<br/>추천 글</p>
             </Link>
             <Link to="/post">
-              <img src="https://plab-football.s3.amazonaws.com/static/img/explore_seeding.svg" />
+
+              <img src="https://plab-football.s3.amazonaws.com/static/img/explore_dribbler.svg" />
               <p>인플루언서<br/>추천글 작성하기</p>
             </Link>
             <Link to="/rank">

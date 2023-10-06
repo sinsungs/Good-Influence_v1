@@ -31,7 +31,7 @@ return (
                 <ul>
     <div className='rank-container'>
                     <li class="flex-container">
-                      <h1>소셜 모임 TOP5 랭킹</h1>
+                      <h1>소셜 모임 TOP5 참여 랭킹</h1>
                     </li>
                     <hr/>
                     <li class="flex-container">
@@ -78,7 +78,7 @@ return (
 
 
                     <li class="flex-container">
-                      <h1>인플루언서 TOP5 랭킹</h1>
+                      <h1>인플루언서 TOP5 추천 랭킹</h1>
                     </li>
                     <hr/>
                     <li class="flex-container">

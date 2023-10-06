@@ -67,12 +67,19 @@ function RecommendList() {
       <div className="container">
         {Influencer.map(Influencer => (
           <div className="box" key={Influencer.ino}>
-            <div className="box-header"></div>
+            <div className="box-header">
+            
+              <img src={Influencer.imageurl} alt="image" style={{ width: '100%', height: '150px' }}/>
+              
+            </div>
             <div className="box-body">
 
               인플루언서 내용 : {Influencer.title}<br/>
               추천 글 내용 : {Influencer.content}<br/>
               추천 인플루언서 : {Influencer.name}
+              <div>
+              <button onClick={() => deletePost(Influencer.ino, Influencer.pno)} style={{backgroundColor:"red"}}>추천글 삭제</button>
+              </div>
 
               
             </div>
@@ -84,7 +91,7 @@ function RecommendList() {
                   ♥ 33
               </span>
             </div>
-            <button onClick={() => deletePost(Influencer.ino, Influencer.pno)} style={{backgroundColor:"red"}}>추천글 삭제</button>
+           
             {/* <button>추천글 삭제하기</button> */}
           </div>
         ))}

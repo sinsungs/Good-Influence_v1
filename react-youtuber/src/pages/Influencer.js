@@ -47,6 +47,8 @@ function Influencer() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    
+
     // 엔티티 데이터를 생성하고 서버로 전송하는 로직을 작성하세요.
     const influencerData = {
       name,
@@ -54,6 +56,11 @@ function Influencer() {
       category,
       sns
     };
+
+    if (!name || !content || !category || !sns || !file) {
+      alert('모든 필수 입력란을 채워주세요.');
+      return;
+    }
 
     const formData  = new FormData();
 
@@ -65,7 +72,7 @@ function Influencer() {
       .then(response => {
         // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
         console.log('influencer 엔티티가 생성되었습니다.', response.data);
-        alert('influencer 엔티티가 생성되었습니다.', response.data);
+        alert('인플루언서 생성 완료');
         handleModalClose();
         window.location.reload();
       })
@@ -129,11 +136,12 @@ function Influencer() {
     .then((response) => {
       // const channelId = response.data.items[0].snippet.channelId;
       // this.getChannelLists(channelId, APIKey);
-      alert('추천받기 성공 console을 확인하세요')
+      // alert('추천받기 성공 console을 확인하세요')
       // console.log(response);
       console.log(response);
       console.log(response.data.items[0].snippet);
       console.log(response.data.items[0].snippet.channelTitle);
+      alert(response.data.items[0].snippet.channelTitle);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -205,7 +213,7 @@ function Influencer() {
         {influencers.map((influencers) => (
           <div className="y-box" key={influencers.ino}>
             {/* <div className="y-box-header"><img src={imagePath} alt="s" style={{ width: '100%', height: '150px' }}/></div> */}
-            <div className="y-box-header"><img src={influencers.image_url} alt="s" style={{ width: '100%', height: '150px' }}/></div>
+            <div className="y-box-header"><img src={influencers.image_url} alt="image" style={{ width: '100%', height: '150px' }}/></div>
 
             <div className="y-box-body">
               이름 : {influencers.name}<br/>
@@ -219,7 +227,7 @@ function Influencer() {
             } */}
             
             {(influencers.verifyuser === null) || (influencers.verifyuser == '관리자') ? (
-              <button onClick={() => handleVerifyClick(influencers.ino)} style={{ float: 'right', backgroundColor: 'black' }}>유저 인증</button>
+              <button onClick={() => handleVerifyClick(influencers.ino)} style={{ float: 'right', backgroundColor: 'black' }}>유저 인증 필요</button>
             ) : (
               <span><button style={{ float: 'right', backgroundColor: 'red' }}>닉네임={influencers.verifyuser}</button></span>
             )}
@@ -239,7 +247,7 @@ function Influencer() {
 {isModalOpen && (
         <div className="modal">
             <div className="modal-content">
-              <h3>인플루언서 등록하기</h3>
+              <h3>인플루언서 생성하기</h3>
 
           <form onSubmit={handleSubmit}>
 

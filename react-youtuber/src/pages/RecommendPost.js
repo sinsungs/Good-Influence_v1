@@ -77,13 +77,24 @@ const handleSearchSubmit = async (e) => {
       return;
     }
     
+    const title = event.target.elements.title.value;
+    const content = event.target.elements.content.value;
+    const ino = event.target.elements.ino.value;
+
+    if (!title || !content || !ino || !file) {
+      alert('모든 필수 입력란을 채워주세요.');
+      return;
+    }
+
     const postData = {
-      title: event.target.elements.title.value,
-      content: event.target.elements.content.value,
-      ino: event.target.elements.ino.value,
+      title: title,
+      content: content,
+      ino: ino,
       secondino : event.target.elements.secondino.value,
       thirdino: event.target.elements.thirdino.value,
     };
+
+
 
     const formData  = new FormData();
 
@@ -170,23 +181,30 @@ const handleInfluencerEdit = (field, influencer) => {
 
               <label>추천 인플루언서</label>
               <p>* 인플루언서를 1명에서 3명까지 선택할 수 있습니다.</p>
-              <input type="text" className="custom-input" name="ino" value={ino} onClick={() => handleModalOpen('ino')} placeholder="첫번째 인플루언서를 선택해주세요."   readOnly/>
-              <div style={{ height: '30px' }}></div>
-              <input type="text" className="custom-input" name="secondino" value={secondino} onClick={() => handleModalOpen('secondino')} placeholder="두번째 인플루언서를 선택해주세요."   readOnly/>
-              <div style={{ height: '30px' }}></div>
-              <input type="text" className="custom-input" name="thirdino" value={thirdino} onClick={() => handleModalOpen('thirdino')} placeholder="세번째 인플루언서를 선택해주세요."   readOnly/>
-              <div style={{ height: '30px' }}></div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <div className="rectangle"   onClick={() => handleModalOpen('ino')}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="rectangle"   onClick={() => handleModalOpen('ino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-                </div>
-                <div className="rectangle"   onClick={() => handleModalOpen('secondino')}>
+              </div>
+              <input type="text" style={{width:'200px'}}className="custom-input" name="ino" value={ino} onClick={() => handleModalOpen('ino')} placeholder="첫번째 인플루언서를 선택해주세요."   readOnly/>
+              <div style={{ height: '30px' }}></div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="rectangle"   onClick={() => handleModalOpen('secondino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-                </div>
-                <div className="rectangle"   onClick={() => handleModalOpen('thirdino')}>
+              </div>
+              <input type="text" style={{width:'200px'}} className="custom-input" name="secondino" value={secondino} onClick={() => handleModalOpen('secondino')} placeholder="두번째 인플루언서를 선택해주세요."   readOnly/>
+              <div style={{ height: '30px' }}></div>
+              </div>
+
+
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="rectangle"   onClick={() => handleModalOpen('thirdino')}>
                 {/* <img src={rectangleImage} alt="Rectangle" className="rectangle-image" /> */}
-                </div>
+              </div>
+              <input type="text" style={{width:'200px'}} className="custom-input" name="thirdino" value={thirdino} onClick={() => handleModalOpen('thirdino')} placeholder="세번째 인플루언서를 선택해주세요."   readOnly/>
+              <div style={{ height: '30px' }}></div>
               </div>
 
               <button type="submit">작성하기</button>
@@ -200,7 +218,8 @@ const handleInfluencerEdit = (field, influencer) => {
       <div className="modal">
         <div className="modal-content">
           <form onSubmit={handleSearchSubmit} style={{ height: '240px' }}>
-            <p style={{ marginBottom: '10px' }}>인풀루언서 등록하기</p>
+            <p style={{ marginBottom: '10px' }}>인풀루언서 찾아보기</p>
+            <p>검색어 없이 검색하시면 모든 인플루언서 List</p>
             <input
               type="text"
               value={searchQuery}
