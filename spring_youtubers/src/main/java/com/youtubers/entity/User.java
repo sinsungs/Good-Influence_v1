@@ -57,6 +57,8 @@ public class User extends BaseEntity {
 	
 	private String sns;
 	
+	private String imageUrl;
+	
 //    @OneToMany(mappedBy = "user")
 //    private List<MeetUser> meetUser = new ArrayList<>();
 	

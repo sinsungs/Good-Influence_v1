@@ -140,6 +140,7 @@ public class PostInfluencerService{
 			   .title(postInfluencer.getPost().getTitle())
 	           .content(postInfluencer.getPost().getContent())
 	           .name(postInfluencer.getInfluencer().getName())
+	           .imageurl(postInfluencer.getPost().getImageUrl())
 //	           .influencerContent(postInfluencer.getInfluencer().getContent())
 	            
 			   .build();

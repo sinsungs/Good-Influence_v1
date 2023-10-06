@@ -1,5 +1,6 @@
 package com.youtubers.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.PostInfluencerService;
 import com.youtubers.Service.PostService;
+import com.youtubers.Service.S3UploadService;
 import com.youtubers.dto.PostRequestDTO;
 import com.youtubers.dto.PostResponseDTO;
 import com.youtubers.entity.Influencer;
@@ -28,13 +30,16 @@ public class PostController {
 	
     private final PostService postService;
     private final PostInfluencerService postInfluencerService;
+    private final S3UploadService s3UploadService;
     
     @PostMapping("/register")
     public  ResponseEntity<PostResponseDTO> createPost(@RequestPart PostRequestDTO dto, @RequestPart("file") MultipartFile file, 
-    		Authentication authentication) {
+    		Authentication authentication) throws IOException {
     	
         // 파일 업로드 로직 추가
-        String uploadedFileName = "./img/" + file.getOriginalFilename();
+        String uploadedFileName = s3UploadService.saveFile(file);
+        
+//        String uploadedFileName = "./img/" + file.getOriginalFilename();
         
     	System.out.println("정보" + authentication.getName());
     	

@@ -28,4 +28,6 @@ public class PostResponseDTO {
     private Long thirdino;
 
     private String writer;
+    
+    private String imageurl;
 }

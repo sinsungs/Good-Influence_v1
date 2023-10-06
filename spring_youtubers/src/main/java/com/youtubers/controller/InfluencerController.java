@@ -1,5 +1,6 @@
 package com.youtubers.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youtubers.Service.InfluencerService;
+import com.youtubers.Service.S3UploadService;
 import com.youtubers.dto.InfluencerDTO;
 import com.youtubers.entity.Influencer;
 
@@ -29,6 +31,7 @@ import lombok.extern.log4j.Log4j2;
 public class InfluencerController {
 
     private final InfluencerService influencerService;
+    private final S3UploadService s3UploadService;
 
     /* API 버전 ( @RequestBody 사용 )*/
     
@@ -45,10 +48,12 @@ public class InfluencerController {
     
     
 	@PostMapping("/register")
-	public ResponseEntity<Influencer> createInfluencer( @RequestPart InfluencerDTO dto,  @RequestPart("file") MultipartFile file) {
+	public ResponseEntity<Influencer> createInfluencer( @RequestPart InfluencerDTO dto,  @RequestPart("file") MultipartFile file) throws IOException {
 		
+        String uploadedFileName = s3UploadService.saveFile(file);
+        
         // 파일 업로드 로직 추가
-        String uploadedFileName = "./img/" + file.getOriginalFilename();
+//        String uploadedFileName = "./img/" + file.getOriginalFilename();
         
         Influencer createdInfluencer = influencerService.createInfluencer(dto, uploadedFileName);
         

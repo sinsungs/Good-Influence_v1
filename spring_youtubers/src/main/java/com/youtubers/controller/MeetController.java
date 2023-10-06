@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.youtubers.Service.MeetService;
+import com.youtubers.Service.S3UploadService;
 import com.youtubers.dto.MeetDTO;
 import com.youtubers.entity.Meet;
 
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class MeetController {
 
     private final MeetService meetService;
+    private final S3UploadService s3UploadService;
 	
     @PostMapping("/create")
     public ResponseEntity<Meet> createMeet(@RequestBody MeetDTO dto, Authentication authentication) {
@@ -32,6 +34,9 @@ public class MeetController {
     	System.out.println("정보" + authentication.getName());
     	System.out.println("수용인원" + dto.getMaxplayers());
     	System.out.println("만남시간" + dto.getMeettime());
+    	
+//        String storedFileName = s3UploadService.saveFile(image,"images");
+//        diary.setImageUrl(storedFileName);
     	
     	dto.setWriter(authentication.getName());
     	

@@ -39,7 +39,11 @@ public class InfluencerService{
         User user = userRepository.findByEmail(email).orElse(null);
         Influencer findInfluencer = influencerRepository.findById(ino).orElse(null);
         
-        if (user.getSns() != "인플루언서") {
+        System.out.println(user.getSns());
+        
+//        System.out.println(user.getEmail());
+        
+        if (!"인플루언서".equals(user.getSns())) {
         	return "관리자에게 권한을 받고 요청해주세요.";
         }
         

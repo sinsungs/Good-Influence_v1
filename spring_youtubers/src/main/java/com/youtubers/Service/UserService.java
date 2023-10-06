@@ -142,6 +142,7 @@ public class UserService {
 				.amount(0)
 				.experience(0)
 				.sns("유저")
+				.imageUrl("https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84.jpeg")
 				.build();
 		
         userRepository.save(user);
@@ -164,6 +165,7 @@ public class UserService {
 				.amount(0)
 				.experience(0)
 				.sns("default")
+				.imageUrl("https://sinsung-s3.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EA%B8%B0%EB%B3%B8%ED%94%84%EB%A1%9C%ED%95%84.jpeg")
 				.build();
 		
 		return userRepository.save(user);
