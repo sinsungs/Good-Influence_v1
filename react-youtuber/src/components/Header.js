@@ -30,8 +30,10 @@ function Header() {
       .then(response => {
 
         console.log('Payment response:', response);
+        // alert(response.data);
 
         window.open(response.data, '_blank');
+
 
           // // navigate를 사용하여 페이지 이동
           // navigate('/meeting');
@@ -99,7 +101,7 @@ function Header() {
 
         </div>
 
-        <div>
+        <div style={{width:'400px'}}>
 
           {/* <button class="mypage-button">내 정보</button> */}
 
@@ -122,14 +124,18 @@ function Header() {
               {/* <Link to="/profile"></Link> */}
             </div>
 
-              <div style={{float:'left'}}>
+              {/* <div style={{float:'left'}}> */}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ flex: '0 0 100px', marginRight: '10px' }}>
               <img src={userProfile.imageUrl} alt='image' style={{width:'100px', height:'100px'}} />
               </div>
+
               <div>
               이메일 : {userProfile.email}<br/>
               닉네임 : {userProfile.username}<br/>
               보유금 : {userProfile.amount}<br/>
               경험치 : {userProfile.experience}
+              </div>
               </div>
             </>
           ) : (
