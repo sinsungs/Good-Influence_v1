@@ -25,7 +25,7 @@
     "eject": "react-scripts eject"
   },
   
-  "proxy": "http://3.37.211.99",
+  "proxy": "https://goodinfluence.store",
   "eslintConfig": {
     "extends": [
       "react-app",
