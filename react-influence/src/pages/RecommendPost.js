@@ -83,7 +83,7 @@ const handleSearchSubmit = async (e) => {
     const secondino = event.target.elements.secondino.value;
     const thirdino = event.target.elements.thirdino.value;
 
-    if (!title || !content || !ino || !file) {
+    if (!title || !content || !ino || !secondino || !thirdino || !file) {
       alert('모든 필수 입력란을 채워주세요.');
       return;
     }
