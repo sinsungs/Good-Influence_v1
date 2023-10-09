@@ -57,6 +57,9 @@ function App() {
 
         <Routes>
 
+          <Route path="/" element={<Meet/>}/>
+          <Route path="/*" element={<Meet/>}/>
+          <Route path="/" element={<Meet/>}/>
           <Route path="/meet" element={<Meet/>}/>
           <Route path="/Influencer" element={<Influencer/>}/>
           <Route path="/post" element={<RecommendPost/>}/>

@@ -9,9 +9,10 @@
         "destination": "https://goodinfluence.store/:path*/"
         },
         {
-            "source": "/meet",
-            "destination": "/meet/list" 
+            "source": "/(.*)",
+            "destination": "/"
         }
+        
         
         
     ]
