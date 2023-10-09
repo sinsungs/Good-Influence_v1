@@ -68,7 +68,7 @@ function Influencer() {
     formData.append('file', file);
 
     // 예시: 데이터를 서버로 전송하는 코드
-    axios.post('/influencer/register', formData)
+    axios.post('/api/influencer/register', formData)
       .then(response => {
         // 성공적으로 데이터를 전송한 후에 수행할 작업을 여기에 작성하세요.
         console.log('influencer 엔티티가 생성되었습니다.', response.data);
@@ -86,7 +86,7 @@ function Influencer() {
 
   useEffect(() => {
     // 서버에서 Youtuber 데이터를 가져오는 요청을 수행합니다.
-    axios.get('/influencer/list')
+    axios.get('/api/influencer/list')
       .then(response => {
         // 요청에 성공하면 받아온 데이터를 상태로 설정합니다.
         console.log(response.data);
@@ -170,7 +170,7 @@ function Influencer() {
       
       alert('인플루언서에 유저 인증을 요청하시겠습니까 ?')
     
-      axios.post(`/influencer/verify/${ino}`, {}, {
+      axios.post(`/api/influencer/verify/${ino}`, {}, {
         headers: {
           Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
         },

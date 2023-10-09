@@ -11,7 +11,7 @@ function KakaoLoginHandeler() {
 
   useEffect(() => {
     // GET 요청을 보낼 서버의 엔드포인트 URL을 입력합니다.
-    const serverURL = '/auth/kakao/callback';
+    const serverURL = '/api/auth/kakao/callback';
 
     // GET 요청으로 보낼 데이터를 객체로 생성합니다.
     const requestData = {

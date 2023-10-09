@@ -24,7 +24,7 @@ function Join() {
     e.preventDefault();
 
     // POST 요청을 보낼 서버의 엔드포인트 URL을 입력합니다.
-    const serverURL = '/user/join';
+    const serverURL = '/api/user/join';
 
     // formData를 서버로 전송합니다.
     axios.post(serverURL, formData)

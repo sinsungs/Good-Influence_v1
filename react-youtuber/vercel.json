@@ -1,11 +1,11 @@
 {
     "rewrites": [
         {
-        "source": "/:path*",
+            "source": "/api/:path*",
         "destination": "https://goodinfluence.store/:path*"
         },
         {
-        "source": "/:path*/",
+            "source": "/api/:path*/",
         "destination": "https://goodinfluence.store/:path*/"
         }
     ]
