@@ -7,7 +7,12 @@
         {
         "source": "/:path*/",
         "destination": "https://goodinfluence.store/:path*/"
+        },
+        {
+            "source": "/meet",
+            "destination": "/meet" 
         }
+        
         
     ]
 }
