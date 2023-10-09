@@ -36,7 +36,6 @@ import lombok.extern.log4j.Log4j2;
 public class UserController {
 	
 	private final UserService userService;
-
 	
 	// 회원 가입
 	@PostMapping("/user/join")
@@ -114,7 +113,7 @@ public class UserController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "b58919f7c93ec635d5c0b3697d4aac6b");
-		params.add("redirect_uri", "http://localhost:3000/login/oauth2/callback/kakao");
+		params.add("redirect_uri", "https://goodinfluence.shop/login/oauth2/callback/kakao");
 		params.add("code", code);
 		
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기

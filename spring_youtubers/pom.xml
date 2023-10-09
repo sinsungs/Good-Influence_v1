@@ -11,7 +11,7 @@
 	<groupId>com.youtubers</groupId>
 	<artifactId>spring_youtubers</artifactId>
 	<version>0.0.1</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>spring_youtubers</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

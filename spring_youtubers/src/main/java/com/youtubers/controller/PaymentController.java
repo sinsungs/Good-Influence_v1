@@ -35,19 +35,12 @@ public class PaymentController {
     }
     
     @GetMapping("/success")
-    public ResponseEntity afterPayRequest(@RequestParam("pg_token") String pgToken) {
+    public ResponseEntity<String> afterPayRequest(@RequestParam("pg_token") String pgToken) {
 
         KakaoApproveResponse kakaoApprove = paymentService.ApproveResponse(pgToken);
         
-//        PaymentDTO dto = new PaymentDTO();
-//        
-//        dto.setDeposit(kakaoApprove.getAmount().getTotal());
-////        paymentDTO.setEmail("rkdtlstjd123@naver.com");
-//    	dto.setEmail(authentication.getName());
-//        
-//        paymentService.savePayment(dto);
-
-        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+//        return new ResponseEntity<>(kakaoApprove, HttpStatus.OK);
+          return ResponseEntity.ok("보유금이 충전되었습니다.");
     }
     
     @GetMapping("/cancel")

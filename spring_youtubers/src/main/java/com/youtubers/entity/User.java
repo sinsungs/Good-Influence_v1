@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -59,10 +60,23 @@ public class User extends BaseEntity {
 	
 	private String imageUrl;
 	
-//    @OneToMany(mappedBy = "user")
-//    private List<MeetUser> meetUser = new ArrayList<>();
 	
-    // Rank를 참조(조인)하는 부분 추가
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Meet> meets = new ArrayList<>();
+//    
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<MeetUser> meetusers = new ArrayList<>();
+//    
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Post> posts = new ArrayList<>();
+//	
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Payment> payments = new ArrayList<>();
+//    
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Orders> orders = new ArrayList<>();
+	
+    // Reward를 참조(조인)하는 부분 추가
 //    @ManyToOne
 //    @JoinColumn(name = "rankid")
 //    private Ranks ranks;

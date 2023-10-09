@@ -70,7 +70,7 @@ public class PaymentService {
         parameters.add("total_amount", "33000");
         parameters.add("vat_amount", "3000");
         parameters.add("tax_free_amount", "0");
-        parameters.add("approval_url", "http://localhost:8080/payment/success"); // 성공 시 redirect url
+        parameters.add("approval_url", "https://goodinfluence.shop/payment/success"); // 성공 시 redirect url
         parameters.add("cancel_url", "http://localhost:8080/payment/cancel"); // 취소 시 redirect url
         parameters.add("fail_url", "http://localhost:8080/payment/fail"); // 실패 시 redirect url
     
