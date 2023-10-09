@@ -1,20 +1,8 @@
 {
     "rewrites": [
         {
-        "source": "/:path*",
-        "destination": "https://goodinfluence.store/:path*"
-        },
-        {
-        "source": "/:path*/",
-        "destination": "https://goodinfluence.store/:path*/"
-        },
-        {
             "source": "/(.*)",
             "destination": "/"
         }
-    ],
-    "routes":
-     [
-        { "src": "/meet", "dest": "/meet" }
     ]
 }
