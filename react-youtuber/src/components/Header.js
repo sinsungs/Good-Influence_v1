@@ -48,7 +48,7 @@ function Header() {
             // navigate를 사용하여 페이지 이동
             document.cookie = `jwtToken=;`;
             navigate('/meet');
-            window.location.reload();
+            // window.location.reload();
   }
 
   useEffect(() => {
