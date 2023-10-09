@@ -84,7 +84,7 @@ function Login() {
         <div style={{ textAlign: 'center', margin: '50px 0'}}>
             <p>간편 로그인</p>
 
-            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=http://localhost:3000/login/oauth2/callback/kakao">
+            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=b58919f7c93ec635d5c0b3697d4aac6b&redirect_uri=https://goodinfluence.shop/login/oauth2/callback/kakao">
             <img src={kakao_login_button} alt='kakao_image' /></a>
 
         </div>
