@@ -46,7 +46,7 @@ function Login() {
 
         // navigate를 사용하여 페이지 이동
         navigate('/meet');
-        // window.location.reload();
+        window.location.reload();
 
       })
       .catch((error) => {

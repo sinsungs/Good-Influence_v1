@@ -9,7 +9,7 @@ function Admin() {
 
     useEffect(() => {
         // 서버에서 데이터 가져오기
-        axios.get('/admin/user')
+        axios.get('/api/admin/user')
         .then(response => {
             setUsers(response.data);
         })
@@ -25,7 +25,7 @@ function Admin() {
 
             if (confirmDelete) {
                 
-            axios.delete(`/admin/delete/${userId}`)
+            axios.delete(`/api/admin/delete/${userId}`)
             .then(response => {
 
                 alert('삭제 성공했습니다.')
@@ -48,7 +48,7 @@ function Admin() {
 
             if (confirmDelete) {
                 
-            axios.patch(`/admin/verify/${userId}`)
+            axios.patch(`/api/admin/verify/${userId}`)
             .then(response => {
 
                 alert('인플루언서로 설정 했습니다.')

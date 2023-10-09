@@ -17,7 +17,7 @@ function RecommendList() {
 
   useEffect(() => {
     // 서버에서 Youtuber 데이터를 가져오는 요청을 수행합니다.
-    axios.get('/post/list')
+    axios.get('/api/post/list')
       .then(response => {
         // 요청에 성공하면 받아온 데이터를 상태로 설정합니다.
         setInfluencer(response.data);
@@ -40,7 +40,7 @@ function RecommendList() {
     
     alert('추천게시글 삭제 하시겠습니까 ?')
   
-    axios.delete(`/post/delete/${ino}/${pno}`,
+    axios.delete(`/api/post/delete/${ino}/${pno}`,
     {
       headers: {
         Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가

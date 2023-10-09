@@ -11,7 +11,7 @@ function Ranking() {
 
     useEffect(() => {
         // 서버에서 데이터 가져오기
-        axios.get('/statistics/ranking')
+        axios.get('/api/statistics/ranking')
         .then(response => {
       // 데이터를 두 개의 배열로 분리
           setMeetRanks(response.data.meetRanks)

@@ -24,7 +24,7 @@ function Header() {
       'Authorization': `Bearer ${jwtToken}`,
     };
   
-    const paymentEndpoint = '/payment/ready';
+    const paymentEndpoint = '/api/payment/ready';
 
     axios.get(paymentEndpoint, { headers })
       .then(response => {
@@ -48,7 +48,7 @@ function Header() {
             // navigate를 사용하여 페이지 이동
             document.cookie = `jwtToken=;`;
             navigate('/meet');
-            // window.location.reload();
+            window.location.reload();
   }
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function Header() {
       };
 
       // 사용자 프로필 정보를 가져오는 API 호출
-      axios.post('/user/profile', {}, { headers })
+      axios.post('/api/user/profile', {}, { headers })
         .then(response => {
           // setUserProfile(response.data); // 프로필 정보를 상태 변수에 저장
           // console(userProfile.username);

@@ -55,7 +55,7 @@ const handleSearchSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post('/search', { name : searchQuery }); // POST 요청으로 변경
+    const response = await axios.post('/api/search', { name : searchQuery }); // POST 요청으로 변경
     const data = response.data;
     // alert(data);
     setSearchResults(data);
@@ -101,7 +101,7 @@ const handleSearchSubmit = async (e) => {
     formData.append('dto', new Blob([JSON.stringify(postData)], { type: "application/json" }));
     formData.append('file', file);
 
-    axios.post('/post/register', formData, {
+    axios.post('/api/post/register', formData, {
       headers: {
         Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가
       },
