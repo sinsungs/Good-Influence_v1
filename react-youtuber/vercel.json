@@ -10,7 +10,7 @@
         },
         {
             "source": "/meet",
-            "destination": "/meet" 
+            "destination": "/meet/list" 
         }
         
         
