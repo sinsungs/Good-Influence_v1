@@ -139,14 +139,27 @@ const handleSearchSubmit = async (e) => {
 // 선택한 인플루언서 값을 수정하는 함수
 const handleInfluencerEdit = (field, influencer) => {
   if (field === 'ino') {
+    if ((secondino === influencer) || (thirdino === influencer)) {
+      alert('중복된 추천 인플루언서 입니다.');
+      return;
+    }
     setino(influencer);
   } else if (field === 'secondino') {
+    if ((ino === influencer) || (thirdino === influencer)) {
+      alert('중복된 추천 인플루언서 입니다.');
+      return;
+    }
     setSecondino(influencer);
   } else if (field === 'thirdino') {
+    if ((ino === influencer) || (secondino === influencer)) {
+      alert('중복된 추천 인플루언서 입니다.');
+      return;
+    }
     setThirdino(influencer);
   }
   setIsModalOpen(false); // 모달 창 닫기
 };
+
 
 
 
