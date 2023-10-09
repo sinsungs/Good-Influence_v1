@@ -28,7 +28,7 @@ function App() {
   const [message, setMessage] = useState([]);
   
   const Proxytest = () => {
-    axios.get('/hello')
+    axios.get('/api/hello')
       .then((res) => {
         setMessage(res.data);
         alert(res.data);
@@ -46,7 +46,7 @@ function App() {
     
     <Router>
       <div>
-        <button onClick={handleButtonClick}>Proxy 테스트</button>
+        {/* <button onClick={handleButtonClick}>Proxy 테스트</button> */}
       </div>
 
         <Header />

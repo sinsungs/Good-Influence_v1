@@ -80,6 +80,8 @@ const handleSearchSubmit = async (e) => {
     const title = event.target.elements.title.value;
     const content = event.target.elements.content.value;
     const ino = event.target.elements.ino.value;
+    const secondino = event.target.elements.secondino.value;
+    const thirdino = event.target.elements.thirdino.value;
 
     if (!title || !content || !ino || !file) {
       alert('모든 필수 입력란을 채워주세요.');
@@ -90,8 +92,8 @@ const handleSearchSubmit = async (e) => {
       title: title,
       content: content,
       ino: ino,
-      secondino : event.target.elements.secondino.value,
-      thirdino: event.target.elements.thirdino.value,
+      secondino: secondino,
+      thirdino : thirdino
     };
 
 
@@ -180,7 +182,7 @@ const handleInfluencerEdit = (field, influencer) => {
               <div style={{ height: '30px' }}></div> {/* 마진을 통해 간격 추가 */}
 
               <label>추천 인플루언서</label>
-              <p>* 인플루언서를 1명에서 3명까지 선택할 수 있습니다.</p>
+              <p>* 인플루언서 3명을 모두 선택해 주세요.</p>
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className="rectangle"   onClick={() => handleModalOpen('ino')}>
