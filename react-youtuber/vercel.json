@@ -12,8 +12,10 @@
             "source": "/(.*)",
             "destination": "/"
         }
-        
-        
-        
+    ],
+    "routes":
+     [
+        { "src": "/meet", "dest": "/meet" },
+        { "src": "/meet/(.*)", "dest": "/meet" }
     ]
 }
