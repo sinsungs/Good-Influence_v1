@@ -24,7 +24,7 @@ function Header() {
       'Authorization': `Bearer ${jwtToken}`,
     };
   
-    const paymentEndpoint = '/api/payment/ready';
+    const paymentEndpoint = '/payment/ready';
 
     axios.get(paymentEndpoint, { headers })
       .then(response => {
