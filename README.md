@@ -1,4 +1,4 @@
-# Influencer-project
+# Good Influence
 
 ## ⏰ 일정
 
