@@ -74,7 +74,7 @@ MySQL
 
 ### 소셜 모임 만들기
 
-<img src="./img/소셜모임 만들기.JPG" width=80%><br>
+<img src="./img/소셜모임만들기.JPG" width=80%><br>
 
 ### 소셜 모임 후기 게시글 
 
